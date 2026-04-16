@@ -1,11 +1,11 @@
 import { Inter, Geist_Mono } from 'next/font/google';
 import Script from 'next/script';
-import { headers } from 'next/headers';
+import { cookies } from 'next/headers';
 import { ThemeProvider } from '@/components/theme-provider';
 import { i18n } from '@/lib/i18n-config';
 import './globals.css';
 
-const GA_ID = 'G-61LV8L2PRW';
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 const inter = Inter({
   subsets: ['latin'],
@@ -19,46 +19,16 @@ const geistMono = Geist_Mono({
   display: 'swap',
 });
 
-export default function RootLayout({ children }) {
-  const h = headers();
-  let cookieHeader = '';
-
-  // Turbopack/Next può restituire un oggetto senza metodo `.get()`.
-  if (h) {
-    if (typeof h.get === 'function') {
-      cookieHeader = h.get('cookie') ?? '';
-    } else {
-      cookieHeader = h.cookie ?? h['cookie'] ?? '';
-      if (!cookieHeader) {
-        try {
-          for (const entry of h) {
-            const [key, val] = entry;
-            if (typeof key === 'string' && key.toLowerCase() === 'cookie') {
-              cookieHeader = val ?? '';
-              break;
-            }
-          }
-        } catch {
-          // ignore - best-effort
-        }
-      }
-    }
-  }
-
-  const getCookieValue = (name) => {
-    const parts = cookieHeader.split(';').map((p) => p.trim());
-    const match = parts.find((p) => p.startsWith(`${name}=`));
-    if (!match) return undefined;
-    return decodeURIComponent(match.slice(name.length + 1));
-  };
-
-  const cookieLang = getCookieValue('NEXT_LOCALE');
+export default async function RootLayout({ children }) {
+  // Next 16: cookies() è async, ritorna ReadonlyRequestCookies.
+  const cookieStore = await cookies();
+  const cookieLang = cookieStore.get('NEXT_LOCALE')?.value;
   const htmlLang = i18n.locales.includes(cookieLang) ? cookieLang : i18n.defaultLocale;
 
   return (
     <html lang={htmlLang} suppressHydrationWarning className={`${inter.variable} ${geistMono.variable}`}>
       <head>
-        {/* Keep `<html lang>` consistent with the URL locale (no-cookie first visit). */}
+        {/* Sync <html lang> con l'URL al primo paint (prima che il cookie sia settato). */}
         <Script id="set-html-lang-from-path" strategy="beforeInteractive">
           {`
             (function () {
@@ -72,19 +42,23 @@ export default function RootLayout({ children }) {
             })();
           `}
         </Script>
-        {/* Google Analytics GA4 */}
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${GA_ID}');
-          `}
-        </Script>
+        {/* Google Analytics GA4 - attivo solo se NEXT_PUBLIC_GA_ID è settato */}
+        {GA_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${GA_ID}');
+              `}
+            </Script>
+          </>
+        )}
       </head>
       <body className="font-sans" suppressHydrationWarning>
         <ThemeProvider
