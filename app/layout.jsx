@@ -1,7 +1,6 @@
 import { Inter, Geist_Mono } from 'next/font/google';
 import Script from 'next/script';
 import { headers } from 'next/headers';
-import { Analytics } from '@vercel/analytics/next';
 import { ThemeProvider } from '@/components/theme-provider';
 import { i18n } from '@/lib/i18n-config';
 import './globals.css';
@@ -96,7 +95,6 @@ export default function RootLayout({ children }) {
         >
           {children}
         </ThemeProvider>
-        <Analytics />
       </body>
     </html>
   );
