@@ -1,0 +1,226 @@
+{
+  "meta": {
+    "title": "Farhan Abdullah | Full-Stack Developer – Venezia, Italia",
+    "description": "Full-Stack Developer specializzato in MERN stack e Next.js. Sviluppo siti web, web app e soluzioni multilingua (IT/EN/BN) a Venezia, Italia.",
+    "keywords": "farhan abdullah, sviluppatore web venezia, full stack developer, mern stack italia, next.js developer, react developer italia, siti multilingua, bangladesh venezia"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "Chi Sono",
+    "projects": "Progetti",
+    "books": "Libri",
+    "blog": "Blog",
+    "uses": "Tool",
+    "contact": "Contatti",
+    "cv_download": "Scarica CV"
+  },
+  "hero": {
+    "badge": "Disponibile per opportunità",
+    "greeting": "Ciao, sono",
+    "name": "Farhan Abdullah",
+    "tagline": "Full-Stack Developer — MERN · Next.js · Multilingua",
+    "subtagline": "Venezia, Italia · Background IT enterprise · 3 lingue",
+    "description": "Sviluppo siti web moderni, web app scalabili e soluzioni multilingua con il MERN stack e Next.js. Basato a Venezia, disponibile da remoto in tutta Italia e nel mondo.",
+    "cta_projects": "Vedi Progetti",
+    "cta_github": "GitHub",
+    "cta_contact": "Contattami",
+    "stats": {
+      "years_it": "Anni esperienza IT",
+      "years_italy": "Anni in Italia",
+      "languages": "Lingue parlate",
+      "diploma": "Diploma Informatica"
+    }
+  },
+  "services": {
+    "label": "Servizi",
+    "title": "Cosa posso fare per te",
+    "sub": "Soluzioni web complete, dal design al deploy.",
+    "items": {
+      "websites": {
+        "title": "Siti Web Business",
+        "desc": "Siti veloci e responsive per aziende e professionisti, ottimizzati per SEO."
+      },
+      "webapps": {
+        "title": "Web App MERN Stack",
+        "desc": "Applicazioni full-stack con React, Node.js, MongoDB e UI pulita."
+      },
+      "multilingual": {
+        "title": "Siti Multilingua",
+        "desc": "Siti bilingui o trilingui con SEO corretto per ogni lingua (hreflang, canonical)."
+      },
+      "maintenance": {
+        "title": "Manutenzione & IT",
+        "desc": "Manutenzione siti esistenti, supporto tecnico e ottimizzazione performance."
+      }
+    }
+  },
+  "home": {
+    "featured_projects_title": "Progetti in evidenza",
+    "featured_projects_sub": "Una selezione dei miei lavori recenti.",
+    "view_all_projects": "Vedi tutti i progetti",
+    "cta_final_title": "Hai un progetto in mente?",
+    "cta_final_sub": "Parliamone. Ti rispondo entro 24 ore.",
+    "cta_final_button": "Contattami ora"
+  },
+  "about": {
+    "label": "Chi Sono",
+    "title": "La mia storia",
+    "sub": "Dal Bangladesh a Venezia, con in mezzo codice e curiosità.",
+    "story_title": "La mia storia",
+    "story_p1": "Sono Farhan Abdullah, uno sviluppatore full-stack con passione per il codice pulito e le soluzioni scalabili. Nativo del Bangladesh, sono emigrato in Italia nel 2010 e qui ho completato il mio percorso formativo.",
+    "story_p2": "Ho conseguito il diploma in informatica nel 2017 e da allora mi sono specializzato nel MERN stack (MongoDB, Express, React, Node.js) e Next.js. Amo creare applicazioni web moderne, responsive e multilingue che risolvono problemi reali.",
+    "story_p3": "Oltre allo sviluppo, mi appassiona la crescita personale, il fitness (soprattutto calisthenics), e lo studio della storia islamica. Credo nel lifelong learning e nella qualità del codice che scrivo.",
+    "info_title": "Su di me",
+    "location": "Sede Principale",
+    "location_detail": "Marghera, Venezia, Italia",
+    "profession": "Professione",
+    "profession_detail": "Full-Stack Developer specializzato in MERN stack e Next.js",
+    "education": "Formazione",
+    "education_detail": "Diploma in Informatica (2017)",
+    "interests_title": "Passioni",
+    "fitness": "Fitness & Calisthenics",
+    "fitness_detail": "Appassionato di calisthenics e allenamento a corpo libero",
+    "interests": "Interessi",
+    "interests_detail": "Notizie di tecnologia, storia islamica, sviluppo personale",
+    "contact_me": "Contattami",
+    "contact_detail": "Disponibile per progetti e collaborazioni",
+    "skills_title": "Competenze Tecniche",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "tools": "Tool & Altro",
+    "values_title": "I miei valori",
+    "values_desc": "Nel mio lavoro cerco sempre di mantenere questi principi fondamentali:",
+    "value_1": "Qualità del codice e best practices",
+    "value_2": "Comunicazione chiara con i clienti",
+    "value_3": "Apprendimento continuo e innovazione",
+    "value_4": "Etica professionale e integrità",
+    "cta_title": "Pronti a collaborare?",
+    "cta_desc": "Che tu abbia un progetto preciso in mente o voglia semplicemente parlare di tecnologia, sono sempre disponibile.",
+    "view_work": "Vedi i miei lavori",
+    "get_in_touch": "Contattami"
+  },
+  "projects": {
+    "label": "Progetti",
+    "title": "I miei lavori",
+    "sub": "Applicazioni web, siti e soluzioni che ho costruito.",
+    "filter_all": "Tutti",
+    "filter_fullstack": "Full-Stack",
+    "filter_frontend": "Frontend",
+    "filter_backend": "Backend",
+    "filter_multilingual": "Multilingua",
+    "view_case_study": "Vedi case study",
+    "back_to_projects": "Tutti i progetti",
+    "duration": "Durata",
+    "role": "Il mio ruolo",
+    "client": "Cliente",
+    "challenge": "Il Problema",
+    "solution": "La Soluzione",
+    "results": "Risultati",
+    "technologies": "Tecnologie",
+    "live_demo": "Live Demo",
+    "source_code": "Codice sorgente",
+    "similar_project": "Hai un progetto simile in mente?"
+  },
+  "books": {
+    "label": "Libri",
+    "title": "La mia libreria",
+    "sub": "I libri che mi hanno formato come persona e sviluppatore.",
+    "total": "Totale",
+    "books_count": "libri",
+    "categories_count": "categorie",
+    "languages_count": "lingue",
+    "status_read": "Letto",
+    "status_reading": "In lettura",
+    "status_wishlist": "Da leggere",
+    "recommended": "Consigliato",
+    "categories": {
+      "bengali_classics": "Classici Bengali",
+      "sirah": "Sīrah (Biografia del Profeta ﷺ)",
+      "islamic_history": "Storia Islamica & Civiltà",
+      "islamic_sciences": "Scienze Islamiche",
+      "spirituality": "Spiritualità & Cuore",
+      "productivity": "Produttività & Crescita"
+    }
+  },
+  "blog": {
+    "label": "Blog",
+    "title": "Pensieri & Articoli",
+    "sub": "Scrivo di sviluppo web, MERN stack, Next.js e altro.",
+    "read_more": "Leggi di più",
+    "reading_time": "min di lettura",
+    "published_on": "Pubblicato il",
+    "back_to_blog": "Tutti gli articoli"
+  },
+  "uses": {
+    "label": "Tool",
+    "title": "Cosa uso ogni giorno",
+    "sub": "Hardware, software e tool che uso nel mio lavoro.",
+    "hardware_title": "Hardware",
+    "hardware_desc": "La configurazione fisica che alimenta il mio flusso di lavoro.",
+    "editor_title": "Editor & IDE",
+    "editor_desc": "Il mio ambiente di sviluppo principale.",
+    "languages_title": "Linguaggi & Runtime",
+    "languages_desc": "Linguaggi di programmazione che uso quotidianamente.",
+    "frontend_tools": "Strumenti Frontend",
+    "frontend_desc": "Librerie e framework per costruire interfacce utente.",
+    "backend_tools": "Backend & Database",
+    "backend_desc": "Tecnologie lato server e sistemi di database.",
+    "devops_tools": "DevOps & Tool",
+    "devops_desc": "Strumenti per sviluppo, deployment e produttività.",
+    "items": {
+      "laptop": "MacBook Pro / Laptop Ubuntu",
+      "monitor": "Setup Doppio Monitor",
+      "keyboard": "Tastiera Meccanica",
+      "mouse": "Mouse Ergonomico",
+      "vscode": "VS Code",
+      "vscode_ext": "Estensioni: ESLint, Prettier, GitLens, Thunder Client",
+      "javascript": "JavaScript / TypeScript",
+      "nodejs": "Node.js",
+      "react": "React.js",
+      "nextjs": "Next.js",
+      "tailwind": "Tailwind CSS",
+      "expressjs": "Express.js",
+      "mongodb": "MongoDB",
+      "git": "Git & GitHub",
+      "docker": "Docker",
+      "figma": "Figma",
+      "postman": "Postman / Thunder Client",
+      "npm": "npm / pnpm"
+    }
+  },
+  "contact": {
+    "label": "Contatti",
+    "title": "Parliamoci",
+    "sub": "Aperto a opportunità e collaborazioni. Rispondo entro 24 ore.",
+    "email": "Email",
+    "phone": "Telefono",
+    "whatsapp": "WhatsApp",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "location": "Posizione",
+    "download_cv": "Scarica il mio CV",
+    "available": "Disponibile per"
+  },
+  "footer": {
+    "tagline": "Full-Stack Developer · Venezia, Italia",
+    "built_with": "Costruito con Next.js e ☕",
+    "rights": "Tutti i diritti riservati"
+  },
+  "theme": {
+    "light": "Tema chiaro",
+    "dark": "Tema scuro",
+    "system": "Sistema"
+  },
+  "language": {
+    "italian": "Italiano",
+    "english": "English",
+    "bengali": "বাংলা",
+    "change_language": "Cambia lingua"
+  },
+  "common": {
+    "loading": "Caricamento…",
+    "error": "Si è verificato un errore",
+    "not_found": "Pagina non trovata",
+    "back_home": "Torna alla home"
+  }
+}

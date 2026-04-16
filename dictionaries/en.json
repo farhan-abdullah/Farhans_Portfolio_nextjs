@@ -1,0 +1,226 @@
+{
+  "meta": {
+    "title": "Farhan Abdullah | Full-Stack Developer – Venice, Italy",
+    "description": "Full-Stack Developer specializing in MERN stack and Next.js. I build websites, web apps, and multilingual solutions (IT/EN/BN) from Venice, Italy.",
+    "keywords": "farhan abdullah, web developer venice, full stack developer, mern stack italy, next.js developer, react developer italy, multilingual websites, bangladesh venice"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "books": "Books",
+    "blog": "Blog",
+    "uses": "Uses",
+    "contact": "Contact",
+    "cv_download": "Download CV"
+  },
+  "hero": {
+    "badge": "Available for opportunities",
+    "greeting": "Hi, I'm",
+    "name": "Farhan Abdullah",
+    "tagline": "Full-Stack Developer — MERN · Next.js · Multilingual",
+    "subtagline": "Venice, Italy · Enterprise IT background · 3 languages",
+    "description": "I build modern websites, scalable web apps, and multilingual solutions using the MERN stack and Next.js. Based in Venice, available remotely across Italy and worldwide.",
+    "cta_projects": "View Projects",
+    "cta_github": "GitHub",
+    "cta_contact": "Contact Me",
+    "stats": {
+      "years_it": "Years IT Experience",
+      "years_italy": "Years in Italy",
+      "languages": "Languages Spoken",
+      "diploma": "CS Diploma"
+    }
+  },
+  "services": {
+    "label": "Services",
+    "title": "What I can help with",
+    "sub": "End-to-end web solutions, from design to deployment.",
+    "items": {
+      "websites": {
+        "title": "Business Websites",
+        "desc": "Fast, responsive websites for businesses and professionals, SEO-optimized."
+      },
+      "webapps": {
+        "title": "MERN Stack Web Apps",
+        "desc": "Full-stack applications with React, Node.js, MongoDB, and clean UI."
+      },
+      "multilingual": {
+        "title": "Multilingual Sites",
+        "desc": "Bilingual or trilingual websites with proper SEO per language (hreflang, canonical)."
+      },
+      "maintenance": {
+        "title": "Maintenance & IT",
+        "desc": "Existing site maintenance, technical support, and performance optimization."
+      }
+    }
+  },
+  "home": {
+    "featured_projects_title": "Featured Projects",
+    "featured_projects_sub": "A selection of my recent work.",
+    "view_all_projects": "View all projects",
+    "cta_final_title": "Got a project in mind?",
+    "cta_final_sub": "Let's talk. I'll get back to you within 24 hours.",
+    "cta_final_button": "Contact me now"
+  },
+  "about": {
+    "label": "About",
+    "title": "My story",
+    "sub": "From Bangladesh to Venice, with code and curiosity in between.",
+    "story_title": "My story",
+    "story_p1": "I'm Farhan Abdullah, a full-stack developer passionate about clean code and scalable solutions. Native to Bangladesh, I moved to Italy in 2010 and completed my education here.",
+    "story_p2": "I earned my Computer Science diploma in 2017 and have since specialized in the MERN stack (MongoDB, Express, React, Node.js) and Next.js. I love creating modern, responsive, and multilingual web applications that solve real-world problems.",
+    "story_p3": "Beyond coding, I'm passionate about personal growth, fitness (especially calisthenics), and studying Islamic history. I believe in lifelong learning and the quality of the code I write.",
+    "info_title": "About Me",
+    "location": "Main Base",
+    "location_detail": "Marghera, Venice, Italy",
+    "profession": "Profession",
+    "profession_detail": "Full-Stack Developer specializing in MERN stack and Next.js",
+    "education": "Education",
+    "education_detail": "Computer Science Diploma (2017)",
+    "interests_title": "Passions",
+    "fitness": "Fitness & Calisthenics",
+    "fitness_detail": "Passionate about calisthenics and bodyweight training",
+    "interests": "Interests",
+    "interests_detail": "Tech news, Islamic history, personal development",
+    "contact_me": "Contact Me",
+    "contact_detail": "Available for projects and collaborations",
+    "skills_title": "Technical Skills",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "tools": "Tools & Other",
+    "values_title": "My Values",
+    "values_desc": "In my work, I strive to maintain these core principles:",
+    "value_1": "Code quality and best practices",
+    "value_2": "Clear communication with clients",
+    "value_3": "Continuous learning and innovation",
+    "value_4": "Professional integrity",
+    "cta_title": "Ready to collaborate?",
+    "cta_desc": "Whether you have a specific project in mind or just want to talk tech, I'm always available.",
+    "view_work": "View my work",
+    "get_in_touch": "Get in touch"
+  },
+  "projects": {
+    "label": "Projects",
+    "title": "My work",
+    "sub": "Web applications, websites, and solutions I've built.",
+    "filter_all": "All",
+    "filter_fullstack": "Full-Stack",
+    "filter_frontend": "Frontend",
+    "filter_backend": "Backend",
+    "filter_multilingual": "Multilingual",
+    "view_case_study": "View case study",
+    "back_to_projects": "All projects",
+    "duration": "Duration",
+    "role": "My role",
+    "client": "Client",
+    "challenge": "The Problem",
+    "solution": "The Solution",
+    "results": "Results",
+    "technologies": "Technologies",
+    "live_demo": "Live Demo",
+    "source_code": "Source code",
+    "similar_project": "Got a similar project in mind?"
+  },
+  "books": {
+    "label": "Books",
+    "title": "My library",
+    "sub": "The books that shaped me as a person and as a developer.",
+    "total": "Total",
+    "books_count": "books",
+    "categories_count": "categories",
+    "languages_count": "languages",
+    "status_read": "Read",
+    "status_reading": "Reading",
+    "status_wishlist": "To read",
+    "recommended": "Recommended",
+    "categories": {
+      "bengali_classics": "Bengali Classics",
+      "sirah": "Sīrah (Life of the Prophet ﷺ)",
+      "islamic_history": "Islamic History & Civilization",
+      "islamic_sciences": "Islamic Sciences",
+      "spirituality": "Spirituality & the Heart",
+      "productivity": "Productivity & Growth"
+    }
+  },
+  "blog": {
+    "label": "Blog",
+    "title": "Thoughts & Articles",
+    "sub": "I write about web development, MERN stack, Next.js, and more.",
+    "read_more": "Read more",
+    "reading_time": "min read",
+    "published_on": "Published on",
+    "back_to_blog": "All articles"
+  },
+  "uses": {
+    "label": "Uses",
+    "title": "What I use every day",
+    "sub": "Hardware, software, and tools I use in my daily work.",
+    "hardware_title": "Hardware",
+    "hardware_desc": "The physical setup that powers my development workflow.",
+    "editor_title": "Editor & IDE",
+    "editor_desc": "My primary development environment.",
+    "languages_title": "Languages & Runtimes",
+    "languages_desc": "Programming languages I work with daily.",
+    "frontend_tools": "Frontend Tools",
+    "frontend_desc": "Libraries and frameworks for building user interfaces.",
+    "backend_tools": "Backend & Databases",
+    "backend_desc": "Server-side technologies and database systems.",
+    "devops_tools": "DevOps & Tools",
+    "devops_desc": "Tools for development, deployment, and productivity.",
+    "items": {
+      "laptop": "MacBook Pro / Ubuntu Laptop",
+      "monitor": "Dual Monitor Setup",
+      "keyboard": "Mechanical Keyboard",
+      "mouse": "Ergonomic Mouse",
+      "vscode": "VS Code",
+      "vscode_ext": "Extensions: ESLint, Prettier, GitLens, Thunder Client",
+      "javascript": "JavaScript / TypeScript",
+      "nodejs": "Node.js",
+      "react": "React.js",
+      "nextjs": "Next.js",
+      "tailwind": "Tailwind CSS",
+      "expressjs": "Express.js",
+      "mongodb": "MongoDB",
+      "git": "Git & GitHub",
+      "docker": "Docker",
+      "figma": "Figma",
+      "postman": "Postman / Thunder Client",
+      "npm": "npm / pnpm"
+    }
+  },
+  "contact": {
+    "label": "Contact",
+    "title": "Let's talk",
+    "sub": "Open to opportunities and collaborations. I reply within 24 hours.",
+    "email": "Email",
+    "phone": "Phone",
+    "whatsapp": "WhatsApp",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "location": "Location",
+    "download_cv": "Download my CV",
+    "available": "Available for"
+  },
+  "footer": {
+    "tagline": "Full-Stack Developer · Venice, Italy",
+    "built_with": "Built with Next.js and ☕",
+    "rights": "All rights reserved"
+  },
+  "theme": {
+    "light": "Light theme",
+    "dark": "Dark theme",
+    "system": "System"
+  },
+  "language": {
+    "italian": "Italiano",
+    "english": "English",
+    "bengali": "বাংলা",
+    "change_language": "Change language"
+  },
+  "common": {
+    "loading": "Loading…",
+    "error": "An error occurred",
+    "not_found": "Page not found",
+    "back_home": "Back to home"
+  }
+}
