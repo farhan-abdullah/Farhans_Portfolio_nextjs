@@ -2,14 +2,13 @@ import Script from 'next/script';
 import { siteConfig } from '@/lib/site-config';
 
 /**
- * JSON-LD structured data (schema.org Person + WebSite).
- * Migliora l'SEO indicando a Google chi sei, cosa fai e in che lingua.
+ * JSON-LD structured data per SEO.
+ * Emette tre schemi schema.org: Person, WebSite, ProfessionalService.
  *
- * Uso:
- *   import JsonLd from '@/components/JsonLd';
+ * Uso in app/[lang]/layout.jsx:
  *   <JsonLd locale={lang} />
  *
- * `lang` deve essere 'it' | 'en' | 'bn' (vedi lib/i18n-config.js).
+ * `locale` deve essere 'it' | 'en' | 'bn' (vedi lib/i18n-config.js).
  */
 export default function JsonLd({ locale = 'it' }) {
   const content = {
@@ -18,48 +17,24 @@ export default function JsonLd({ locale = 'it' }) {
       jobTitle: 'Full-Stack Developer',
       description:
         'Sviluppatore specializzato in MERN Stack e Next.js. Costruisco siti web veloci, multilingua e ottimizzati per clienti enterprise a Venezia e in tutta Italia.',
+      service: 'Sviluppo siti web e applicazioni web con MERN Stack e Next.js',
       siteName: 'Farhan Abdullah — Portfolio',
-      knowsAbout: [
-        'MERN Stack',
-        'Next.js',
-        'React',
-        'Node.js',
-        'TypeScript',
-        'Tailwind CSS',
-        'Payload CMS',
-      ],
     },
     en: {
       name: 'Farhan Abdullah',
       jobTitle: 'Full-Stack Developer',
       description:
         'Full-Stack Developer specialized in MERN Stack and Next.js. I build fast, multilingual and optimized websites for enterprise clients in Venice and across Italy.',
+      service: 'Web development and web applications with MERN Stack and Next.js',
       siteName: 'Farhan Abdullah — Portfolio',
-      knowsAbout: [
-        'MERN Stack',
-        'Next.js',
-        'React',
-        'Node.js',
-        'TypeScript',
-        'Tailwind CSS',
-        'Payload CMS',
-      ],
     },
     bn: {
       name: 'ফরহান আবদুল্লাহ',
       jobTitle: 'ফুল-স্ট্যাক ডেভেলপার',
       description:
         'MERN Stack এবং Next.js-এ বিশেষজ্ঞ ফুল-স্ট্যাক ডেভেলপার। ভেনিস ও সারা ইতালির এন্টারপ্রাইজ ক্লায়েন্টদের জন্য দ্রুত, বহুভাষিক ও অপ্টিমাইজড ওয়েবসাইট তৈরি করি।',
+      service: 'MERN Stack এবং Next.js দিয়ে ওয়েবসাইট ও ওয়েব অ্যাপ্লিকেশন ডেভেলপমেন্ট',
       siteName: 'ফরহান আবদুল্লাহ — পোর্টফোলিও',
-      knowsAbout: [
-        'MERN Stack',
-        'Next.js',
-        'React',
-        'Node.js',
-        'TypeScript',
-        'Tailwind CSS',
-        'Payload CMS',
-      ],
     },
   };
 
@@ -89,7 +64,15 @@ export default function JsonLd({ locale = 'it' }) {
             addressRegion: 'Veneto',
             addressCountry: 'IT',
           },
-          knowsAbout: current.knowsAbout,
+          knowsAbout: [
+            'MERN Stack',
+            'Next.js',
+            'React',
+            'Node.js',
+            'TypeScript',
+            'Tailwind CSS',
+            'Payload CMS',
+          ],
           knowsLanguage: ['it', 'en', 'bn'],
           inLanguage: locale,
           sameAs: [siteConfig.links.github, siteConfig.links.linkedin].filter(Boolean),
@@ -109,6 +92,32 @@ export default function JsonLd({ locale = 'it' }) {
           url: pageUrl,
           description: current.description,
           inLanguage: locale,
+        })}
+      </Script>
+
+      {/* ProfessionalService schema */}
+      <Script
+        id={`json-ld-service-${locale}`}
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
+        {JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'ProfessionalService',
+          name: current.service,
+          provider: {
+            '@type': 'Person',
+            name: current.name,
+            url: pageUrl,
+          },
+          serviceType: [
+            'MERN Stack Development',
+            'Next.js Development',
+            'Multilingual Websites',
+            'Web Application Development',
+          ],
+          areaServed: 'Italy',
+          url: pageUrl,
         })}
       </Script>
     </>

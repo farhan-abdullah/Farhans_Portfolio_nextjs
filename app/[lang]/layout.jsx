@@ -3,6 +3,7 @@ import { getDictionary } from '@/lib/getDictionary';
 import { siteConfig } from '@/lib/site-config';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
+import JsonLd from '@/components/JsonLd';
 
 export async function generateStaticParams() {
   return i18n.locales.map((lang) => ({ lang }));
@@ -50,28 +51,14 @@ export default async function LangLayout({ children, params }) {
   const { lang } = await params;
   const dict = await getDictionary(lang);
 
-  const personSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Person',
-    name: siteConfig.author.name,
-    url: siteConfig.url,
-    jobTitle: 'Full-Stack Developer',
-    sameAs: [siteConfig.links.github, siteConfig.links.linkedin],
-    knowsAbout: ['MERN', 'Next.js', 'React', 'MongoDB', 'Web Development', 'SEO', 'Multilingual Websites'],
-  };
-
-  const webSiteSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: siteConfig.name,
-    url: siteConfig.url,
-    inLanguage: lang === 'it' ? 'it-IT' : lang === 'en' ? 'en-US' : 'bn-BD',
-  };
-
   return (
     <div className="flex min-h-screen flex-col">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }} />
+      {/*
+        JSON-LD structured data (Person + WebSite + ProfessionalService).
+        Il componente usa <Script> di next/script → nessun warning React 19
+        e i crawler lo leggono correttamente dopo l'idratazione.
+      */}
+      <JsonLd locale={lang} />
       <Navbar lang={lang} dict={dict} />
       <main className="flex-1">{children}</main>
       <Footer lang={lang} dict={dict} />
