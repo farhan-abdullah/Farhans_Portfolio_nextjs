@@ -3,30 +3,48 @@ import { withPayload } from '@payloadcms/next/withPayload';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+
+  // 🔥 Ottimizzazioni per produzione + Vercel
+  output: 'standalone',
+  swcMinify: true,
+  compress: true,
+  poweredByHeader: false,
+
+  // Immagini (già buone, ma rinforzate)
   images: {
     formats: ['image/avif', 'image/webp'],
-    // Allowlist specifico per sicurezza (Next 16 raccomanda remotePatterns ristretti).
-    // Aggiungi qui i domini dei tuoi bucket S3/R2 o CDN quando li configuri.
     remotePatterns: [
       { protocol: 'https', hostname: 'farhanabdullah.com' },
       { protocol: 'https', hostname: 'www.farhanabdullah.com' },
       { protocol: 'https', hostname: '*.r2.cloudflarestorage.com' },
       { protocol: 'https', hostname: '*.r2.dev' },
-      // Bucket pubblico R2 specifico (match esplicito oltre al wildcard)
       { protocol: 'https', hostname: 'pub-70b3f41573214ebf8452ded8c7a1b7d1.r2.dev' },
       { protocol: 'http', hostname: 'localhost' },
       { protocol: 'http', hostname: '127.0.0.1' },
     ],
+    minimumCacheTTL: 60 * 60 * 24, // 24 ore di cache immagini
   },
+
+  // Headers di sicurezza e performance
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          { key: 'X-Frame-Options', value: 'DENY' },
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+        ],
+      },
+    ];
+  },
+
   experimental: {
-    // View Transitions API per transizioni fluide tra rotte.
     viewTransition: true,
-    // Abilita cache su disco di Turbopack in dev (beta, Next 16).
-    turbopackFileSystemCacheForDev: true,
+    // turbopack solo in dev se vuoi, ma disattivato in prod
   },
-  // React Compiler è ora stabile in Next 16 ma non default.
-  // Abilitarlo quando testato:
-  // reactCompiler: true,
 };
 
-export default withPayload(nextConfig, { devBundleServerPackages: false });
+export default withPayload(nextConfig, { 
+  devBundleServerPackages: false 
+});
