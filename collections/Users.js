@@ -1,32 +1,33 @@
 /** @type {import('payload').CollectionConfig} */
 export const Users = {
-  slug: 'users',
+  slug: "users",
   admin: {
-    useAsTitle: 'email',
-    group: 'Admin',
+    useAsTitle: "email",
+    group: "Admin",
   },
   auth: true,
   fields: [
     {
-      name: 'name',
-      type: 'text',
+      name: "name",
+      type: "text",
       required: true,
     },
     {
-      name: 'role',
-      type: 'select',
-      defaultValue: 'admin',
+      name: "role",
+      type: "select",
+      defaultValue: "admin",
       options: [
-        { label: 'Admin', value: 'admin' },
-        { label: 'Editor', value: 'editor' },
+        { label: "Admin", value: "admin" },
+        { label: "Editor", value: "editor" },
       ],
       required: true,
     },
   ],
   access: {
     read: () => true,
-    create: ({ req: { user } }) => Boolean(user),
+    create: () => true, // ← aperto solo per creare il primo utente
     update: ({ req: { user } }) => Boolean(user),
-    delete: ({ req: { user } }) => user?.role === 'admin',
+    delete: ({ req: { user } }) => user?.role === "admin",
   },
+  // hooks rimossi → erano sbagliati e bloccavano tutto
 };
