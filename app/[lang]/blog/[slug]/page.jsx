@@ -4,6 +4,10 @@ import { siteConfig } from '@/lib/site-config';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, Calendar, Clock } from 'lucide-react';
+import LexicalRenderer from '@/components/lexical-renderer';
+
+// ISR: il detail post viene rigenerato on-demand ogni ora.
+export const revalidate = 3600;
 
 export async function generateMetadata({ params }) {
   const { lang, slug } = await params;
@@ -77,25 +81,28 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export async function generateStaticParams({ params }) {
-  const { lang } = await params;
+export async function generateStaticParams() {
+  // NOTE: generateStaticParams NON riceve params. Iteriamo tutte le locale
+  // definite in i18n.locales per pregenerare ogni combinazione lang × slug.
   try {
     const payload = await getPayloadClient();
-    const { docs } = await payload.find({
-      collection: 'blog-posts',
-      locale: lang,
-      where: {
-        status: { equals: 'published' },
-      },
-      limit: 100,
-    });
+    const { i18n } = await import('@/lib/i18n-config');
 
-    return docs.map((post) => ({
-      slug: post.slug,
-      lang,
-    }));
+    const all = await Promise.all(
+      i18n.locales.map(async (lang) => {
+        const { docs } = await payload.find({
+          collection: 'blog-posts',
+          locale: lang,
+          where: { status: { equals: 'published' } },
+          limit: 500,
+        });
+        return docs.map((post) => ({ slug: post.slug, lang }));
+      })
+    );
+
+    return all.flat();
   } catch (error) {
-    console.error('Error generating static params:', error);
+    console.error('Error generating static params (blog):', error);
     return [];
   }
 }
@@ -216,16 +223,16 @@ export default async function BlogDetailPage({ params }) {
             <div className="mt-8">
               {typeof post.content === 'string' ? (
                 <div dangerouslySetInnerHTML={{ __html: post.content }} />
-              ) : (
-                <p>{JSON.stringify(post.content).substring(0, 500)}...</p>
-              )}
+              ) : post.content?.root?.children ? (
+                <LexicalRenderer data={post.content} />
+              ) : null}
             </div>
           )}
         </article>
 
         {/* CTA */}
         <div className="mt-16 pt-16 border-t border-[hsl(var(--border))]">
-          <h3 className="text-2xl font-bold mb-4">Hai un'idea per il prossimo progetto?</h3>
+          <h3 className="text-2xl font-bold mb-4">{dict.common.cta_project_idea}</h3>
           <p className="text-muted-foreground mb-6">{dict.hero.description}</p>
           <Link
             href={`/${lang}/contact`}

@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "@payloadcms/db-mongodb": "^3.81.0",
+    "@payloadcms/email-resend": "^3.81.0",
     "@payloadcms/next": "^3.81.0",
-    "@payloadcms/plugin-form-builder": "^3.81.0",
     "@payloadcms/plugin-nested-docs": "^3.81.0",
     "@payloadcms/plugin-redirects": "^3.81.0",
     "@payloadcms/plugin-search": "^3.81.0",

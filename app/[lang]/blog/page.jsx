@@ -4,6 +4,10 @@ import { siteConfig } from '@/lib/site-config';
 import { PageHeader } from '@/components/page-header';
 import { BlogCard } from '@/components/cards/blog-card';
 
+// ISR: rigenera la lista ogni ora. Usa /api/revalidate?path=... (Payload hook) per
+// revalidation immediata on-publish se configurato.
+export const revalidate = 3600;
+
 export async function generateMetadata({ params }) {
   const { lang } = await params;
   const dict = await getDictionary(lang);
@@ -86,7 +90,7 @@ export default async function BlogPage({ params }) {
         ) : (
           <div className="flex items-center justify-center min-h-96">
             <p className="text-muted-foreground text-center max-w-md">
-              {dict.common.no_posts_found || 'Ancora nessun articolo pubblicato. Torna più tardi!'}
+              {dict.common.no_posts_found}
             </p>
           </div>
         )}

@@ -1,5 +1,5 @@
 import { mongooseAdapter } from '@payloadcms/db-mongodb';
-import { formBuilderPlugin } from '@payloadcms/plugin-form-builder';
+import { resendAdapter } from '@payloadcms/email-resend';
 import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs';
 import { redirectsPlugin } from '@payloadcms/plugin-redirects';
 import { searchPlugin } from '@payloadcms/plugin-search';
@@ -27,6 +27,11 @@ const useCloudStorage =
   process.env.S3_ACCESS_KEY_ID &&
   process.env.S3_SECRET_ACCESS_KEY &&
   process.env.S3_ENDPOINT;
+
+// Resend adapter è attivo solo se RESEND_API_KEY è presente.
+// Usato da Payload per mail transazionali (es. reset password admin).
+// Senza adapter Payload logga solo in console.
+const useResend = !!process.env.RESEND_API_KEY;
 
 export default buildConfig({
   admin: {
@@ -59,6 +64,20 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
+
+  // ── EMAIL ────────────────────────────────────────────────────────────────
+  // Mail transazionali (reset password, notifiche admin).
+  // In dev senza RESEND_API_KEY, Payload logga solo in console.
+  ...(useResend
+    ? {
+        email: resendAdapter({
+          defaultFromAddress:
+            process.env.RESEND_FROM_ADDRESS || 'noreply@farhanabdullah.com',
+          defaultFromName: process.env.RESEND_FROM_NAME || 'Farhan Abdullah',
+          apiKey: process.env.RESEND_API_KEY,
+        }),
+      }
+    : {}),
 
   sharp,
 
@@ -133,29 +152,6 @@ export default buildConfig({
         slug: originalDoc.slug,
         category: originalDoc.category,
       }),
-    }),
-
-    // ── FORM BUILDER ─────────────────────────────────────────────────────────
-    // Drag-and-drop form builder from the admin panel
-    formBuilderPlugin({
-      fields: {
-        text: true,
-        textarea: true,
-        select: true,
-        email: true,
-        state: false,
-        country: false,
-        checkbox: true,
-        number: true,
-        message: true,
-        payment: false,
-      },
-      formOverrides: {
-        admin: { group: 'Forms' },
-      },
-      formSubmissionOverrides: {
-        admin: { group: 'Forms' },
-      },
     }),
 
     // ── CLOUD STORAGE (Cloudflare R2 / S3) ───────────────────────────────────

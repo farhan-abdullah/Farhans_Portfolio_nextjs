@@ -221,6 +221,8 @@
     "loading": "Caricamento…",
     "error": "Si è verificato un errore",
     "not_found": "Pagina non trovata",
-    "back_home": "Torna alla home"
+    "back_home": "Torna alla home",
+    "no_posts_found": "Ancora nessun articolo pubblicato. Torna più tardi!",
+    "cta_project_idea": "Hai un'idea per il prossimo progetto?"
   }
 }

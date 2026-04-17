@@ -221,6 +221,8 @@
     "loading": "Loading…",
     "error": "An error occurred",
     "not_found": "Page not found",
-    "back_home": "Back to home"
+    "back_home": "Back to home",
+    "no_posts_found": "No articles published yet. Check back soon!",
+    "cta_project_idea": "Got an idea for your next project?"
   }
 }

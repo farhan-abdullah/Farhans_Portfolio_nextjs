@@ -4,6 +4,9 @@ import { siteConfig } from '@/lib/site-config';
 import { PageHeader } from '@/components/page-header';
 import { ProjectsGrid } from '@/components/projects-grid';
 
+// ISR: rigenera la lista ogni ora.
+export const revalidate = 3600;
+
 export async function generateMetadata({ params }) {
   const { lang } = await params;
   const dict = await getDictionary(lang);

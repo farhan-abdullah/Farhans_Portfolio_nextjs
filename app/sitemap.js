@@ -49,6 +49,8 @@ export default async function sitemap() {
       const { docs: blogPosts } = await payload.find({
         collection: 'blog-posts',
         locale: lang,
+        // Solo post pubblicati — i draft non vanno indicizzati
+        where: { status: { equals: 'published' } },
         limit: 1000,
         select: {
           slug: true,
@@ -76,6 +78,8 @@ export default async function sitemap() {
       const { docs: projects } = await payload.find({
         collection: 'projects',
         locale: lang,
+        // Solo progetti 'live' — WIP e archived fuori dal sitemap
+        where: { status: { equals: 'live' } },
         limit: 1000,
         select: {
           slug: true,

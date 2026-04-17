@@ -26,7 +26,12 @@ export default async function RootLayout({ children }) {
   const htmlLang = i18n.locales.includes(cookieLang) ? cookieLang : i18n.defaultLocale;
 
   return (
-    <html lang={htmlLang} suppressHydrationWarning className={`${inter.variable} ${geistMono.variable}`}>
+    <html
+      lang={htmlLang}
+      suppressHydrationWarning
+      data-scroll-behavior="smooth"
+      className={`${inter.variable} ${geistMono.variable}`}
+    >
       <head>
         {/* Sync <html lang> con l'URL al primo paint (prima che il cookie sia settato). */}
         <Script id="set-html-lang-from-path" strategy="beforeInteractive">

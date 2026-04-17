@@ -1,42 +1,47 @@
 import { siteConfig } from '@/lib/site-config';
 import { getPayloadClient } from '@/lib/getPayloadClient';
+import { i18n } from '@/lib/i18n-config';
 
 /**
  * RSS Feed API Route
- * Generates RSS feed for blog posts
+ * Generates RSS feed for blog posts, per-language via ?lang=
  *
- * Accessible at: /api/rss
- * Returns: application/xml
+ * - /api/rss           → defaultLocale (it)
+ * - /api/rss?lang=en   → English feed
+ * - /api/rss?lang=bn   → Bengali feed
+ *
+ * Returns application/xml, cached 1h con stale-while-revalidate 24h.
  */
 
 export const dynamic = 'force-dynamic';
 
 const BASE_URL = siteConfig.url;
-const DEFAULT_LANG = 'it'; // Default to Italian feed
 
 export async function GET(request) {
+  const { searchParams } = new URL(request.url);
+  const langParam = searchParams.get('lang');
+  const lang = i18n.locales.includes(langParam) ? langParam : i18n.defaultLocale;
+
   try {
     const payload = await getPayloadClient();
 
-    // Fetch latest blog posts
     const { docs: blogPosts } = await payload.find({
       collection: 'blog-posts',
-      locale: DEFAULT_LANG,
+      locale: lang,
+      where: { status: { equals: 'published' } },
       limit: 50,
       sort: '-publishedAt',
       select: {
         slug: true,
         title: true,
-        description: true,
+        excerpt: true,
         content: true,
         publishedAt: true,
         updatedAt: true,
-        author: true,
       },
     });
 
-    // Generate RSS XML
-    const rssContent = generateRSSFeed(blogPosts);
+    const rssContent = generateRSSFeed(blogPosts, lang);
 
     return new Response(rssContent, {
       headers: {
@@ -47,63 +52,63 @@ export async function GET(request) {
   } catch (error) {
     console.error('RSS Feed Generation Error:', error);
 
-    // Return error feed
     const errorFeed = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>${siteConfig.name}</title>
+    <title>${escapeXML(siteConfig.name)}</title>
     <link>${BASE_URL}</link>
     <description>Blog Feed</description>
     <item>
       <title>Feed Temporarily Unavailable</title>
-      <link>${BASE_URL}/blog</link>
+      <link>${BASE_URL}/${lang}/blog</link>
       <description>The RSS feed is temporarily unavailable. Please check back later.</description>
     </item>
   </channel>
 </rss>`;
 
     return new Response(errorFeed, {
-      headers: {
-        'Content-Type': 'application/xml; charset=utf-8',
-      },
+      headers: { 'Content-Type': 'application/xml; charset=utf-8' },
       status: 200,
     });
   }
 }
 
 /**
- * Generate RSS feed XML from blog posts
+ * Genera l'XML RSS dai blog post per una specifica locale.
  */
-function generateRSSFeed(posts) {
+function generateRSSFeed(posts, lang) {
   const now = new Date().toUTCString();
-  const lastBuildDate = posts.length > 0 ? new Date(posts[0].publishedAt).toUTCString() : now;
+  const lastBuildDate =
+    posts.length > 0 ? new Date(posts[0].publishedAt || posts[0].updatedAt).toUTCString() : now;
 
   const itemsXML = posts
     .map((post) => {
-      const postUrl = `${BASE_URL}/${DEFAULT_LANG}/blog/${post.slug}`;
-      const pubDate = new Date(post.publishedAt).toUTCString();
+      const postUrl = `${BASE_URL}/${lang}/blog/${post.slug}`;
+      const pubDate = new Date(post.publishedAt || post.updatedAt).toUTCString();
 
-      // Extract plain text from content for description (basic approach)
-      const description = post.description || extractPlainText(post.content);
+      // Preferisci excerpt esplicito, altrimenti estrai plain text da Lexical.
+      const description = post.excerpt || extractPlainText(post.content, 400);
 
+      // content:encoded è rimosso: mettere Lexical JSON raw in CDATA è inutile
+      // per i lettori RSS. In futuro si può aggiungere convertendo Lexical → HTML.
       return `    <item>
       <title>${escapeXML(post.title)}</title>
       <link>${postUrl}</link>
-      <guid>${postUrl}</guid>
+      <guid isPermaLink="true">${postUrl}</guid>
       <pubDate>${pubDate}</pubDate>
       <description>${escapeXML(description)}</description>
-      <content:encoded><![CDATA[${post.content}]]></content:encoded>
     </item>`;
     })
     .join('\n');
 
   return `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>${escapeXML(siteConfig.name)} - Blog</title>
-    <link>${BASE_URL}</link>
+    <title>${escapeXML(siteConfig.name)} — Blog (${lang})</title>
+    <link>${BASE_URL}/${lang}/blog</link>
+    <atom:link href="${BASE_URL}/api/rss?lang=${lang}" rel="self" type="application/rss+xml" />
     <description>Blog posts about web development, MERN stack, and Next.js</description>
-    <language>${DEFAULT_LANG}</language>
+    <language>${lang}</language>
     <lastBuildDate>${lastBuildDate}</lastBuildDate>
     <image>
       <url>${siteConfig.ogImage}</url>
@@ -142,20 +147,31 @@ function extractPlainText(content, maxLength = 200) {
 }
 
 /**
- * Extract text from Lexical JSON structure
+ * Extract text from Lexical JSON structure.
+ * - text nodes → aggiungi il loro `text`
+ * - linebreak → aggiungi spazio
+ * - qualsiasi altro node con `children` → recursive
+ * - gestisce anche nodi che hanno sia `text` che `children` (es. link)
  */
 function extractFromLexical(nodes) {
-  let text = '';
+  if (!Array.isArray(nodes)) return '';
+  let out = '';
 
   for (const node of nodes) {
-    if (node.type === 'text') {
-      text += node.text + ' ';
-    } else if (node.children) {
-      text += extractFromLexical(node.children);
+    if (!node || typeof node !== 'object') continue;
+
+    if (node.type === 'text' && typeof node.text === 'string') {
+      out += node.text + ' ';
+    } else if (node.type === 'linebreak') {
+      out += ' ';
+    }
+
+    if (Array.isArray(node.children) && node.children.length > 0) {
+      out += extractFromLexical(node.children);
     }
   }
 
-  return text.trim();
+  return out.replace(/\s+/g, ' ').trim();
 }
 
 /**

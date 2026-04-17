@@ -4,6 +4,22 @@ import { siteConfig } from '@/lib/site-config';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, Github, ExternalLink, Figma } from 'lucide-react';
+import LexicalRenderer from '@/components/lexical-renderer';
+
+// ISR: detail progetto rigenerato ogni ora.
+export const revalidate = 3600;
+
+// Helper per rendering rich text: string (legacy) o Lexical JSON
+function renderRichText(field) {
+  if (!field) return null;
+  if (typeof field === 'string') {
+    return <p>{field}</p>;
+  }
+  if (field?.root?.children) {
+    return <LexicalRenderer data={field} />;
+  }
+  return null;
+}
 
 export async function generateMetadata({ params }) {
   const { lang, slug } = await params;
@@ -75,22 +91,29 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export async function generateStaticParams({ params }) {
-  const { lang } = await params;
+export async function generateStaticParams() {
+  // NOTE: generateStaticParams NON riceve params. Iteriamo tutte le locale
+  // definite in i18n.locales per pregenerare ogni combinazione lang × slug.
   try {
     const payload = await getPayloadClient();
-    const { docs } = await payload.find({
-      collection: 'projects',
-      locale: lang,
-      limit: 100,
-    });
+    const { i18n } = await import('@/lib/i18n-config');
 
-    return docs.map((project) => ({
-      slug: project.slug,
-      lang,
-    }));
+    const all = await Promise.all(
+      i18n.locales.map(async (lang) => {
+        const { docs } = await payload.find({
+          collection: 'projects',
+          locale: lang,
+          // Solo progetti pubblicati (status 'live') per non indicizzare draft
+          where: { status: { equals: 'live' } },
+          limit: 500,
+        });
+        return docs.map((project) => ({ slug: project.slug, lang }));
+      })
+    );
+
+    return all.flat();
   } catch (error) {
-    console.error('Error generating static params:', error);
+    console.error('Error generating static params (projects):', error);
     return [];
   }
 }
@@ -171,11 +194,7 @@ export default async function ProjectDetailPage({ params }) {
               <div className="mb-12">
                 <h2 className="text-2xl font-bold mb-4">{dict.projects.challenge}</h2>
                 <div className="prose prose-invert max-w-none">
-                  {typeof project.problem === 'string' ? (
-                    <p>{project.problem}</p>
-                  ) : (
-                    <p>{JSON.stringify(project.problem).substring(0, 200)}...</p>
-                  )}
+                  {renderRichText(project.problem)}
                 </div>
               </div>
             )}
@@ -185,11 +204,7 @@ export default async function ProjectDetailPage({ params }) {
               <div className="mb-12">
                 <h2 className="text-2xl font-bold mb-4">{dict.projects.solution}</h2>
                 <div className="prose prose-invert max-w-none">
-                  {typeof project.solution === 'string' ? (
-                    <p>{project.solution}</p>
-                  ) : (
-                    <p>{JSON.stringify(project.solution).substring(0, 200)}...</p>
-                  )}
+                  {renderRichText(project.solution)}
                 </div>
               </div>
             )}
@@ -199,11 +214,7 @@ export default async function ProjectDetailPage({ params }) {
               <div className="mb-12">
                 <h2 className="text-2xl font-bold mb-4">{dict.projects.results}</h2>
                 <div className="prose prose-invert max-w-none">
-                  {typeof project.outcome === 'string' ? (
-                    <p>{project.outcome}</p>
-                  ) : (
-                    <p>{JSON.stringify(project.outcome).substring(0, 200)}...</p>
-                  )}
+                  {renderRichText(project.outcome)}
                 </div>
               </div>
             )}
