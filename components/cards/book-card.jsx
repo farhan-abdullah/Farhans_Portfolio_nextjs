@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { Star } from 'lucide-react';
 
-export function BookCard({ book }) {
+export function BookCard({ book, dict }) {
   const categoryEmoji = {
     bengali_classics: '📖',
     sirah: '📿',
@@ -18,9 +18,9 @@ export function BookCard({ book }) {
   };
 
   const statusLabel = {
-    read: 'Letto',
-    reading: 'In lettura',
-    wishlist: 'Da leggere',
+    read: dict?.books?.status_read ?? 'Read',
+    reading: dict?.books?.status_reading ?? 'Reading',
+    wishlist: dict?.books?.status_wishlist ?? 'To read',
   };
 
   return (
@@ -78,7 +78,7 @@ export function BookCard({ book }) {
         {/* Notes snippet */}
         {book.notes && (
           <p className="text-xs text-muted-foreground line-clamp-2 italic">
-            "{book.notes.substring(0, 100)}..."
+            &ldquo;{book.notes.substring(0, 100)}&hellip;&rdquo;
           </p>
         )}
       </div>

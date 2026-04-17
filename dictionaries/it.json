@@ -97,9 +97,11 @@
     "cta_title": "Pronti a collaborare?",
     "cta_desc": "Che tu abbia un progetto preciso in mente o voglia semplicemente parlare di tecnologia, sono sempre disponibile.",
     "view_work": "Vedi i miei lavori",
-    "get_in_touch": "Contattami"
+    "get_in_touch": "Contattami",
+    "download_cv": "Scarica il CV"
   },
   "projects": {
+    "no_projects_found": "Nessun progetto trovato per questa categoria.",
     "label": "Progetti",
     "title": "I miei lavori",
     "sub": "Applicazioni web, siti e soluzioni che ho costruito.",
@@ -122,6 +124,7 @@
     "similar_project": "Hai un progetto simile in mente?"
   },
   "books": {
+    "filter_all": "Tutti",
     "label": "Libri",
     "title": "La mia libreria",
     "sub": "I libri che mi hanno formato come persona e sviluppatore.",
@@ -218,6 +221,7 @@
     "change_language": "Cambia lingua"
   },
   "common": {
+    "no_books_found": "Nessun libro in questa categoria.",
     "loading": "Caricamento…",
     "error": "Si è verificato un errore",
     "not_found": "Pagina non trovata",

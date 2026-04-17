@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, Clock, Calendar } from 'lucide-react';
 
-export function BlogCard({ post, lang }) {
+export function BlogCard({ post, lang, dict }) {
   const publishDate = post.publishedAt
     ? new Date(post.publishedAt).toLocaleDateString(lang === 'en' ? 'en-US' : 'it-IT', {
         year: 'numeric',
@@ -72,7 +72,7 @@ export function BlogCard({ post, lang }) {
 
           {/* CTA */}
           <div className="flex items-center gap-2 text-sm font-medium text-accent">
-            Leggi <ArrowRight className="h-4 w-4" />
+            {dict?.blog?.read_more ?? 'Read more'} <ArrowRight className="h-4 w-4" />
           </div>
         </div>
       </article>

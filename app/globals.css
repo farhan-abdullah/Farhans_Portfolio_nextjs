@@ -12,6 +12,11 @@
     --card: 0 0% 100%;
     --accent: 168 100% 42%; /* #00d4aa */
     --accent-foreground: 0 0% 100%;
+    /* primary maps to accent for button consistency */
+    --primary: 168 100% 42%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
   }
   .dark {
     --background: 222 47% 6%;
@@ -22,6 +27,10 @@
     --card: 222 47% 8%;
     --accent: 168 100% 45%;
     --accent-foreground: 222 47% 6%;
+    --primary: 168 100% 45%;
+    --primary-foreground: 222 47% 6%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
   }
   * {
     @apply border-[hsl(var(--border))];
@@ -54,4 +63,17 @@
   .bg-card {
     background-color: hsl(var(--card));
   }
+  .bg-primary {
+    background-color: hsl(var(--primary));
+  }
+  .text-primary-foreground {
+    color: hsl(var(--primary-foreground));
+  }
+  .bg-secondary {
+    background-color: hsl(var(--secondary));
+  }
+  .text-secondary-foreground {
+    color: hsl(var(--secondary-foreground));
+  }
 }
+

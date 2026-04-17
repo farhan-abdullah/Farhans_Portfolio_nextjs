@@ -7,7 +7,7 @@ export function BooksTabs({ initialBooks, dict }) {
   const [activeCategory, setActiveCategory] = useState('all');
 
   const categories = [
-    { id: 'all', label: 'Tutti' },
+    { id: 'all', label: dict.books.filter_all },
     { id: 'bengali_classics', label: dict.books.categories.bengali_classics },
     { id: 'sirah', label: dict.books.categories.sirah },
     { id: 'islamic_history', label: dict.books.categories.islamic_history },
@@ -68,7 +68,7 @@ export function BooksTabs({ initialBooks, dict }) {
       {filteredBooks.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {filteredBooks.map((book) => (
-            <BookCard key={book.id} book={book} />
+            <BookCard key={book.id} book={book} dict={dict} />
           ))}
         </div>
       ) : (

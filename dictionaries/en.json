@@ -97,9 +97,11 @@
     "cta_title": "Ready to collaborate?",
     "cta_desc": "Whether you have a specific project in mind or just want to talk tech, I'm always available.",
     "view_work": "View my work",
-    "get_in_touch": "Get in touch"
+    "get_in_touch": "Get in touch",
+    "download_cv": "Download CV"
   },
   "projects": {
+    "no_projects_found": "No projects found in this category.",
     "label": "Projects",
     "title": "My work",
     "sub": "Web applications, websites, and solutions I've built.",
@@ -122,6 +124,7 @@
     "similar_project": "Got a similar project in mind?"
   },
   "books": {
+    "filter_all": "All",
     "label": "Books",
     "title": "My library",
     "sub": "The books that shaped me as a person and as a developer.",
@@ -218,6 +221,7 @@
     "change_language": "Change language"
   },
   "common": {
+    "no_books_found": "No books in this category.",
     "loading": "Loading…",
     "error": "An error occurred",
     "not_found": "Page not found",

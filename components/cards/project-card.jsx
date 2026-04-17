@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 
-export function ProjectCard({ project, lang }) {
+export function ProjectCard({ project, lang, dict }) {
   return (
     <Link href={`/${lang}/projects/${project.slug}`}>
       <div className="group overflow-hidden rounded-lg border border-[hsl(var(--border))] bg-[hsl(var(--card))] transition-all hover:border-accent hover:shadow-lg">
@@ -58,7 +58,7 @@ export function ProjectCard({ project, lang }) {
 
           {/* CTA */}
           <div className="flex items-center gap-2 text-sm font-medium text-accent">
-            Ver más <ArrowRight className="h-4 w-4" />
+            {dict?.projects?.view_case_study ?? 'View'} <ArrowRight className="h-4 w-4" />
           </div>
         </div>
       </div>

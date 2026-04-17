@@ -294,7 +294,7 @@ export default async function ProjectDetailPage({ params }) {
             {/* Links */}
             {project.links && (Object.values(project.links).some((v) => v)) && (
               <div>
-                <h3 className="font-bold mb-4">{dict.projects.technologies}</h3>
+                <h3 className="font-bold mb-4">Links</h3>
                 <div className="flex flex-col gap-3">
                   {project.links.live && (
                     <a
