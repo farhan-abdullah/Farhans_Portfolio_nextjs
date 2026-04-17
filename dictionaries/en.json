@@ -98,7 +98,10 @@
     "cta_desc": "Whether you have a specific project in mind or just want to talk tech, I'm always available.",
     "view_work": "View my work",
     "get_in_touch": "Get in touch",
-    "download_cv": "Download CV"
+    "download_cv": "Download CV",
+    "books_title": "A man and his books",
+    "books_intro": "I believe every book we read becomes a brick in the person we turn into. From Bengali classics to the Sīrah of the Prophet ﷺ, from Islamic history to productivity essays — my library tells the quiet story of the questions, silences and answers that shaped me as a person and as a developer.",
+    "books_cta": "Explore my library"
   },
   "projects": {
     "no_projects_found": "No projects found in this category.",
@@ -221,7 +224,6 @@
     "change_language": "Change language"
   },
   "common": {
-    "no_books_found": "No books in this category.",
     "loading": "Loading…",
     "error": "An error occurred",
     "not_found": "Page not found",

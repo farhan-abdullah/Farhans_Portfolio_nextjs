@@ -1,3 +1,5 @@
+import Link from 'next/link';
+import { BookOpen, ArrowRight } from 'lucide-react';
 import { getDictionary } from '@/lib/getDictionary';
 import { siteConfig } from '@/lib/site-config';
 import { PageHeader } from '@/components/page-header';
@@ -80,32 +82,24 @@ export default async function AboutPage({ params }) {
           <h2 className="text-3xl font-bold mb-8">{dict.about.info_title}</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            {/* Location */}
             <div>
               <h3 className="font-semibold text-foreground mb-2">{dict.about.location}</h3>
               <p className="text-muted-foreground">{dict.about.location_detail}</p>
             </div>
-
-            {/* Profession */}
             <div>
               <h3 className="font-semibold text-foreground mb-2">{dict.about.profession}</h3>
               <p className="text-muted-foreground">{dict.about.profession_detail}</p>
             </div>
-
-            {/* Education */}
             <div>
               <h3 className="font-semibold text-foreground mb-2">{dict.about.education}</h3>
               <p className="text-muted-foreground">{dict.about.education_detail}</p>
             </div>
-
-            {/* Interests */}
             <div>
               <h3 className="font-semibold text-foreground mb-2">{dict.about.interests}</h3>
               <p className="text-muted-foreground">{dict.about.interests_detail}</p>
             </div>
           </div>
 
-          {/* CV Download */}
           <div className="bg-muted/50 p-6 rounded-lg mb-12">
             <h3 className="font-semibold text-foreground mb-4">{dict.about.download_cv}</h3>
             <div className="flex flex-wrap gap-3">
@@ -114,7 +108,7 @@ export default async function AboutPage({ params }) {
                 download
                 className="inline-flex items-center px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm font-medium"
               >
-                📄 {dict.language[lang === 'it' ? 'italian' : lang === 'en' ? 'english' : 'bengali']} CV
+                {dict.language[lang === 'it' ? 'italian' : lang === 'en' ? 'english' : 'bengali']} CV
               </a>
               {lang !== 'en' && (
                 <a
@@ -122,7 +116,7 @@ export default async function AboutPage({ params }) {
                   download
                   className="inline-flex items-center px-4 py-2 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80 transition-colors text-sm font-medium"
                 >
-                  📄 English CV
+                  English CV
                 </a>
               )}
               {lang !== 'it' && (
@@ -131,7 +125,7 @@ export default async function AboutPage({ params }) {
                   download
                   className="inline-flex items-center px-4 py-2 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80 transition-colors text-sm font-medium"
                 >
-                  📄 Italian CV
+                  Italian CV
                 </a>
               )}
             </div>
@@ -152,6 +146,28 @@ export default async function AboutPage({ params }) {
               <h3 className="font-semibold text-foreground mb-2">{dict.about.interests}</h3>
               <p className="text-muted-foreground">{dict.about.interests_detail}</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Books Section — moved from navbar to a personal mention here */}
+      <section className="container-custom py-16 border-t">
+        <div className="max-w-3xl">
+          <div className="relative overflow-hidden rounded-2xl border border-[hsl(var(--border))] bg-gradient-to-br from-accent/10 via-[hsl(var(--muted))]/40 to-transparent p-8 md:p-10">
+            <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-accent/15 text-accent">
+              <BookOpen className="h-6 w-6" />
+            </div>
+            <h2 className="text-3xl font-bold mb-4">{dict.about.books_title}</h2>
+            <p className="text-muted-foreground leading-relaxed text-base md:text-lg mb-8">
+              {dict.about.books_intro}
+            </p>
+            <Link
+              href={`/${lang}/books`}
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-accent text-[hsl(var(--accent-foreground))] hover:opacity-90 transition-opacity font-medium"
+            >
+              {dict.about.books_cta}
+              <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
         </div>
       </section>
@@ -184,19 +200,19 @@ export default async function AboutPage({ params }) {
           <p className="text-muted-foreground mb-8">{dict.about.values_desc}</p>
           <div className="space-y-4">
             <div className="flex items-start gap-4">
-              <div className="text-2xl">✓</div>
+              <div className="text-2xl">OK</div>
               <p className="text-muted-foreground pt-1">{dict.about.value_1}</p>
             </div>
             <div className="flex items-start gap-4">
-              <div className="text-2xl">✓</div>
+              <div className="text-2xl">OK</div>
               <p className="text-muted-foreground pt-1">{dict.about.value_2}</p>
             </div>
             <div className="flex items-start gap-4">
-              <div className="text-2xl">✓</div>
+              <div className="text-2xl">OK</div>
               <p className="text-muted-foreground pt-1">{dict.about.value_3}</p>
             </div>
             <div className="flex items-start gap-4">
-              <div className="text-2xl">✓</div>
+              <div className="text-2xl">OK</div>
               <p className="text-muted-foreground pt-1">{dict.about.value_4}</p>
             </div>
           </div>
@@ -213,13 +229,13 @@ export default async function AboutPage({ params }) {
               href={`/${lang}/projects`}
               className="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-medium"
             >
-              {dict.about.view_work} →
+              {dict.about.view_work}
             </a>
             <a
               href={`/${lang}/contact`}
               className="inline-flex items-center px-6 py-3 border border-primary text-primary rounded-lg hover:bg-primary/10 transition-colors font-medium"
             >
-              {dict.about.get_in_touch} →
+              {dict.about.get_in_touch}
             </a>
           </div>
         </div>

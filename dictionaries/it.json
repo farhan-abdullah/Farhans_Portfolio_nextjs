@@ -98,7 +98,10 @@
     "cta_desc": "Che tu abbia un progetto preciso in mente o voglia semplicemente parlare di tecnologia, sono sempre disponibile.",
     "view_work": "Vedi i miei lavori",
     "get_in_touch": "Contattami",
-    "download_cv": "Scarica il CV"
+    "download_cv": "Scarica il CV",
+    "books_title": "Un uomo, i suoi libri",
+    "books_intro": "Credo che ogni libro letto sia un mattone della persona che diventiamo. Dai classici bengali alla Sīrah del Profeta ﷺ, dalla storia islamica ai testi di produttività: la mia libreria racconta il percorso — fatto di silenzi, domande e risposte — che mi ha formato come uomo e come sviluppatore.",
+    "books_cta": "Esplora la mia libreria"
   },
   "projects": {
     "no_projects_found": "Nessun progetto trovato per questa categoria.",
@@ -221,12 +224,11 @@
     "change_language": "Cambia lingua"
   },
   "common": {
-    "no_books_found": "Nessun libro in questa categoria.",
     "loading": "Caricamento…",
     "error": "Si è verificato un errore",
     "not_found": "Pagina non trovata",
     "back_home": "Torna alla home",
     "no_posts_found": "Ancora nessun articolo pubblicato. Torna più tardi!",
-    "cta_project_idea": "Hai un'idea per il prossimo progetto?"
+    "cta_project_idea": "Hai un’idea per il prossimo progetto?"
   }
 }
