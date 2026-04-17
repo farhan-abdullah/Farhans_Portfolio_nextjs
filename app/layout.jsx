@@ -31,25 +31,24 @@ export default async function RootLayout({ children }) {
       data-scroll-behavior="smooth"
       className={`${inter.variable} ${geistMono.variable}`}
     >
-      <head>
-        {/* Native script moved to <head> for synchronous execution before paint */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function () {
-                var path = window.location.pathname || '';
-                var parts = path.split('/');
-                var locale = parts[1];
-                var allowed = ['it', 'en', 'bn'];
-                if (allowed.indexOf(locale) !== -1) {
-                  document.documentElement.lang = locale;
-                }
-              })();
-            `
-          }}
-        />
-      </head>
       <body className="font-sans" suppressHydrationWarning>
+        {/*
+          next/script con strategy="beforeInteractive" DEVE essere dentro <body>.
+          Next lo sposta automaticamente in <head> nell'HTML SSR e lo esegue
+          prima dell'idratazione. Sincronizza <html lang> con la locale dell'URL
+          quando il cookie NEXT_LOCALE non coincide (es. primo landing su /en/...).
+        */}
+        <Script id="html-lang-from-url" strategy="beforeInteractive">
+          {`(function () {
+            var path = window.location.pathname || '';
+            var parts = path.split('/');
+            var locale = parts[1];
+            var allowed = ['it', 'en', 'bn'];
+            if (allowed.indexOf(locale) !== -1) {
+              document.documentElement.lang = locale;
+            }
+          })();`}
+        </Script>
         {/* Google Analytics GA4 - attivo solo se NEXT_PUBLIC_GA_ID è settato */}
         {GA_ID && (
           <>

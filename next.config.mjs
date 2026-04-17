@@ -8,9 +8,12 @@ const nextConfig = {
     // Allowlist specifico per sicurezza (Next 16 raccomanda remotePatterns ristretti).
     // Aggiungi qui i domini dei tuoi bucket S3/R2 o CDN quando li configuri.
     remotePatterns: [
-      { protocol: 'https', hostname: 'farhanabdullah.dev' },
+      { protocol: 'https', hostname: 'farhanabdullah.com' },
+      { protocol: 'https', hostname: 'www.farhanabdullah.com' },
       { protocol: 'https', hostname: '*.r2.cloudflarestorage.com' },
       { protocol: 'https', hostname: '*.r2.dev' },
+      // Bucket pubblico R2 specifico (match esplicito oltre al wildcard)
+      { protocol: 'https', hostname: 'pub-70b3f41573214ebf8452ded8c7a1b7d1.r2.dev' },
       { protocol: 'http', hostname: 'localhost' },
       { protocol: 'http', hostname: '127.0.0.1' },
     ],
