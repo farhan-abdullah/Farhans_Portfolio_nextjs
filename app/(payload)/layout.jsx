@@ -4,6 +4,17 @@ import { handleServerFunctions, RootLayout } from "@payloadcms/next/layouts";
 import { importMap } from "./admin/importMap.js";
 import "./custom.css";
 
+/**
+ * Layout dell'admin panel Payload.
+ *
+ * Importa `./custom.css` che sovrascrive le CSS variables di Payload
+ * e i selettori globali (.btn, .nav, .card, .field-type, .table ecc.)
+ * per allineare l'estetica al portfolio (teal #00d4aa + navy).
+ *
+ * NON avvolgere RootLayout in un <div> Tailwind: l'admin ha il suo
+ * layout e i wrapper custom creano conflitti con l'hydration di Payload
+ * (causa possibile di "removeChild" errors).
+ */
 const serverFunction = async function (args) {
   "use server";
   return handleServerFunctions({
@@ -15,14 +26,12 @@ const serverFunction = async function (args) {
 
 export default function Layout({ children }) {
   return (
-    <div className="[&_.app-wrap]:bg-[radial-gradient(circle_at_top_left,hsl(var(--accent)/0.12),transparent_34%),radial-gradient(circle_at_90%_10%,hsl(var(--accent)/0.08),transparent_26%),#0f0f0f] [&_.app-header]:backdrop-blur-xl [&_.app-header]:supports-[backdrop-filter]:bg-black/45 [&_.collection-edit]:mx-auto [&_.collection-edit]:max-w-[1280px] [&_.collection-list]:mx-auto [&_.collection-list]:max-w-[1280px] [&_.dashboard]:mx-auto [&_.dashboard]:max-w-[1280px] [&_.render-fields]:rounded-xl">
-      <RootLayout
-        config={config}
-        importMap={importMap}
-        serverFunction={serverFunction}
-      >
-        {children}
-      </RootLayout>
-    </div>
+    <RootLayout
+      config={config}
+      importMap={importMap}
+      serverFunction={serverFunction}
+    >
+      {children}
+    </RootLayout>
   );
 }

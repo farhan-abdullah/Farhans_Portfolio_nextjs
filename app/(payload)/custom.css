@@ -1,190 +1,286 @@
 /* ============================================================
-   Payload CMS Admin — Ultra Premium Custom Theme
-   Style: Elevated YouTube / Modern Glassmorphism
+   Payload CMS Admin — Tema "Portfolio"
+
+   Allineato al design system del sito (app/globals.css):
+   - Accent: teal #00d4aa (hsl 168 100% 45%)
+   - Dark bg: navy hsl(222 47% 6%)
+   - Font: Inter (come il portfolio pubblico)
+
+   Tecnica: override delle CSS variables di Payload + selettori
+   globali stabili (.btn, .nav, .card, .field-type ecc.).
+   Payload admin NON supporta Tailwind direttamente: usa SCSS +
+   CSS Modules. Questo approccio è quello ufficiale documentato.
 ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
-  --font-body: 'Roboto', Arial, sans-serif;
-  --font-mono: 'Roboto Mono', monospace;
-  
-  /* Radii */
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'Geist Mono', 'SF Mono', 'Menlo', monospace;
+
   --radius-sm: 6px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
   --radius-pill: 9999px;
-  
-  /* Animations */
+
   --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-smooth: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ── Base Variable Overrides (YouTube Red Accent) ───────────── */
-:root, [data-theme='dark'], [data-theme='light'] {
-  --color-success-250: 255, 0, 0;   
-  --color-success-500: 255, 0, 0;
-  --color-success-150: 255, 60, 60;
-  --color-error-500: 255, 0, 0;
-}
-
-[data-theme='dark'] {
-  --app-bg: #0f0f0f;
-  --surface-bg: rgba(33, 33, 33, 0.6);
-  --surface-hover: rgba(63, 63, 63, 0.8);
-  --border-color: rgba(255, 255, 255, 0.08);
-  --glass-border: 1px solid rgba(255, 255, 255, 0.05);
-  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
-  
-  --color-base-0: 15, 15, 15;
-  --color-base-50: 15, 15, 15;
-  --color-base-100: 15, 15, 15;
-  --color-base-150: 33, 33, 33;
-  --color-base-200: 33, 33, 33;
-  --color-base-250: 63, 63, 63;
-  --color-base-300: 63, 63, 63;
-}
-
+/* ── Accent teal del portfolio ───────────────────────────────
+   Payload usa --color-success-* come colore primario/CTA.
+   Lo rimappiamo sul teal del portfolio. */
+:root,
+[data-theme='dark'],
 [data-theme='light'] {
-  --app-bg: #f9f9f9;
-  --surface-bg: rgba(255, 255, 255, 0.8);
-  --surface-hover: rgba(240, 240, 240, 0.9);
-  --border-color: rgba(0, 0, 0, 0.06);
-  --glass-border: 1px solid rgba(0, 0, 0, 0.04);
-  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.08);
-
-  --color-base-0: 249, 249, 249;
-  --color-base-50: 249, 249, 249;
-  --color-base-100: 249, 249, 249;
-  --color-base-150: 255, 255, 255;
-  --color-base-200: 255, 255, 255;
-  --color-base-250: 230, 230, 230;
-  --color-base-300: 230, 230, 230;
+  --color-success-50:  220, 252, 242;
+  --color-success-100: 170, 245, 225;
+  --color-success-150: 120, 238, 208;
+  --color-success-200: 70, 230, 192;
+  --color-success-250: 0, 230, 184;
+  --color-success-500: 0, 214, 171;
+  --color-success-600: 0, 184, 147;
+  --color-success-750: 0, 152, 122;
 }
 
-/* ── Global App Background & Flow ───────────────────────────── */
-html, body, .app-wrap {
-  background-color: var(--app-bg) !important;
+/* ── Dark mode: navy del portfolio ──────────────────────────── */
+[data-theme='dark'] {
+  --app-bg: hsl(222 47% 6%);
+  --surface-bg: hsla(222, 47%, 9%, 0.7);
+  --surface-hover: hsla(217, 33%, 17%, 0.85);
+  --border-color: hsla(217, 33%, 22%, 0.6);
+  --text-primary: hsl(210 40% 98%);
+  --text-muted: hsl(215 20% 65%);
+
+  --color-base-0:   8, 15, 24;
+  --color-base-50:  10, 18, 28;
+  --color-base-100: 12, 22, 34;
+  --color-base-150: 17, 28, 42;
+  --color-base-200: 22, 33, 48;
+  --color-base-250: 30, 42, 60;
+  --color-base-300: 40, 54, 76;
+  --color-base-400: 65, 85, 115;
+  --color-base-500: 130, 145, 170;
+  --color-base-600: 180, 190, 210;
+  --color-base-800: 220, 228, 240;
+  --color-base-1000: 248, 250, 252;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.55);
+}
+
+/* ── Light mode: bianco + teal ──────────────────────────────── */
+[data-theme='light'] {
+  --app-bg: hsl(0 0% 100%);
+  --surface-bg: hsla(210, 40%, 98%, 0.85);
+  --surface-hover: hsl(210 40% 96%);
+  --border-color: hsl(214 32% 91%);
+  --text-primary: hsl(222 47% 11%);
+  --text-muted: hsl(215 16% 47%);
+
+  --color-base-0:   255, 255, 255;
+  --color-base-50:  251, 252, 253;
+  --color-base-100: 247, 248, 250;
+  --color-base-150: 241, 243, 247;
+  --color-base-200: 231, 234, 239;
+  --color-base-250: 216, 221, 228;
+  --color-base-300: 199, 206, 215;
+  --color-base-400: 158, 168, 181;
+  --color-base-500: 120, 132, 150;
+  --color-base-600: 85, 97, 114;
+  --color-base-800: 45, 55, 70;
+  --color-base-1000: 15, 23, 42;
+
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 12px 32px rgba(15, 23, 42, 0.12);
+}
+
+/* ── Globale ─────────────────────────────────────────────────── */
+html,
+body,
+.app-wrap {
   font-family: var(--font-body) !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Slide up and fade in for major view components */
-@keyframes slideUpFade {
-  0% { opacity: 0; transform: translateY(15px); }
-  100% { opacity: 1; transform: translateY(0); }
+.app-wrap {
+  background-color: var(--app-bg) !important;
+  background-image:
+    radial-gradient(circle at 15% 0%, rgba(var(--color-success-500), 0.06), transparent 45%),
+    radial-gradient(circle at 85% 100%, rgba(var(--color-success-500), 0.04), transparent 50%);
+  background-attachment: fixed;
+  color: var(--text-primary);
 }
 
-.dashboard, .collection-list, .document {
-  animation: slideUpFade 0.5s var(--transition-smooth);
-}
-
-/* ── App Header (Glassmorphic) ─────────────────────────────── */
+/* ── Header ──────────────────────────────────────────────────── */
 .app-header {
   background: var(--surface-bg) !important;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: var(--glass-border) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-color) !important;
   box-shadow: var(--shadow-sm);
   position: sticky;
   top: 0;
   z-index: 100;
-  transition: all var(--transition-smooth);
 }
 
 .step-nav__link {
   font-weight: 500;
   border-radius: var(--radius-sm);
-  padding: 4px 8px;
+  padding: 4px 10px;
   transition: all var(--transition-fast);
+  color: var(--text-muted);
 }
 .step-nav__link:hover {
   background: var(--surface-hover);
-  color: rgb(var(--color-success-250)) !important;
+  color: rgb(var(--color-success-500)) !important;
 }
 
-/* ── UI Cards & Dashboard Blocks ───────────────────────────── */
-.card, .dashboard__card {
-  background: var(--surface-bg) !important;
-  border: var(--glass-border) !important;
-  border-radius: var(--radius-md) !important;
-  box-shadow: var(--shadow-sm) !important;
-  backdrop-filter: blur(8px);
-  transition: all var(--transition-smooth) !important;
-  overflow: hidden;
-}
-
-.card:hover, .dashboard__card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg) !important;
-  border-color: rgba(var(--color-success-250), 0.3) !important;
-}
-
-/* ── Sidebar / Navigation ──────────────────────────────────── */
+/* ── Sidebar / Navigation ────────────────────────────────────── */
 .nav {
   background: var(--surface-bg) !important;
-  backdrop-filter: blur(16px);
-  border-right: var(--glass-border) !important;
+  backdrop-filter: blur(14px);
+  border-right: 1px solid var(--border-color) !important;
+}
+
+.nav__brand {
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+  padding: 12px 16px !important;
+  margin-bottom: 1rem;
+  text-decoration: none !important;
+  color: var(--text-primary) !important;
 }
 
 .nav__link {
   border-radius: var(--radius-md) !important;
   font-weight: 500 !important;
   padding: 10px 14px !important;
-  margin: 4px 12px !important;
+  margin: 2px 10px !important;
   transition: all var(--transition-fast) !important;
+  color: var(--text-primary) !important;
 }
 .nav__link:hover {
   background: var(--surface-hover) !important;
-  transform: translateX(4px);
 }
 .nav__link--active {
-  background: rgba(var(--color-success-250), 0.1) !important;
+  background: rgba(var(--color-success-500), 0.12) !important;
   color: rgb(var(--color-success-250)) !important;
-  box-shadow: inset 3px 0 0 rgb(var(--color-success-250));
+  box-shadow: inset 3px 0 0 rgb(var(--color-success-500));
 }
 .nav__link--active::before { display: none !important; }
 
-/* ── Buttons (Interactive & Pill-shaped) ───────────────────── */
+/* Rimuovi eventuali pseudo-element branding residui */
+.nav__brand::before,
+.nav__brand::after {
+  content: none !important;
+}
+
+/* ── Dashboard cards ─────────────────────────────────────────── */
+.dashboard__card,
+.card {
+  background: var(--surface-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-sm) !important;
+  transition: all var(--transition-smooth) !important;
+  overflow: hidden;
+}
+.dashboard__card:hover,
+.card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(var(--color-success-500), 0.35) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+/* ── Contenitori centrati larghezza massima ─────────────────── */
+.collection-edit,
+.collection-list,
+.dashboard,
+.document {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── Buttons ─────────────────────────────────────────────────── */
 .btn {
-  border-radius: var(--radius-pill) !important;
+  border-radius: var(--radius-md) !important;
   font-weight: 600 !important;
-  letter-spacing: 0.02em;
-  padding: 10px 20px !important;
+  letter-spacing: -0.005em;
+  padding: 9px 18px !important;
   transition: all var(--transition-fast) !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   text-transform: none !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 }
-.btn:active {
-  transform: scale(0.96);
-}
+.btn:active { transform: scale(0.97); }
 .btn--style-primary {
-  background: linear-gradient(135deg, rgb(255, 50, 50), rgb(200, 0, 0)) !important;
-  color: white !important;
+  background: rgb(var(--color-success-500)) !important;
+  color: hsl(222 47% 6%) !important;
   border: none !important;
+  font-weight: 700 !important;
 }
 .btn--style-primary:hover {
-  box-shadow: 0 6px 16px rgba(255, 0, 0, 0.3) !important;
+  background: rgb(var(--color-success-250)) !important;
+  box-shadow: 0 6px 16px rgba(var(--color-success-500), 0.35) !important;
   transform: translateY(-1px);
 }
 .btn--style-secondary {
   background: var(--surface-hover) !important;
-  backdrop-filter: blur(8px);
-  border: var(--glass-border) !important;
-}
-.btn--style-secondary:hover {
-  background: rgba(var(--color-base-250), 1) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
 }
 .btn--size-icon {
-  border-radius: 50% !important; /* Circle form controls/icons */
-  padding: 10px !important;
+  border-radius: var(--radius-md) !important;
+  padding: 8px !important;
 }
 
-/* ── Tables & Lists ────────────────────────────────────────── */
+/* ── Form fields ─────────────────────────────────────────────── */
+.field-type { margin-bottom: 22px; }
+
+.field-type label {
+  font-weight: 500;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+  display: inline-block;
+  color: var(--text-muted);
+}
+
+.field-type input,
+.field-type textarea,
+.field-type select,
+.react-select__control {
+  background: var(--surface-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-md) !important;
+  padding: 10px 14px !important;
+  font-size: 0.95rem !important;
+  color: var(--text-primary) !important;
+  transition: all var(--transition-fast) !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+}
+
+.field-type input:focus,
+.field-type textarea:focus,
+.react-select__control--is-focused {
+  border-color: rgb(var(--color-success-500)) !important;
+  box-shadow: 0 0 0 3px rgba(var(--color-success-500), 0.15) !important;
+  background: var(--surface-hover) !important;
+  outline: none !important;
+}
+
+.render-fields {
+  border-radius: var(--radius-lg);
+}
+
+/* ── Tables ──────────────────────────────────────────────────── */
 .table {
   border-collapse: separate !important;
-  border-spacing: 0 8px !important;
+  border-spacing: 0 6px !important;
   width: 100%;
 }
 .table thead tr {
@@ -193,156 +289,132 @@ html, body, .app-wrap {
 }
 .table th {
   text-transform: uppercase;
-  font-size: 0.75rem;
-  letter-spacing: 0.05em;
-  opacity: 0.6;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  color: var(--text-muted);
   border: none !important;
-  padding: 12px 16px;
+  padding: 10px 14px;
 }
 .table tbody tr {
   background: var(--surface-bg) !important;
   backdrop-filter: blur(4px);
   border-radius: var(--radius-md) !important;
   box-shadow: var(--shadow-sm);
-  transition: all var(--transition-smooth);
+  transition: all var(--transition-fast);
 }
 .table tbody tr td {
   border: none !important;
-  padding: 16px;
-  border-top: var(--glass-border);
-  border-bottom: var(--glass-border);
+  padding: 14px;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
 }
-.table tbody tr td:first-child { 
-  border-top-left-radius: var(--radius-md); 
-  border-bottom-left-radius: var(--radius-md); 
-  border-left: var(--glass-border);
+.table tbody tr td:first-child {
+  border-top-left-radius: var(--radius-md);
+  border-bottom-left-radius: var(--radius-md);
+  border-left: 1px solid var(--border-color);
 }
-.table tbody tr td:last-child { 
-  border-top-right-radius: var(--radius-md); 
-  border-bottom-right-radius: var(--radius-md); 
-  border-right: var(--glass-border);
+.table tbody tr td:last-child {
+  border-top-right-radius: var(--radius-md);
+  border-bottom-right-radius: var(--radius-md);
+  border-right: 1px solid var(--border-color);
 }
 .table tbody tr:hover {
-  transform: scale(1.01) translateY(-2px);
-  box-shadow: var(--shadow-lg);
-  background: var(--surface-hover) !important;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(var(--color-success-500), 0.3) !important;
 }
 
-/* ── Form Fields & Inputs ──────────────────────────────────── */
-.field-type {
-  margin-bottom: 24px;
-}
-.field-type label {
-  font-weight: 500;
-  font-size: 0.85rem;
-  margin-bottom: 8px;
-  display: inline-block;
-  opacity: 0.8;
-}
-.field-type input, .field-type textarea, .field-type select, .react-select__control {
-  background: var(--surface-bg) !important;
-  border: var(--glass-border) !important;
-  border-radius: var(--radius-md) !important;
-  padding: 12px 16px !important;
-  transition: all var(--transition-fast) !important;
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.02) !important;
-}
-.field-type input:focus, .field-type textarea:focus, .react-select__control--is-focused {
-  border-color: rgb(var(--color-success-250)) !important;
-  box-shadow: 0 0 0 4px rgba(255,0,0,0.15) !important;
-  background: var(--surface-hover) !important;
-  outline: none !important;
-}
-
-/* ── Login Page Overhaul ───────────────────────────────────── */
+/* ── Login / Create First User ──────────────────────────────── */
 .template-default {
-  background: linear-gradient(135deg, var(--app-bg), rgba(255, 0, 0, 0.05)) !important;
+  background: var(--app-bg) !important;
+  background-image:
+    radial-gradient(circle at 20% 25%, rgba(var(--color-success-500), 0.1), transparent 45%),
+    radial-gradient(circle at 80% 75%, rgba(var(--color-success-500), 0.06), transparent 50%);
+  min-height: 100vh;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  min-height: 100vh;
 }
 .template-default__wrap {
   width: 100%;
-  max-width: 460px;
+  max-width: 440px;
   background: var(--surface-bg) !important;
   backdrop-filter: blur(24px) !important;
-  border: var(--glass-border) !important;
+  border: 1px solid var(--border-color) !important;
   border-radius: var(--radius-lg) !important;
-  padding: 48px !important;
+  padding: 44px !important;
   box-shadow: var(--shadow-lg) !important;
-  animation: slideUpFade 0.7s var(--transition-smooth);
 }
 .template-default__wrap h1 {
   text-align: center;
-  font-weight: 800;
-  font-size: 2rem;
-  margin-bottom: 30px;
+  font-weight: 700;
+  font-size: 1.75rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+  color: var(--text-primary);
 }
 
-/* ── Status Pills & Badges ─────────────────────────────────── */
+/* ── Pills / badges di stato ────────────────────────────────── */
 .pill {
   border-radius: var(--radius-pill) !important;
-  padding: 6px 14px !important;
-  font-weight: 700 !important;
+  padding: 4px 12px !important;
+  font-weight: 600 !important;
   text-transform: uppercase;
   font-size: 0.65rem !important;
   letter-spacing: 0.04em;
-  background: rgba(var(--color-base-300), 0.5) !important;
-  border: var(--glass-border);
+  background: var(--surface-hover) !important;
+  border: 1px solid var(--border-color);
+  color: var(--text-muted) !important;
 }
-.pill--style-success {
-  background: rgba(0, 200, 100, 0.15) !important;
-  color: rgb(0, 200, 100) !important;
-  border-color: rgba(0, 200, 100, 0.3) !important;
-}
+.pill--style-success,
 .pill--style-active {
-  background: rgba(255, 0, 0, 0.15) !important;
-  color: rgb(255, 50, 50) !important;
-  border-color: rgba(255, 0, 0, 0.3) !important;
+  background: rgba(var(--color-success-500), 0.12) !important;
+  color: rgb(var(--color-success-250)) !important;
+  border-color: rgba(var(--color-success-500), 0.3) !important;
 }
 
-/* ── Tooltips & Popovers ───────────────────────────────────── */
-.tooltip {
+/* ── Tooltip / popover ──────────────────────────────────────── */
+.tooltip,
+.popup-button {
   background: var(--surface-hover) !important;
   backdrop-filter: blur(10px);
   border-radius: var(--radius-sm) !important;
-  box-shadow: var(--shadow-sm) !important;
-  border: var(--glass-border);
+  box-shadow: var(--shadow-md) !important;
+  border: 1px solid var(--border-color);
 }
 
-/* ── Custom Scrollbar ──────────────────────────────────────── */
+/* ── Scrollbar ──────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: rgba(150, 150, 150, 0.3);
+  background: var(--border-color);
   border-radius: var(--radius-pill);
 }
-::-webkit-scrollbar-thumb:hover { background: rgba(255, 50, 50, 0.6); }
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--color-success-500), 0.5);
+}
 
-/* ── Micro-animations for structural items ─────────────────── */
-/* Logo Area Enhancement */
-.nav__brand {
-  margin-bottom: 2rem;
-  transition: transform var(--transition-fast);
-  font-weight: 800;
-  font-size: 1.4rem;
-  display: flex !important;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none !important;
+/* ── Typography ─────────────────────────────────────────────── */
+.collection-list__title,
+.document-header__title,
+.dashboard__header h1,
+h1, h2, h3 {
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  color: var(--text-primary);
 }
-.nav__brand:hover { transform: scale(1.02); }
-.nav__brand::before {
-  content: '▶';
-  color: rgb(255, 0, 0);
-  filter: drop-shadow(0 0 8px rgba(255,0,0,0.5));
-  font-size: 1.6rem;
+
+/* ── Animazioni d'ingresso ──────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-.nav__brand::after {
-  content: 'YouTube CMS';
-  background: -webkit-linear-gradient(135deg, #ff0000, #ff8888);
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: unset;
+
+.dashboard,
+.collection-list,
+.document,
+.template-default__wrap {
+  animation: fadeInUp 0.4s var(--transition-smooth);
 }
