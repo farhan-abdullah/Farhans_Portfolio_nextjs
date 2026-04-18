@@ -27,23 +27,32 @@ const dirname = path.dirname(filename);
 const useResend = !!process.env.RESEND_API_KEY;
 
 export default buildConfig({
-  admin: {
+admin: {
   user: Users.slug,
   meta: {
     titleSuffix: ' | Farhan Admin',
   },
-  // 🔥 CUSTOMIZZAZIONE COMPLETA CON TAILWIND (tutto l'admin)
+  // 🔥 CUSTOMIZZAZIONE COMPLETA CON TAILWIND (corretto per Next.js 16 + Payload)
   components: {
     graphics: {
-      Logo: () => import('@/components/admin/Logo'),
-      Icon: () => import('@/components/admin/Logo'),
+      Logo: async () => {
+        const { default: Logo } = await import('@/components/admin/Logo');
+        return Logo;
+      },
+      Icon: async () => {
+        const { default: Logo } = await import('@/components/admin/Logo');
+        return Logo;
+      },
     },
     views: {
-      Dashboard: () => import('@/components/admin/Dashboard'),
+      Dashboard: async () => {
+        const { default: Dashboard } = await import('@/components/admin/Dashboard');
+        return Dashboard;
+      },
     },
   },
   theme: 'dark',
-  css: '/admin-custom.css',   // stile globale Tailwind
+  css: '/admin-custom.css',
 },
   localization: {
     locales: [
