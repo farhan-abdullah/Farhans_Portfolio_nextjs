@@ -1,9 +1,13 @@
-import Script from 'next/script';
 import { siteConfig } from '@/lib/site-config';
 
 /**
  * JSON-LD structured data per SEO.
  * Emette tre schemi schema.org: Person, WebSite, ProfessionalService.
+ *
+ * Usa <script type="application/ld+json"> inline invece di next/script:
+ * - React 19 supporta nativamente questo pattern per JSON-LD (dati, non codice)
+ * - Evita conflitti DOM tra next/script e React (removeChild errors al cambio locale)
+ * - I crawler leggono comunque lo script inline nell'HTML SSR
  *
  * Uso in app/[lang]/layout.jsx:
  *   <JsonLd locale={lang} />
@@ -42,84 +46,76 @@ export default function JsonLd({ locale = 'it' }) {
   const baseUrl = siteConfig.url;
   const pageUrl = locale === 'it' ? baseUrl : `${baseUrl}/${locale}`;
 
+  const personSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: current.name,
+    jobTitle: current.jobTitle,
+    description: current.description,
+    url: pageUrl,
+    image: `${baseUrl}/profile.jpg`,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Venezia',
+      addressRegion: 'Veneto',
+      addressCountry: 'IT',
+    },
+    knowsAbout: [
+      'MERN Stack',
+      'Next.js',
+      'React',
+      'Node.js',
+      'TypeScript',
+      'Tailwind CSS',
+      'Payload CMS',
+    ],
+    knowsLanguage: ['it', 'en', 'bn'],
+    inLanguage: locale,
+    sameAs: [siteConfig.links.github, siteConfig.links.linkedin].filter(Boolean),
+  };
+
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: current.siteName,
+    url: pageUrl,
+    description: current.description,
+    inLanguage: locale,
+  };
+
+  const serviceSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    name: current.service,
+    provider: {
+      '@type': 'Person',
+      name: current.name,
+      url: pageUrl,
+    },
+    serviceType: [
+      'MERN Stack Development',
+      'Next.js Development',
+      'Multilingual Websites',
+      'Web Application Development',
+    ],
+    areaServed: 'Italy',
+    url: pageUrl,
+  };
+
   return (
     <>
-      {/* Person — schema per il portfolio owner */}
-      <Script
-        id={`json-ld-person-${locale}`}
+      <script
         type="application/ld+json"
-        strategy="afterInteractive"
-      >
-        {JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'Person',
-          name: current.name,
-          jobTitle: current.jobTitle,
-          description: current.description,
-          url: pageUrl,
-          image: `${baseUrl}/profile.jpg`,
-          address: {
-            '@type': 'PostalAddress',
-            addressLocality: 'Venezia',
-            addressRegion: 'Veneto',
-            addressCountry: 'IT',
-          },
-          knowsAbout: [
-            'MERN Stack',
-            'Next.js',
-            'React',
-            'Node.js',
-            'TypeScript',
-            'Tailwind CSS',
-            'Payload CMS',
-          ],
-          knowsLanguage: ['it', 'en', 'bn'],
-          inLanguage: locale,
-          sameAs: [siteConfig.links.github, siteConfig.links.linkedin].filter(Boolean),
-        })}
-      </Script>
-
-      {/* WebSite schema */}
-      <Script
-        id={`json-ld-website-${locale}`}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
+      <script
         type="application/ld+json"
-        strategy="afterInteractive"
-      >
-        {JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'WebSite',
-          name: current.siteName,
-          url: pageUrl,
-          description: current.description,
-          inLanguage: locale,
-        })}
-      </Script>
-
-      {/* ProfessionalService schema */}
-      <Script
-        id={`json-ld-service-${locale}`}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+      <script
         type="application/ld+json"
-        strategy="afterInteractive"
-      >
-        {JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'ProfessionalService',
-          name: current.service,
-          provider: {
-            '@type': 'Person',
-            name: current.name,
-            url: pageUrl,
-          },
-          serviceType: [
-            'MERN Stack Development',
-            'Next.js Development',
-            'Multilingual Websites',
-            'Web Application Development',
-          ],
-          areaServed: 'Italy',
-          url: pageUrl,
-        })}
-      </Script>
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
     </>
   );
 }

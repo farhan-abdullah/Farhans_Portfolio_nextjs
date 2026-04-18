@@ -1,4 +1,3 @@
-import { ThemeProvider } from '@/components/theme-provider';
 import { i18n } from '@/lib/i18n-config';
 import { Geist_Mono, Inter } from 'next/font/google';
 import { cookies } from 'next/headers';
@@ -27,9 +26,10 @@ export default async function RootLayout({ children }) {
   return (
     <html
       lang={htmlLang}
+      translate="no"
       suppressHydrationWarning
       data-scroll-behavior="smooth"
-      className={`${inter.variable} ${geistMono.variable}`}
+      className={`${inter.variable} ${geistMono.variable} notranslate`}
     >
       <body className="font-sans" suppressHydrationWarning>
         {/*
@@ -70,14 +70,13 @@ export default async function RootLayout({ children }) {
             />
           </>
         )}
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        {/*
+          ThemeProvider è spostato in app/[lang]/layout.jsx così che
+          /admin (Payload CMS) NON sia avvolto da next-themes.
+          next-themes muta className su <html> e confligge con il theme
+          system di Payload → causa errori "removeChild" in admin.
+        */}
+        {children}
       </body>
     </html>
   );

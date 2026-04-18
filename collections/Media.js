@@ -21,7 +21,8 @@ export const Media = {
     },
   ],
   upload: {
-    staticDir: 'media',
+    // staticDir rimosso: s3Storage plugin imposta disableLocalStorage: true
+    // automaticamente. Tutti i file vanno su Cloudflare R2, niente filesystem.
     mimeTypes: ['image/*', 'application/pdf'],
     imageSizes: [
       { name: 'thumbnail', width: 400, height: 300, position: 'centre' },

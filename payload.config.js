@@ -21,13 +21,6 @@ import { Users } from './collections/Users.js';
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
-// Cloud storage is only active when R2/S3 env vars are provided
-const useCloudStorage =
-  process.env.S3_BUCKET &&
-  process.env.S3_ACCESS_KEY_ID &&
-  process.env.S3_SECRET_ACCESS_KEY &&
-  process.env.S3_ENDPOINT;
-
 // Resend adapter è attivo solo se RESEND_API_KEY è presente.
 // Usato da Payload per mail transazionali (es. reset password admin).
 // Senza adapter Payload logga solo in console.
@@ -155,29 +148,29 @@ export default buildConfig({
     }),
 
     // ── CLOUD STORAGE (Cloudflare R2 / S3) ───────────────────────────────────
-    // Only activates when S3_BUCKET + credentials are in .env.local
-    // Compatible with Cloudflare R2 (S3-compatible API)
-    ...(useCloudStorage
-      ? [
-          s3Storage({
-            collections: {
-              media: {
-                prefix: 'media',
-                generateFileURL: ({ prefix, filename: fname }) =>
-                  `${process.env.S3_PUBLIC_URL}/${prefix}/${fname}`,
-              },
-            },
-            bucket: process.env.S3_BUCKET || '',
-            config: {
-              credentials: {
-                accessKeyId: process.env.S3_ACCESS_KEY_ID || '',
-                secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || '',
-              },
-              region: process.env.S3_REGION || 'auto',
-              endpoint: process.env.S3_ENDPOINT || '',
-            },
-          }),
-        ]
-      : []),
+    // Sempre attivo: Vercel ha filesystem read-only, quindi uploads DEVONO
+    // andare su storage esterno. Se le env vars S3_* mancano al runtime,
+    // gli upload falliranno con errore esplicito (meglio della WARN silente).
+    //
+    // Compatible con Cloudflare R2 (API S3-compatibile).
+    // `disableLocalStorage: true` viene impostato automaticamente dal plugin.
+    s3Storage({
+      collections: {
+        media: {
+          prefix: 'media',
+          generateFileURL: ({ prefix, filename: fname }) =>
+            `${process.env.S3_PUBLIC_URL}/${prefix}/${fname}`,
+        },
+      },
+      bucket: process.env.S3_BUCKET || '',
+      config: {
+        credentials: {
+          accessKeyId: process.env.S3_ACCESS_KEY_ID || '',
+          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || '',
+        },
+        region: process.env.S3_REGION || 'auto',
+        endpoint: process.env.S3_ENDPOINT || '',
+      },
+    }),
   ],
 });
