@@ -219,7 +219,7 @@ export const Projects = {
       ],
     },
     {
-  name: 'techStack',
+  name: 'TechStackField',
   type: 'array',
   label: 'Tech Stack',
   fields: [{ name: 'technology', type: 'text' }],
@@ -230,7 +230,7 @@ export const Projects = {
   },
 },
 {
-  name: 'techStack',
+  name: 'ResultsField',
   type: 'array',
   admin: {
     components: {
@@ -239,7 +239,7 @@ export const Projects = {
   },
 },
 {
-  name: 'techStack',
+  name: 'ImagePreviewField',
   type: 'array',
   admin: {
     components: {

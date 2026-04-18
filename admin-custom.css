@@ -1,0 +1,15 @@
+/* admin-custom.css */
+@import 'tailwindcss';
+
+@layer base {
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+}
+
+@layer components {
+  .payload-admin {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+  }
+}

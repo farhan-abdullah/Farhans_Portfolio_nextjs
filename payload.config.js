@@ -28,12 +28,23 @@ const useResend = !!process.env.RESEND_API_KEY;
 
 export default buildConfig({
   admin: {
-    user: Users.slug,
-    meta: {
-      titleSuffix: '— Farhan Portfolio CMS',
+  user: Users.slug,
+  meta: {
+    titleSuffix: ' | Farhan Admin',
+  },
+  // 🔥 CUSTOMIZZAZIONE COMPLETA CON TAILWIND (tutto l'admin)
+  components: {
+    graphics: {
+      Logo: () => import('@/components/admin/Logo'),
+      Icon: () => import('@/components/admin/Logo'),
+    },
+    views: {
+      Dashboard: () => import('@/components/admin/Dashboard'),
     },
   },
-
+  theme: 'dark',
+  css: '/admin-custom.css',   // stile globale Tailwind
+},
   localization: {
     locales: [
       { code: 'it', label: 'Italiano' },
