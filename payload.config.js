@@ -35,12 +35,12 @@ export default buildConfig({
     // 🔥 CUSTOMIZZAZIONE COMPLETA CON TAILWIND (tutto l'admin)
     components: {
       graphics: {
-        Logo: path.resolve(dirname, "components/admin/Logo.jsx"),
-        Icon: path.resolve(dirname, "components/admin/Logo.jsx"),
+        Logo: "@/components/admin/Logo",
+        Icon: "@/components/admin/Logo",
       },
       views: {
         dashboard: {
-          Component: path.resolve(dirname, "components/admin/Dashboard.jsx"),
+          Component: "@/components/admin/Dashboard",
         },
       },
     },
