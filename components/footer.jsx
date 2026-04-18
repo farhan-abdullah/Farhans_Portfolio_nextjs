@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { Github, Linkedin, Mail } from 'lucide-react';
+import { Mail } from 'lucide-react';
+import { Github, Linkedin } from '@/components/icons';
 import { siteConfig } from '@/lib/site-config';
 
 export function Footer({ lang, dict }) {

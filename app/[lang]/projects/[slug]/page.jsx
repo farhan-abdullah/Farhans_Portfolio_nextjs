@@ -3,7 +3,8 @@ import { getPayloadClient } from '@/lib/getPayloadClient';
 import { siteConfig } from '@/lib/site-config';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, Github, ExternalLink, Figma } from 'lucide-react';
+import { ArrowLeft, ExternalLink } from 'lucide-react';
+import { Github, Figma } from '@/components/icons';
 import LexicalRenderer from '@/components/lexical-renderer';
 
 // ISR: detail progetto rigenerato ogni ora.

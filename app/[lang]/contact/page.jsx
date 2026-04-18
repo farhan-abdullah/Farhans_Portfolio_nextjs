@@ -1,7 +1,8 @@
 import { getDictionary } from '@/lib/getDictionary';
 import { PageHeader } from '@/components/page-header';
 import { siteConfig } from '@/lib/site-config';
-import { Mail, Phone, MessageCircle, Linkedin, Github, MapPin, Download } from 'lucide-react';
+import { Mail, Phone, MessageCircle, MapPin, Download } from 'lucide-react';
+import { Github, Linkedin } from '@/components/icons';
 
 export async function generateMetadata({ params }) {
   const { lang } = await params;
