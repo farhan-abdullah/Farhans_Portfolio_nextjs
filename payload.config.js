@@ -51,8 +51,9 @@ admin: {
       },
     },
   },
-  theme: 'dark',
-  css: '/admin-custom.css',
+ ttheme: 'dark',
+    // Usa path.resolve, NON la stringa statica '/admin-custom.css'
+  css: path.resolve(dirname, 'admin-custom.css'),
 },
   localization: {
     locales: [
