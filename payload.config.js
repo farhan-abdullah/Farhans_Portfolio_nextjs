@@ -32,19 +32,17 @@ export default buildConfig({
     meta: {
       titleSuffix: " | Farhan Admin",
     },
-    // 🔥 CUSTOMIZZAZIONE COMPLETA CON TAILWIND (tutto l'admin)
+    // Admin custom con Tailwind (versione stabile)
     components: {
       graphics: {
         Logo: "@/components/admin/Logo",
         Icon: "@/components/admin/Logo",
       },
       views: {
-        dashboard: {
-          Component: "@/components/admin/Dashboard",
-        },
+        Dashboard: "@/components/admin/Dashboard",
       },
     },
-    theme: "light",
+    theme: "dark",
     css: path.resolve(dirname, "admin-custom.css"),
   },
   localization: {
@@ -172,13 +170,21 @@ export default buildConfig({
     // Required env vars (set in Vercel → Settings → Environment Variables):
     //   S3_BUCKET, S3_ACCESS_KEY_ID, S3_SECRET_ACCESS_KEY,
     //   S3_ENDPOINT, S3_PUBLIC_URL, S3_REGION (defaults "auto")
-    console.log('[R2 config]', {
-      S3_BUCKET:     process.env.S3_BUCKET     ? `"${process.env.S3_BUCKET}"` : 'MISSING',
-      S3_ENDPOINT:   process.env.S3_ENDPOINT   ? `"${process.env.S3_ENDPOINT}"` : 'MISSING',
-      S3_PUBLIC_URL: process.env.S3_PUBLIC_URL  ? `"${process.env.S3_PUBLIC_URL}"` : 'MISSING',
-      S3_REGION:     process.env.S3_REGION     || 'auto (default)',
-      S3_ACCESS_KEY_ID:     process.env.S3_ACCESS_KEY_ID     ? '***SET***' : 'MISSING',
-      S3_SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY ? '***SET***' : 'MISSING',
+    console.log("[R2 config]", {
+      S3_BUCKET: process.env.S3_BUCKET
+        ? `"${process.env.S3_BUCKET}"`
+        : "MISSING",
+      S3_ENDPOINT: process.env.S3_ENDPOINT
+        ? `"${process.env.S3_ENDPOINT}"`
+        : "MISSING",
+      S3_PUBLIC_URL: process.env.S3_PUBLIC_URL
+        ? `"${process.env.S3_PUBLIC_URL}"`
+        : "MISSING",
+      S3_REGION: process.env.S3_REGION || "auto (default)",
+      S3_ACCESS_KEY_ID: process.env.S3_ACCESS_KEY_ID ? "***SET***" : "MISSING",
+      S3_SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY
+        ? "***SET***"
+        : "MISSING",
     }),
 
     s3Storage({
