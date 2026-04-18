@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { ArrowRight, Github, Mail } from 'lucide-react';
+import { ArrowRight, Mail } from 'lucide-react';
+import { Github } from '@/components/icons';
 
 export function Hero({ lang, dict }) {
   return (
