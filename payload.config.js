@@ -51,7 +51,7 @@ admin: {
       },
     },
   },
- ttheme: 'dark',
+ theme: 'dark',
     // Usa path.resolve, NON la stringa statica '/admin-custom.css'
   css: path.resolve(dirname, 'admin-custom.css'),
 },
