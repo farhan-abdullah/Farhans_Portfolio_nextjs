@@ -1,10 +1,4 @@
-/* admin-custom.css */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  .payload-admin {
-    --background: 240 10% 3.9%;
-  }
+/* admin-custom.css — loaded by Payload directly, no PostCSS processing */
+.payload-admin {
+  --background: 240 10% 3.9%;
 }

@@ -8,6 +8,9 @@ import {
   LinkFeature,
   BlockquoteFeature,
 } from '@payloadcms/richtext-lexical';
+import { revalidatePath } from 'next/cache';
+
+const LOCALES = ['it', 'en', 'bn'];
 
 /** @type {import('payload').CollectionConfig} */
 export const BlogPosts = {
@@ -149,6 +152,15 @@ export const BlogPosts = {
           data.publishedAt = new Date().toISOString();
         }
         return data;
+      },
+    ],
+    afterChange: [
+      ({ doc }) => {
+        const slug = doc?.slug;
+        for (const locale of LOCALES) {
+          revalidatePath(`/${locale}/blog`);
+          if (slug) revalidatePath(`/${locale}/blog/${slug}`);
+        }
       },
     ],
   },
