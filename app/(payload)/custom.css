@@ -563,39 +563,195 @@ input[type='checkbox']:checked {
   animation: admFadeUp 0.35s var(--adm-ease);
 }
 
+/* ══════════════════════════════════════════════════════════════
+   RESPONSIVE ADMIN — Payload 3.x
+   Breakpoints: 1024px (tablet) · 768px (tablet-sm) · 480px (mobile)
+══════════════════════════════════════════════════════════════ */
+
+/* ── Radio groups (Category / Language / Status selects) ────── */
+.radio-group-field,
+.field-type--radio-group,
+.field-type--select {
+  width: 100%;
+}
+
+.radio-group__wrap {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0.5rem !important;
+}
+
+.radio-input {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.45rem !important;
+  padding: 0.45rem 0.85rem !important;
+  border: 1px solid var(--adm-border) !important;
+  border-radius: var(--adm-radius-pill) !important;
+  background: var(--adm-surface-2) !important;
+  cursor: pointer !important;
+  font-size: 0.82rem !important;
+  font-weight: 500 !important;
+  color: var(--adm-text-muted) !important;
+  transition: all var(--adm-fast) !important;
+  min-height: 36px !important;
+  user-select: none !important;
+}
+
+.radio-input:hover {
+  border-color: var(--adm-teal) !important;
+  color: var(--adm-teal) !important;
+}
+
+.radio-input__input {
+  accent-color: var(--adm-teal) !important;
+  width: 14px !important;
+  height: 14px !important;
+  flex-shrink: 0 !important;
+}
+
+.radio-input--selected,
+.radio-input[data-selected='true'] {
+  border-color: var(--adm-teal-border) !important;
+  background: var(--adm-teal-dim) !important;
+  color: var(--adm-teal) !important;
+}
+
+/* ── Upload / Cover field ───────────────────────────────────── */
+.upload-field,
+.file-field,
+.field-type--upload {
+  width: 100% !important;
+}
+
+.upload-field__select,
+.file-field__upload,
+.upload__buttons {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0.5rem !important;
+  width: 100% !important;
+}
+
+.upload-field__select .btn,
+.file-field__upload .btn,
+.upload__buttons .btn {
+  flex: 1 1 auto !important;
+  min-width: 120px !important;
+  justify-content: center !important;
+}
+
+.file-details__filename {
+  word-break: break-all !important;
+}
+
+/* ── Number field (Rating) ──────────────────────────────────── */
+.field-type--number input {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* ── Checkbox field (Featured) — styled as toggle pill ──────── */
+.checkbox-field,
+.field-type--checkbox {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.6rem !important;
+}
+
+.checkbox-input {
+  min-height: 36px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  cursor: pointer !important;
+}
+
+.checkbox-input__input {
+  width: 18px !important;
+  height: 18px !important;
+  accent-color: var(--adm-teal) !important;
+  flex-shrink: 0 !important;
+}
+
+/* ── Date field ─────────────────────────────────────────────── */
+.field-type--date input {
+  width: 100% !important;
+}
+
+/* ── Textarea (Notes) ───────────────────────────────────────── */
+.field-type--textarea textarea {
+  min-height: 120px !important;
+  resize: vertical !important;
+}
+
+/* ── Relationship field ─────────────────────────────────────── */
+.relationship-field,
+.field-type--relationship {
+  width: 100% !important;
+}
+
 /* ── Responsive — Tablet ≤ 1024px ───────────────────────────── */
 @media (max-width: 1024px) {
-  .collection-edit .document__fields,
-  .collection-edit .document__sidebar-wrap {
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-
-  .collection-edit .document__content {
+  /* ── Document edit: stack main + sidebar ── */
+  /* Try all known Payload 3.x wrapper class names */
+  .document-fields__wrap,
+  .doc-fields,
+  .collection-edit > .gutter--left.gutter--right,
+  .document__content,
+  .document-content {
+    display: flex !important;
     flex-direction: column !important;
+    gap: 1rem !important;
   }
 
+  /* Sidebar: full width, not absolute/fixed */
+  .document__sidebar,
+  .document-sidebar,
+  .doc-controls-wrap,
   .collection-edit .document__sidebar {
     position: static !important;
     width: 100% !important;
     max-width: 100% !important;
-    order: -1;
+    flex-shrink: 0 !important;
+  }
+
+  /* Main fields area: full width */
+  .document__fields,
+  .document-main,
+  .document__main,
+  .collection-edit .document__fields {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+  }
+
+  /* Doc controls (publish panel + sidebar fields): full width strip */
+  .doc-controls {
+    width: 100% !important;
+    max-width: 100% !important;
+    position: static !important;
   }
 }
 
-/* ── Responsive — Tablet small ≤ 768px ──────────────────────── */
+/* ── Responsive — Tablet ≤ 768px ────────────────────────────── */
 @media (max-width: 768px) {
-  /* Header: reduce padding */
+  /* Reduce header height */
   .app-header {
     padding: 0 1rem !important;
   }
 
-  /* Nav: ensure mobile hamburger not blocked */
+  /* Ensure nav z-index above content */
   .nav {
     z-index: 200 !important;
   }
 
-  /* Layout max-width: full width with smaller padding */
+  /* Reduce gutter padding */
+  .gutter--left  { padding-left:  1rem !important; }
+  .gutter--right { padding-right: 1rem !important; }
+  .gutter--bottom { padding-bottom: 1.5rem !important; }
+
+  /* Layout containers: reduced horizontal padding */
   .collection-edit,
   .collection-list,
   .dashboard,
@@ -604,44 +760,121 @@ input[type='checkbox']:checked {
     padding-right: 1rem !important;
   }
 
-  /* Tables: horizontal scroll on mobile */
+  /* ── Breadcrumb / step-nav ── */
+  .step-nav {
+    flex-wrap: wrap !important;
+    gap: 0.25rem !important;
+  }
+
+  /* ── Document header: stack title + save button ── */
+  .document-header,
+  .doc-header,
+  .collection-edit__header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.75rem !important;
+    padding-bottom: 1rem !important;
+  }
+
+  .document-header__title,
+  .doc-header__title {
+    font-size: 1.3rem !important;
+    word-break: break-word !important;
+  }
+
+  /* Save / publish buttons: full width on mobile */
+  .document-header .btn,
+  .doc-header .btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* ── Sidebar: collapse before main content ── */
+  .document__sidebar,
+  .document-sidebar,
+  .doc-controls-wrap {
+    order: -1 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    position: static !important;
+  }
+
+  /* Doc-controls: horizontal strip layout on tablet */
+  .doc-controls {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 0.75rem !important;
+    border-radius: var(--adm-radius-lg) !important;
+  }
+
+  .doc-controls__header {
+    width: 100% !important;
+  }
+
+  /* Sidebar fields (e.g. Featured) appear inline, full-width */
+  .field-type--checkbox {
+    padding: 0.75rem !important;
+    background: var(--adm-surface-2) !important;
+    border: 1px solid var(--adm-border) !important;
+    border-radius: var(--adm-radius) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* ── Tables: horizontal scroll ── */
   .table-wrap,
-  .collection-list__table,
-  .list-header + div {
+  .collection-list__table {
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch !important;
+    width: 100% !important;
   }
 
   .table {
-    min-width: 560px;
+    min-width: 520px !important;
   }
 
-  .table th,
+  .table th {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.6rem !important;
+  }
+
   .table tbody tr td {
     padding: 0.65rem 0.75rem !important;
     font-size: 0.8rem !important;
   }
 
-  /* List header: stack search + controls */
+  /* ── List page header: stack search + action ── */
   .list-header {
-    flex-wrap: wrap !important;
-    gap: 0.5rem !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.75rem !important;
     padding: 0.75rem 0 !important;
   }
 
-  .list-header__search {
+  .list-header__search,
+  .list-header__search input {
     width: 100% !important;
     max-width: 100% !important;
   }
 
-  .list-header__search input {
+  .list-header .btn {
     width: 100% !important;
+    justify-content: center !important;
   }
 
-  /* Buttons: minimum touch target */
+  /* ── Column/Filter buttons ── */
+  .list-header__actions {
+    display: flex !important;
+    gap: 0.5rem !important;
+    flex-wrap: wrap !important;
+  }
+
+  /* ── Buttons: touch targets ── */
   .btn {
     min-height: 44px !important;
-    padding: 0.65rem 1rem !important;
+    padding: 0.65rem 1.1rem !important;
   }
 
   .btn--size-icon {
@@ -650,14 +883,32 @@ input[type='checkbox']:checked {
     padding: 0.5rem !important;
   }
 
-  /* Login card */
+  /* ── Radio groups: wrap pills ── */
+  .radio-group__wrap {
+    gap: 0.4rem !important;
+  }
+
+  .radio-input {
+    min-height: 40px !important;
+    padding: 0.4rem 0.75rem !important;
+  }
+
+  /* ── Upload buttons: row, full-width ── */
+  .upload-field__select,
+  .file-field__upload,
+  .upload__buttons {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+  }
+
+  /* ── Login card ── */
   .template-default__wrap {
     max-width: 100% !important;
     margin: 1rem !important;
     padding: 2rem 1.5rem !important;
   }
 
-  /* Tabs: allow horizontal scroll if many tabs */
+  /* ── Tabs: horizontal scroll ── */
   .tabs-field__tabs-container {
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch !important;
@@ -669,12 +920,12 @@ input[type='checkbox']:checked {
     white-space: nowrap !important;
   }
 
-  /* Rich text editor */
+  /* ── Rich text editor ── */
   .rich-text__editor {
-    min-height: 180px !important;
+    min-height: 160px !important;
   }
 
-  /* Pagination: center on mobile */
+  /* ── Pagination ── */
   .pagination {
     justify-content: center !important;
     flex-wrap: wrap !important;
@@ -684,7 +935,10 @@ input[type='checkbox']:checked {
 
 /* ── Responsive — Mobile ≤ 480px ────────────────────────────── */
 @media (max-width: 480px) {
-  /* Full-width layout */
+  /* Tighten gutters further */
+  .gutter--left  { padding-left:  0.75rem !important; }
+  .gutter--right { padding-right: 0.75rem !important; }
+
   .collection-edit,
   .collection-list,
   .dashboard,
@@ -693,53 +947,68 @@ input[type='checkbox']:checked {
     padding-right: 0.75rem !important;
   }
 
-  /* Document header: stack title + actions */
-  .document-header {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 0.75rem !important;
+  /* Document header: tighter */
+  .document-header,
+  .doc-header {
+    padding-top: 0.75rem !important;
   }
 
-  .document-header__title {
-    font-size: 1.25rem !important;
+  .document-header__title,
+  .doc-header__title {
+    font-size: 1.15rem !important;
   }
 
-  /* Doc controls (sidebar) becomes full-width card on mobile */
-  .doc-controls {
-    width: 100% !important;
-  }
-
-  /* Reduce form field margins */
+  /* Form fields: reduce spacing */
   .field-type {
-    margin-bottom: 1rem !important;
+    margin-bottom: 1.1rem !important;
   }
 
-  /* Full-width inputs */
+  /* Inputs: font-size 16px prevents iOS auto-zoom */
   .field-type input,
   .field-type textarea,
   .field-type select,
   .react-select__control {
-    font-size: 1rem !important; /* prevents iOS zoom */
+    font-size: 1rem !important;
   }
 
-  /* Login card: smaller padding */
-  .template-default__wrap {
-    padding: 1.5rem 1.25rem !important;
-    border-radius: var(--adm-radius-lg) !important;
+  /* Radio pills: smaller on very narrow screens */
+  .radio-input {
+    font-size: 0.78rem !important;
+    padding: 0.35rem 0.65rem !important;
+    min-height: 36px !important;
   }
 
-  .template-default__wrap h1 {
-    font-size: 1.35rem !important;
+  /* Upload buttons: stack vertically */
+  .upload-field__select .btn,
+  .file-field__upload .btn,
+  .upload__buttons .btn {
+    width: 100% !important;
+    flex: 1 1 100% !important;
   }
 
-  /* Table: tighter cells */
+  /* Featured/checkbox: full-width card */
+  .field-type--checkbox {
+    padding: 0.65rem 0.85rem !important;
+  }
+
+  /* Textarea: shorter on mobile */
+  .field-type--textarea textarea {
+    min-height: 100px !important;
+  }
+
+  /* Doc-controls: compact */
+  .doc-controls {
+    flex-direction: column !important;
+  }
+
+  /* Table: tightest cells */
   .table th,
   .table tbody tr td {
-    padding: 0.5rem 0.6rem !important;
-    font-size: 0.75rem !important;
+    padding: 0.45rem 0.55rem !important;
+    font-size: 0.72rem !important;
   }
 
-  /* Toolbar: allow scroll */
+  /* Toolbar: horizontal scroll */
   .toolbar {
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch !important;
@@ -750,7 +1019,18 @@ input[type='checkbox']:checked {
     flex-shrink: 0 !important;
   }
 
-  /* Cards: no lift animation on touch (prevents stuck hover) */
+  /* Login card */
+  .template-default__wrap {
+    padding: 1.5rem 1.1rem !important;
+    border-radius: var(--adm-radius-lg) !important;
+    margin: 0.75rem !important;
+  }
+
+  .template-default__wrap h1 {
+    font-size: 1.25rem !important;
+  }
+
+  /* No hover lift on touch devices (prevents stuck state) */
   .dashboard__card:hover,
   .card:hover,
   .table tbody tr:hover {
