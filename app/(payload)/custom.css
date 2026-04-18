@@ -326,8 +326,15 @@ body,
   border-color: rgba(var(--color-success-500), 0.3) !important;
 }
 
-/* ── Login / Create First User ──────────────────────────────── */
-.template-default {
+/* ── Login / Create First User ──────────────────────────────────
+   ATTENZIONE: `.template-default` è il wrapper di TUTTE le view admin
+   autenticate in Payload 3 (dashboard, list, edit), non solo il login.
+   Se forziamo `display:flex; justify-content:center` su `.template-default`
+   collassiamo anche dashboard ed edit view → schermata apparentemente vuota.
+   Per questo lo scope è ridotto a `.template-default:has(.login__form)`
+   che matcha SOLO la pagina di login. */
+.template-default:has(.login__form),
+.template-default:has(.create-first-user) {
   background: var(--app-bg) !important;
   background-image:
     radial-gradient(circle at 20% 25%, rgba(var(--color-success-500), 0.1), transparent 45%),
