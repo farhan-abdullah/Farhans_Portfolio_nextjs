@@ -32,7 +32,7 @@ admin: {
   meta: {
     titleSuffix: ' | Farhan Admin',
   },
-  // 🔥 CUSTOMIZZAZIONE COMPLETA CON TAILWIND (corretto per Next.js 16 + Payload)
+  // 🔥 CUSTOMIZZAZIONE COMPLETA CON TAILWIND (tutto l'admin)
   components: {
     graphics: {
       Logo: async () => {

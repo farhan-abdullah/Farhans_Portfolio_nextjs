@@ -1,8 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    './app/**/*.{js,jsx}',
-    './components/**/*.{js,jsx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/admin/**/*.{js,ts,jsx,tsx}',     // ← IMPORTANTISSIMO per l'admin
+    './admin-custom.css',                           // per gli stili globali dell'admin
   ],
   darkMode: 'class',
   theme: {
