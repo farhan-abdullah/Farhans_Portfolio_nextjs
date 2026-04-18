@@ -230,8 +230,13 @@ export const Projects = {
   },
 },
 {
-  name: 'ResultsField',
+  name: 'results',
   type: 'array',
+  label: 'Risultati ottenuti',
+  fields: [
+    { name: 'metric', type: 'text' },
+    { name: 'value',  type: 'text' },
+  ],
   admin: {
     components: {
       Field: () => import('@/components/admin/ResultsField'),
@@ -239,8 +244,23 @@ export const Projects = {
   },
 },
 {
-  name: 'ImagePreviewField',
-  type: 'array',
+  name: 'hero',
+  type: 'group',
+  label: 'Hero Images',
+  fields: [
+    {
+      name: 'desktop',
+      type: 'upload',
+      relationTo: 'media',
+      label: 'Immagine Desktop',
+    },
+    {
+      name: 'mobile',
+      type: 'upload',
+      relationTo: 'media',
+      label: 'Immagine Mobile',
+    },
+  ],
   admin: {
     components: {
       Field: () => import('@/components/admin/ImagePreviewField'),
