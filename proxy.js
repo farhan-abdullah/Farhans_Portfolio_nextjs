@@ -107,3 +107,4 @@ export function proxy(request) {
 export const config = {
   matcher: ["/((?!_next|api|admin|favicon.ico|.*\\..*).*)"],
 };
+// added comment
