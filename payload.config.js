@@ -1,22 +1,22 @@
-import { mongooseAdapter } from '@payloadcms/db-mongodb';
-import { resendAdapter } from '@payloadcms/email-resend';
-import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs';
-import { redirectsPlugin } from '@payloadcms/plugin-redirects';
-import { searchPlugin } from '@payloadcms/plugin-search';
-import { seoPlugin } from '@payloadcms/plugin-seo';
-import { lexicalEditor } from '@payloadcms/richtext-lexical';
-import { s3Storage } from '@payloadcms/storage-s3';
-import path from 'path';
-import { buildConfig } from 'payload';
-import sharp from 'sharp';
-import { fileURLToPath } from 'url';
+import { mongooseAdapter } from "@payloadcms/db-mongodb";
+import { resendAdapter } from "@payloadcms/email-resend";
+import { nestedDocsPlugin } from "@payloadcms/plugin-nested-docs";
+import { redirectsPlugin } from "@payloadcms/plugin-redirects";
+import { searchPlugin } from "@payloadcms/plugin-search";
+import { seoPlugin } from "@payloadcms/plugin-seo";
+import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import { s3Storage } from "@payloadcms/storage-s3";
+import path from "path";
+import { buildConfig } from "payload";
+import sharp from "sharp";
+import { fileURLToPath } from "url";
 
-import { BlogPosts } from './collections/BlogPosts.js';
-import { Books } from './collections/Books.js';
-import { Categories } from './collections/Categories.js';
-import { Media } from './collections/Media.js';
-import { Projects } from './collections/Projects.js';
-import { Users } from './collections/Users.js';
+import { BlogPosts } from "./collections/BlogPosts.js";
+import { Books } from "./collections/Books.js";
+import { Categories } from "./collections/Categories.js";
+import { Media } from "./collections/Media.js";
+import { Projects } from "./collections/Projects.js";
+import { Users } from "./collections/Users.js";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -27,41 +27,34 @@ const dirname = path.dirname(filename);
 const useResend = !!process.env.RESEND_API_KEY;
 
 export default buildConfig({
-admin: {
-  user: Users.slug,
-  meta: {
-    titleSuffix: ' | Farhan Admin',
-  },
-  // 🔥 CUSTOMIZZAZIONE COMPLETA CON TAILWIND (tutto l'admin)
-  components: {
-    graphics: {
-      Logo: async () => {
-        const { default: Logo } = await import('@/components/admin/Logo');
-        return Logo;
+  admin: {
+    user: Users.slug,
+    meta: {
+      titleSuffix: " | Farhan Admin",
+    },
+    // 🔥 CUSTOMIZZAZIONE COMPLETA CON TAILWIND (tutto l'admin)
+    components: {
+      graphics: {
+        Logo: path.resolve(dirname, "components/admin/Logo.jsx"),
+        Icon: path.resolve(dirname, "components/admin/Logo.jsx"),
       },
-      Icon: async () => {
-        const { default: Logo } = await import('@/components/admin/Logo');
-        return Logo;
+      views: {
+        dashboard: {
+          Component: path.resolve(dirname, "components/admin/Dashboard.jsx"),
+        },
       },
     },
-    views: {
-      Dashboard: async () => {
-        const { default: Dashboard } = await import('@/components/admin/Dashboard');
-        return Dashboard;
-      },
-    },
-  },
- theme: 'dark',
+    theme: "dark",
     // Usa path.resolve, NON la stringa statica '/admin-custom.css'
-  css: path.resolve(dirname, 'admin-custom.css'),
-},
+    css: path.resolve(dirname, "admin-custom.css"),
+  },
   localization: {
     locales: [
-      { code: 'it', label: 'Italiano' },
-      { code: 'en', label: 'English' },
-      { code: 'bn', label: 'বাংলা (Bengali)' },
+      { code: "it", label: "Italiano" },
+      { code: "en", label: "English" },
+      { code: "bn", label: "বাংলা (Bengali)" },
     ],
-    defaultLocale: 'it',
+    defaultLocale: "it",
     fallback: true,
   },
 
@@ -69,14 +62,14 @@ admin: {
 
   editor: lexicalEditor({}),
 
-  secret: process.env.PAYLOAD_SECRET || '',
+  secret: process.env.PAYLOAD_SECRET || "",
 
   typescript: {
-    outputFile: path.resolve(dirname, 'payload-types.ts'),
+    outputFile: path.resolve(dirname, "payload-types.ts"),
   },
 
   db: mongooseAdapter({
-    url: process.env.DATABASE_URI || '',
+    url: process.env.DATABASE_URI || "",
   }),
 
   // ── EMAIL ────────────────────────────────────────────────────────────────
@@ -86,8 +79,8 @@ admin: {
     ? {
         email: resendAdapter({
           defaultFromAddress:
-            process.env.RESEND_FROM_ADDRESS || 'noreply@farhanabdullah.com',
-          defaultFromName: process.env.RESEND_FROM_NAME || 'Farhan Abdullah',
+            process.env.RESEND_FROM_ADDRESS || "noreply@farhanabdullah.com",
+          defaultFromName: process.env.RESEND_FROM_NAME || "Farhan Abdullah",
           apiKey: process.env.RESEND_API_KEY,
         }),
       }
@@ -95,8 +88,12 @@ admin: {
 
   sharp,
 
-  cors: [process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'].filter(Boolean),
-  csrf: [process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'].filter(Boolean),
+  cors: [process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:3000"].filter(
+    Boolean,
+  ),
+  csrf: [process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:3000"].filter(
+    Boolean,
+  ),
 
   upload: {
     limits: {
@@ -108,13 +105,15 @@ admin: {
     // ── SEO ──────────────────────────────────────────────────────────────────
     // Adds metaTitle, metaDescription, og image preview to Projects & BlogPosts
     seoPlugin({
-      collections: ['projects', 'blog-posts'],
-      uploadsCollection: 'media',
+      collections: ["projects", "blog-posts"],
+      uploadsCollection: "media",
       generateTitle: ({ doc }) => `${doc.title} | Farhan Abdullah`,
-      generateDescription: ({ doc }) => doc.excerpt || doc.summary || '',
+      generateDescription: ({ doc }) => doc.excerpt || doc.summary || "",
       generateURL: ({ doc, collectionConfig, locale }) => {
-        const base = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000';
-        const prefix = collectionConfig.slug === 'projects' ? 'projects' : 'blog';
+        const base =
+          process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:3000";
+        const prefix =
+          collectionConfig.slug === "projects" ? "projects" : "blog";
         return `${base}/${locale}/${prefix}/${doc.slug}`;
       },
     }),
@@ -122,41 +121,42 @@ admin: {
     // ── REDIRECTS ─────────────────────────────────────────────────────────────
     // Manage 301/302 redirects from the admin panel without redeploying
     redirectsPlugin({
-      collections: ['projects', 'blog-posts'],
+      collections: ["projects", "blog-posts"],
       overrides: {
-        admin: { group: 'SEO & Navigation' },
+        admin: { group: "SEO & Navigation" },
       },
     }),
 
     // ── NESTED DOCS ───────────────────────────────────────────────────────────
     // Allows hierarchical documents (e.g. categories with sub-categories)
     nestedDocsPlugin({
-      collections: ['categories'],
+      collections: ["categories"],
       generateLabel: (_, doc) => doc.title,
-      generateURL: (docs) => docs.reduce((url, doc) => `${url}/${doc.slug}`, ''),
+      generateURL: (docs) =>
+        docs.reduce((url, doc) => `${url}/${doc.slug}`, ""),
     }),
 
     // ── SEARCH ────────────────────────────────────────────────────────────────
     // Full-text search index across Projects, BlogPosts and Books
     searchPlugin({
-      collections: ['projects', 'blog-posts', 'books'],
+      collections: ["projects", "blog-posts", "books"],
       defaultPriorities: {
         projects: 10,
-        'blog-posts': 20,
+        "blog-posts": 20,
         books: 30,
       },
       searchOverrides: {
-        admin: { group: 'Content' },
+        admin: { group: "Content" },
         fields: ({ defaultFields }) => [
           ...defaultFields,
           {
-            name: 'slug',
-            type: 'text',
+            name: "slug",
+            type: "text",
             admin: { readOnly: true },
           },
           {
-            name: 'category',
-            type: 'text',
+            name: "category",
+            type: "text",
             admin: { readOnly: true },
           },
         ],
@@ -178,19 +178,19 @@ admin: {
     s3Storage({
       collections: {
         media: {
-          prefix: 'media',
+          prefix: "media",
           generateFileURL: ({ prefix, filename: fname }) =>
             `${process.env.S3_PUBLIC_URL}/${prefix}/${fname}`,
         },
       },
-      bucket: process.env.S3_BUCKET || '',
+      bucket: process.env.S3_BUCKET || "",
       config: {
         credentials: {
-          accessKeyId: process.env.S3_ACCESS_KEY_ID || '',
-          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || '',
+          accessKeyId: process.env.S3_ACCESS_KEY_ID || "",
+          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || "",
         },
-        region: process.env.S3_REGION || 'auto',
-        endpoint: process.env.S3_ENDPOINT || '',
+        region: process.env.S3_REGION || "auto",
+        endpoint: process.env.S3_ENDPOINT || "",
       },
     }),
   ],
