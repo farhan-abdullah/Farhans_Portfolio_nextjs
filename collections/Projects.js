@@ -218,5 +218,16 @@ export const Projects = {
         { name: 'ogImage', type: 'upload', relationTo: 'media' },
       ],
     },
+    {
+  name: 'techStack',
+  type: 'array',
+  label: 'Tech Stack',
+  fields: [{ name: 'technology', type: 'text' }],
+  admin: {
+    components: {
+      Field: () => import('@/components/admin/TechStackField'),
+    },
+  },
+},
   ],
 };
