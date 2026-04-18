@@ -4,6 +4,9 @@ import {
   FixedToolbarFeature,
   InlineToolbarFeature,
 } from '@payloadcms/richtext-lexical';
+import { revalidatePath } from 'next/cache';
+
+const LOCALES = ['it', 'en', 'bn'];
 
 /** @type {import('payload').CollectionConfig} */
 export const Projects = {
@@ -275,4 +278,16 @@ export const Projects = {
 },
 
   ],
+  hooks: {
+    afterChange: [
+      ({ doc }) => {
+        const slug = doc?.slug;
+        for (const locale of LOCALES) {
+          revalidatePath(`/${locale}/projects`);
+          if (slug) revalidatePath(`/${locale}/projects/${slug}`);
+          revalidatePath(`/${locale}`);
+        }
+      },
+    ],
+  },
 };
