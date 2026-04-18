@@ -168,21 +168,10 @@ export default buildConfig({
     }),
 
     // ── CLOUD STORAGE (Cloudflare R2 / S3-compatible) ───────────────────────
-    // Vercel has a read-only filesystem — uploads MUST go to external storage.
-    // Required env vars: S3_BUCKET, S3_ACCESS_KEY_ID, S3_SECRET_ACCESS_KEY,
-    //                    S3_ENDPOINT, S3_PUBLIC_URL  (S3_REGION defaults "auto")
-    (() => {
-      const required = ["S3_BUCKET", "S3_ACCESS_KEY_ID", "S3_SECRET_ACCESS_KEY", "S3_ENDPOINT", "S3_PUBLIC_URL"];
-      const missing = required.filter((k) => !process.env[k]);
-      if (missing.length) {
-        throw new Error(
-          `[payload] Missing required R2 environment variables: ${missing.join(", ")}. ` +
-          "Add them in your hosting dashboard under Environment Variables."
-        );
-      }
-      return null;
-    })(),
-
+    // Vercel filesystem is read-only — uploads go to Cloudflare R2.
+    // Required env vars (set in Vercel → Settings → Environment Variables):
+    //   S3_BUCKET, S3_ACCESS_KEY_ID, S3_SECRET_ACCESS_KEY,
+    //   S3_ENDPOINT, S3_PUBLIC_URL, S3_REGION (defaults "auto")
     s3Storage({
       collections: {
         media: {
