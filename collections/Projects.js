@@ -229,5 +229,24 @@ export const Projects = {
     },
   },
 },
+{
+  name: 'techStack',
+  type: 'array',
+  admin: {
+    components: {
+      Field: () => import('@/components/admin/ResultsField'),
+    },
+  },
+},
+{
+  name: 'techStack',
+  type: 'array',
+  admin: {
+    components: {
+      Field: () => import('@/components/admin/ImagePreviewField'),
+    },
+  },
+},
+
   ],
 };
