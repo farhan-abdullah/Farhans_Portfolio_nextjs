@@ -342,7 +342,7 @@ html, body, .app-wrap {
 .nav__brand::after {
   content: 'YouTube CMS';
   background: -webkit-linear-gradient(135deg, #ff0000, #ff8888);
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   color: unset;
 }
