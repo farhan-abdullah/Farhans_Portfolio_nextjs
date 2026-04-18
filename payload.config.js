@@ -35,12 +35,12 @@ export default buildConfig({
     // 🔥 CUSTOMIZZAZIONE COMPLETA CON TAILWIND (tutto l'admin)
     components: {
       graphics: {
-        Logo: '@/components/admin/Logo',
-        Icon: '@/components/admin/Logo',
+        Logo: "@/components/admin/Logo",
+        Icon: "@/components/admin/Logo",
       },
       views: {
         dashboard: {
-          Component: '@/components/admin/Dashboard',
+          Component: "@/components/admin/Dashboard",
         },
       },
     },
@@ -174,22 +174,24 @@ export default buildConfig({
     //
     // Compatible con Cloudflare R2 (API S3-compatibile).
     // `disableLocalStorage: true` viene impostato automaticamente dal plugin.
+    // ── CLOUD STORAGE (Cloudflare R2) ───────────────────────────────────
     s3Storage({
       collections: {
         media: {
           prefix: "media",
-          generateFileURL: ({ prefix, filename: fname }) =>
-            `${process.env.S3_PUBLIC_URL}/${prefix}/${fname}`,
+          generateFileURL: ({ prefix, filename }) =>
+            `${process.env.S3_PUBLIC_URL}/${prefix}/${filename}`,
         },
       },
-      bucket: process.env.S3_BUCKET || "",
       config: {
+        bucket: process.env.S3_BUCKET, // ← Questo era fuori posto
         credentials: {
-          accessKeyId: process.env.S3_ACCESS_KEY_ID || "",
-          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || "",
+          accessKeyId: process.env.S3_ACCESS_KEY_ID,
+          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
         },
         region: process.env.S3_REGION || "auto",
-        endpoint: process.env.S3_ENDPOINT || "",
+        endpoint: process.env.S3_ENDPOINT,
+        forcePathStyle: true, // importante per R2
       },
     }),
   ],
