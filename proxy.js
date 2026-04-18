@@ -8,13 +8,11 @@ const i18n = {
 };
 
 function getLocale(request) {
-  // 1. Cookie (scelta manuale dell'utente)
   const cookieLocale = request.cookies.get("NEXT_LOCALE")?.value;
   if (cookieLocale && i18n.locales.includes(cookieLocale)) {
     return cookieLocale;
   }
 
-  // 2. Accept-Language header
   const acceptLang = request.headers.get("accept-language");
   if (!acceptLang) return i18n.defaultLocale;
 
@@ -38,48 +36,45 @@ function getLocale(request) {
 
 // ==================== MIDDLEWARE ====================
 export function proxy(request) {
-  const url = request.nextUrl.pathname.toLowerCase();
+  const pathname = request.nextUrl.pathname;
 
-  // 🔥 BLOCCO ATTACCHI PHP / WEBSHELL
+  // 🔥 1. BLOCCO ATTACCHI PHP / WEBSHELL
+  const urlLower = pathname.toLowerCase();
   if (
-    url.endsWith(".php") ||
-    url.includes(".php?") ||
-    url.includes("wp-") ||
-    url.includes("wp-admin") ||
-    url.includes("wp-content") ||
-    url.includes("wp-login") ||
-    url.includes("astab") ||
-    url.includes("marvins") ||
-    url.includes("dodo") ||
-    url.includes("wpputty") ||
-    url.includes("shell") ||
-    url.includes("gool") ||
-    url.includes("bbh") ||
-    url.includes("shadow-bot") ||
-    url.includes("zwso") ||
-    url.includes("zxcs") ||
-    url.includes("class-wp-")
+    urlLower.endsWith(".php") ||
+    urlLower.includes(".php?") ||
+    urlLower.includes("wp-") ||
+    urlLower.includes("wp-admin") ||
+    urlLower.includes("wp-content") ||
+    urlLower.includes("wp-login") ||
+    urlLower.includes("astab") ||
+    urlLower.includes("marvins") ||
+    urlLower.includes("dodo") ||
+    urlLower.includes("wpputty") ||
+    urlLower.includes("shell") ||
+    urlLower.includes("gool") ||
+    urlLower.includes("bbh") ||
+    urlLower.includes("shadow-bot") ||
+    urlLower.includes("zwso") ||
+    urlLower.includes("zxcs") ||
+    urlLower.includes("class-wp-")
   ) {
     return NextResponse.json({ message: "Not Found" }, { status: 404 });
   }
 
-  // ── LOGICA i18n (non toccata) ──
-  const { pathname } = request.nextUrl;
-
-  // Skip static files, API, admin e file con estensione
-  if (
-    pathname.startsWith("/_next") ||
-    pathname.startsWith("/api") ||
-    pathname.startsWith("/admin") ||
-    pathname.includes(".") ||
-    pathname === "/favicon.ico"
-  ) {
+  // 🔥 2. SKIP TOTALE PER ADMIN (importantissimo!)
+  if (pathname.startsWith("/admin") || pathname.startsWith("/api") || pathname.startsWith("/_next")) {
     return NextResponse.next();
   }
 
-  // Se l'URL ha già il locale, aggiorna solo il cookie se necessario
+  // 🔥 3. Skip file statici e favicon
+  if (pathname.includes(".") || pathname === "/favicon.ico") {
+    return NextResponse.next();
+  }
+
+  // ── LOGICA i18n (solo per le pagine pubbliche) ──
   const localeFromPath = i18n.locales.find(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
+    (locale) => pathname.startsWith(`/\( {locale}/`) || pathname === `/ \){locale}`
   );
 
   if (localeFromPath) {
@@ -98,8 +93,8 @@ export function proxy(request) {
   // Redirect automatico al locale corretto
   const locale = getLocale(request);
   const newUrl = new URL(
-    `/${locale}${pathname === "/" ? "" : pathname}`,
-    request.url,
+    `/\( {locale} \){pathname === "/" ? "" : pathname}`,
+    request.url
   );
 
   const res = NextResponse.redirect(newUrl);
@@ -111,6 +106,7 @@ export function proxy(request) {
   return res;
 }
 
+// Matcher aggiornato e più sicuro
 export const config = {
-  matcher: ["/((?!_next|api|admin|.*\\..*).*)"],
+  matcher: ["/((?!_next|api|admin|favicon.ico|.*\\..*).*)"],
 };
