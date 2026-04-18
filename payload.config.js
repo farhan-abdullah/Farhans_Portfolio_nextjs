@@ -35,12 +35,12 @@ export default buildConfig({
     // 🔥 CUSTOMIZZAZIONE COMPLETA CON TAILWIND (tutto l'admin)
     components: {
       graphics: {
-        Logo: "@/components/admin/Logo",
-        Icon: "@/components/admin/Logo",
+        Logo: path.resolve(dirname, "components/admin/Logo.jsx"),
+        Icon: path.resolve(dirname, "components/admin/Logo.jsx"),
       },
       views: {
         dashboard: {
-          Component: "@/components/admin/Dashboard",
+          Component: path.resolve(dirname, "components/admin/Dashboard.jsx"),
         },
       },
     },
@@ -53,7 +53,7 @@ export default buildConfig({
       { code: "en", label: "English" },
       { code: "bn", label: "বাংলা (Bengali)" },
     ],
-    defaultLocale: "it",
+    defaultLocale: "en",
     fallback: true,
   },
 
