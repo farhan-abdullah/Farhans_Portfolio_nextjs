@@ -44,7 +44,7 @@ export default buildConfig({
         },
       },
     },
-    theme: "dark",
+    theme: "light",
     css: path.resolve(dirname, "admin-custom.css"),
   },
   localization: {
