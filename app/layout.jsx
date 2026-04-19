@@ -1,27 +1,29 @@
-import { i18n } from '@/lib/i18n-config';
-import { Geist_Mono, Inter } from 'next/font/google';
-import { cookies } from 'next/headers';
-import Script from 'next/script';
-import './globals.css';
-
+import { i18n } from "@/lib/i18n-config";
+import { Analytics } from "@vercel/analytics/react";
+import { Geist_Mono, Inter } from "next/font/google";
+import { cookies } from "next/headers";
+import Script from "next/script";
+import "./globals.css";
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-sans',
-  display: 'swap',
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
-  subsets: ['latin'],
-  variable: '--font-mono',
-  display: 'swap',
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
 });
 
 export default async function RootLayout({ children }) {
   const cookieStore = await cookies();
-  const cookieLang = cookieStore.get('NEXT_LOCALE')?.value;
-  const htmlLang = i18n.locales.includes(cookieLang) ? cookieLang : i18n.defaultLocale;
+  const cookieLang = cookieStore.get("NEXT_LOCALE")?.value;
+  const htmlLang = i18n.locales.includes(cookieLang)
+    ? cookieLang
+    : i18n.defaultLocale;
 
   return (
     <html
@@ -65,7 +67,7 @@ export default async function RootLayout({ children }) {
                   function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
                   gtag('config', '${GA_ID}');
-                `
+                `,
               }}
             />
           </>
@@ -77,6 +79,7 @@ export default async function RootLayout({ children }) {
           system di Payload → causa errori "removeChild" in admin.
         */}
         {children}
+        <Analytics />
       </body>
     </html>
   );
