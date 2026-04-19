@@ -1,11 +1,11 @@
-import { getDictionary } from '@/lib/getDictionary';
-import { getPayloadClient } from '@/lib/getPayloadClient';
-import { siteConfig } from '@/lib/site-config';
-import Image from 'next/image';
-import Link from 'next/link';
-import { ArrowLeft, ExternalLink } from 'lucide-react';
-import { Github, Figma } from '@/components/icons';
-import LexicalRenderer from '@/components/lexical-renderer';
+import { Figma, Github } from "@/components/icons";
+import LexicalRenderer from "@/components/lexical-renderer";
+import { getDictionary } from "@/lib/getDictionary";
+import { getPayloadClient } from "@/lib/getPayloadClient";
+import { siteConfig } from "@/lib/site-config";
+import { ArrowLeft, ExternalLink } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 // ISR: detail progetto rigenerato ogni ora.
 export const revalidate = 3600;
@@ -13,7 +13,7 @@ export const revalidate = 3600;
 // Helper per rendering rich text: string (legacy) o Lexical JSON
 function renderRichText(field) {
   if (!field) return null;
-  if (typeof field === 'string') {
+  if (typeof field === "string") {
     return <p>{field}</p>;
   }
   if (field?.root?.children) {
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }) {
   try {
     const payload = await getPayloadClient();
     const { docs } = await payload.find({
-      collection: 'projects',
+      collection: "projects",
       locale: lang,
       where: {
         slug: { equals: slug },
@@ -39,14 +39,16 @@ export async function generateMetadata({ params }) {
 
     if (!docs[0]) {
       return {
-        title: 'Not Found',
+        title: "Not Found",
       };
     }
 
     const project = docs[0];
     const canonical = `${siteConfig.url}/${lang}/projects/${slug}/`;
-    const title = project.seo?.metaTitle || `${project.title} | ${siteConfig.name}`;
-    const description = project.seo?.metaDescription || project.tagline || project.summary;
+    const title =
+      project.seo?.metaTitle || `${project.title} | ${siteConfig.name}`;
+    const description =
+      project.seo?.metaDescription || project.tagline || project.summary;
 
     return {
       title,
@@ -61,7 +63,7 @@ export async function generateMetadata({ params }) {
         },
       },
       openGraph: {
-        type: 'website',
+        type: "website",
         locale: lang,
         url: canonical,
         title,
@@ -69,7 +71,10 @@ export async function generateMetadata({ params }) {
         siteName: siteConfig.name,
         images: [
           {
-            url: project.seo?.ogImage?.url || project.cover?.url || siteConfig.ogImage,
+            url:
+              project.seo?.ogImage?.url ||
+              project.cover?.url ||
+              siteConfig.ogImage,
             width: 1200,
             height: 630,
             alt: project.title,
@@ -77,44 +82,60 @@ export async function generateMetadata({ params }) {
         ],
       },
       twitter: {
-        card: 'summary_large_image',
+        card: "summary_large_image",
         title,
         description,
-        images: [project.seo?.ogImage?.url || project.cover?.url || siteConfig.ogImage],
+        images: [
+          project.seo?.ogImage?.url || project.cover?.url || siteConfig.ogImage,
+        ],
       },
       robots: { index: true, follow: true },
     };
   } catch (error) {
-    console.error('Error generating metadata:', error);
+    console.error("Error generating metadata:", error);
     return {
-      title: 'Project',
+      title: "Project",
     };
   }
 }
 
 export async function generateStaticParams() {
-  // NOTE: generateStaticParams NON riceve params. Iteriamo tutte le locale
-  // definite in i18n.locales per pregenerare ogni combinazione lang × slug.
   try {
     const payload = await getPayloadClient();
-    const { i18n } = await import('@/lib/i18n-config');
+    const { i18n } = await import("@/lib/i18n-config");
 
     const all = await Promise.all(
       i18n.locales.map(async (lang) => {
         const { docs } = await payload.find({
-          collection: 'projects',
+          collection: "projects",
           locale: lang,
-          // Solo progetti pubblicati (status 'live') per non indicizzare draft
-          where: { status: { equals: 'live' } },
+          where: {
+            status: { equals: "live" }, // solo i progetti pubblicati
+          },
           limit: 500,
         });
-        return docs.map((project) => ({ slug: project.slug, lang }));
-      })
+
+        // ← FILTRIAMO i progetti senza slug valido
+        return docs
+          .filter(
+            (project) =>
+              typeof project.slug === "string" && project.slug.length > 0,
+          )
+          .map((project) => ({
+            slug: project.slug,
+            lang: lang,
+          }));
+      }),
     );
 
-    return all.flat();
+    const params = all.flat();
+
+    console.log(
+      `✅ generateStaticParams: generati ${params.length} progetti statici`,
+    );
+    return params;
   } catch (error) {
-    console.error('Error generating static params (projects):', error);
+    console.error("Error generating static params (projects):", error);
     return [];
   }
 }
@@ -128,7 +149,7 @@ export default async function ProjectDetailPage({ params }) {
   try {
     const payload = await getPayloadClient();
     const { docs } = await payload.find({
-      collection: 'projects',
+      collection: "projects",
       locale: lang,
       where: {
         slug: { equals: slug },
@@ -138,7 +159,7 @@ export default async function ProjectDetailPage({ params }) {
 
     project = docs[0];
   } catch (error) {
-    console.error('Error loading project:', error);
+    console.error("Error loading project:", error);
   }
 
   if (!project) {
@@ -182,9 +203,13 @@ export default async function ProjectDetailPage({ params }) {
         </Link>
 
         <div className="mb-12">
-          <p className="text-sm text-muted-foreground mb-2">{project.category}</p>
+          <p className="text-sm text-muted-foreground mb-2">
+            {project.category}
+          </p>
           <h1 className="text-4xl font-bold mb-4">{project.title}</h1>
-          {project.tagline && <p className="text-lg text-muted-foreground">{project.tagline}</p>}
+          {project.tagline && (
+            <p className="text-lg text-muted-foreground">{project.tagline}</p>
+          )}
         </div>
 
         {/* Sidebar Info */}
@@ -193,7 +218,9 @@ export default async function ProjectDetailPage({ params }) {
             {/* Problem Section */}
             {project.problem && (
               <div className="mb-12">
-                <h2 className="text-2xl font-bold mb-4">{dict.projects.challenge}</h2>
+                <h2 className="text-2xl font-bold mb-4">
+                  {dict.projects.challenge}
+                </h2>
                 <div className="prose prose-invert max-w-none">
                   {renderRichText(project.problem)}
                 </div>
@@ -203,7 +230,9 @@ export default async function ProjectDetailPage({ params }) {
             {/* Solution Section */}
             {project.solution && (
               <div className="mb-12">
-                <h2 className="text-2xl font-bold mb-4">{dict.projects.solution}</h2>
+                <h2 className="text-2xl font-bold mb-4">
+                  {dict.projects.solution}
+                </h2>
                 <div className="prose prose-invert max-w-none">
                   {renderRichText(project.solution)}
                 </div>
@@ -213,7 +242,9 @@ export default async function ProjectDetailPage({ params }) {
             {/* Outcome Section */}
             {project.outcome && (
               <div className="mb-12">
-                <h2 className="text-2xl font-bold mb-4">{dict.projects.results}</h2>
+                <h2 className="text-2xl font-bold mb-4">
+                  {dict.projects.results}
+                </h2>
                 <div className="prose prose-invert max-w-none">
                   {renderRichText(project.outcome)}
                 </div>
@@ -226,7 +257,10 @@ export default async function ProjectDetailPage({ params }) {
                 <h2 className="text-2xl font-bold mb-4">Gallery</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {project.gallery.map((item, idx) => (
-                    <div key={idx} className="relative aspect-video overflow-hidden rounded-lg">
+                    <div
+                      key={idx}
+                      className="relative aspect-video overflow-hidden rounded-lg"
+                    >
                       <Image
                         src={item.image?.url}
                         alt={item.caption || `Gallery ${idx + 1}`}
@@ -245,14 +279,18 @@ export default async function ProjectDetailPage({ params }) {
             {/* Info Cards */}
             {project.duration && (
               <div className="mb-8 p-4 rounded-lg bg-[hsl(var(--muted))]">
-                <p className="text-sm text-muted-foreground">{dict.projects.duration}</p>
+                <p className="text-sm text-muted-foreground">
+                  {dict.projects.duration}
+                </p>
                 <p className="text-lg font-medium mt-1">{project.duration}</p>
               </div>
             )}
 
             {project.myRole && (
               <div className="mb-8 p-4 rounded-lg bg-[hsl(var(--muted))]">
-                <p className="text-sm text-muted-foreground">{dict.projects.role}</p>
+                <p className="text-sm text-muted-foreground">
+                  {dict.projects.role}
+                </p>
                 <p className="text-base mt-2">{project.myRole}</p>
               </div>
             )}
@@ -263,11 +301,20 @@ export default async function ProjectDetailPage({ params }) {
                 <h3 className="font-bold mb-4">{dict.projects.results}</h3>
                 <div className="space-y-3">
                   {project.metrics.map((metric, idx) => (
-                    <div key={idx} className="p-4 rounded-lg bg-[hsl(var(--muted))]">
-                      <p className="text-2xl font-bold text-accent">{metric.value}</p>
-                      <p className="text-sm text-muted-foreground mt-1">{metric.label}</p>
+                    <div
+                      key={idx}
+                      className="p-4 rounded-lg bg-[hsl(var(--muted))]"
+                    >
+                      <p className="text-2xl font-bold text-accent">
+                        {metric.value}
+                      </p>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        {metric.label}
+                      </p>
                       {metric.description && (
-                        <p className="text-xs text-muted-foreground mt-2">{metric.description}</p>
+                        <p className="text-xs text-muted-foreground mt-2">
+                          {metric.description}
+                        </p>
                       )}
                     </div>
                   ))}
@@ -293,7 +340,7 @@ export default async function ProjectDetailPage({ params }) {
             )}
 
             {/* Links */}
-            {project.links && (Object.values(project.links).some((v) => v)) && (
+            {project.links && Object.values(project.links).some((v) => v) && (
               <div>
                 <h3 className="font-bold mb-4">Links</h3>
                 <div className="flex flex-col gap-3">
@@ -338,10 +385,10 @@ export default async function ProjectDetailPage({ params }) {
 
         {/* CTA */}
         <div className="mt-16 pt-16 border-t border-[hsl(var(--border))]">
-          <h3 className="text-2xl font-bold mb-4">{dict.projects.similar_project}</h3>
-          <p className="text-muted-foreground mb-6">
-            {dict.hero.description}
-          </p>
+          <h3 className="text-2xl font-bold mb-4">
+            {dict.projects.similar_project}
+          </h3>
+          <p className="text-muted-foreground mb-6">{dict.hero.description}</p>
           <Link
             href={`/${lang}/contact`}
             className="inline-block px-6 py-3 bg-accent text-[hsl(var(--accent-foreground))] rounded-lg hover:opacity-90 transition-opacity"

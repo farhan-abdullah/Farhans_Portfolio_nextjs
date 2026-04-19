@@ -22,11 +22,11 @@ export const BlogPosts = {
     listSearchableFields: ["title"],
     livePreview: {
       url: ({ data }) => {
-        const base =
+        const baseUrl =
           process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
-        const lang = "it";
+        const lang = data?.locale || "it";
         const slug = data?.slug || "untitled";
-        return `${base}/${lang}/blog/${slug}`;
+        return `${baseUrl}/${lang}/blog/${slug}`;
       },
     },
   },
