@@ -256,7 +256,7 @@ export const Projects = {
       ],
       admin: {
         components: {
-          Field: () => import("@/components/admin/TechStackField"),
+          Field: "@/components/admin/TechStackField",
         },
       },
     },
@@ -270,7 +270,7 @@ export const Projects = {
       ],
       admin: {
         components: {
-          Field: () => import("@/components/admin/ResultsField"),
+          Field: "@/components/admin/ResultsField",
         },
       },
     },
@@ -294,7 +294,7 @@ export const Projects = {
       ],
       admin: {
         components: {
-          Field: () => import("@/components/admin/ImagePreviewField"),
+          Field: "@/components/admin/ImagePreviewField",
         },
       },
     },
