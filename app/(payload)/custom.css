@@ -1,277 +1,115 @@
 /* ============================================================
-   Payload CMS Admin — Portfolio Theme
-   Accent : teal  #00d4aa
-   Base   : navy  hsl(222 47% 6%)
-   Font   : Inter
+   Payload CMS Admin — Farhan Abdullah LIGHT Theme
+   File: app/(payload)/custom.css
+   Accent : Teal #00d4aa (dal tuo portfolio)
+   Base   : Light & Clean
 ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
-/* ── Primitives ─────────────────────────────────────────────── */
+/* ── Light Color Variables (dal tuo portfolio) ─────────────── */
 :root {
-  --adm-teal:          #00d4aa;
-  --adm-teal-dim:      rgba(0,212,170,0.12);
-  --adm-teal-border:   rgba(0,212,170,0.22);
-  --adm-teal-glow:     0 0 20px rgba(0,212,170,0.18);
+  --adm-teal: #00d4aa;
+  --adm-teal-dim: rgba(0, 212, 170, 0.12);
+  --adm-teal-border: rgba(0, 212, 170, 0.25);
+  --adm-teal-glow: 0 0 20px rgba(0, 212, 170, 0.25);
 
-  --adm-bg:            hsl(225, 79%, 65%);
-  --adm-surface:       hsl(221, 34%, 67%);
-  --adm-surface-2:     hsl(219, 21%, 66%);
-  --adm-surface-3:     hsl(218, 7%, 52%);
-  --adm-border:        hsl(216, 92%, 45%);
-  --adm-border-hover:  hsl(217 33% 22%);
+  --adm-bg: #f8fafc;
+  --adm-surface: #ffffff;
+  --adm-surface-2: #f1f5f9;
+  --adm-surface-3: #e2e8f0;
 
-  --adm-text:          hsl(210 40% 98%);
-  --adm-text-muted:    hsl(215 20% 55%);
-  --adm-text-dim:      hsl(215 20% 38%);
+  --adm-border: #cbd5e1;
+  --adm-border-hover: #94a3b8;
 
-  --adm-radius-sm:  6px;
-  --adm-radius:     10px;
-  --adm-radius-lg:  16px;
-  --adm-radius-xl:  20px;
-  --adm-radius-pill:9999px;
+  --adm-text: #0f172a;
+  --adm-text-muted: #64748b;
+  --adm-text-dim: #94a3b8;
 
-  --adm-ease:   cubic-bezier(0.16, 1, 0.3, 1);
-  --adm-fast:   0.15s ease;
-  --adm-smooth: 0.28s var(--adm-ease);
+  --adm-radius-sm: 8px;
+  --adm-radius: 12px;
+  --adm-radius-lg: 16px;
+  --adm-radius-xl: 20px;
+  --adm-radius-pill: 9999px;
 
-  /* Remap Payload's success/brand palette → teal */
-  --color-success-50:  220, 252, 242;
-  --color-success-100: 170, 245, 225;
-  --color-success-200: 70,  230, 192;
-  --color-success-250: 0,   230, 184;
-  --color-success-500: 0,   212, 170;
-  --color-success-600: 0,   184, 147;
-  --color-success-750: 0,   152, 122;
-}
-
-[data-theme='dark'] {
-  --color-base-0:    8,  15, 24;
-  --color-base-50:   10, 18, 28;
-  --color-base-100:  13, 22, 34;
-  --color-base-150:  17, 28, 42;
-  --color-base-200:  22, 33, 48;
-  --color-base-250:  30, 42, 60;
-  --color-base-300:  40, 54, 76;
-  --color-base-400:  65, 85, 115;
-  --color-base-500: 130, 145, 170;
-  --color-base-600: 180, 190, 210;
-  --color-base-800: 220, 228, 240;
-  --color-base-1000: 248, 250, 252;
-}
-
-[data-theme='light'] {
-  --color-base-0:    255, 255, 255;
-  --color-base-50:   251, 252, 253;
-  --color-base-100:  247, 248, 250;
-  --color-base-150:  241, 243, 247;
-  --color-base-200:  231, 234, 239;
-  --color-base-250:  216, 221, 228;
-  --color-base-300:  199, 206, 215;
-  --color-base-400:  158, 168, 181;
-  --color-base-500:  120, 132, 150;
-  --color-base-600:   85,  97, 114;
-  --color-base-800:   45,  55,  70;
-  --color-base-1000:  15,  23,  42;
+  --adm-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --adm-fast: 0.2s ease;
+  --adm-smooth: 0.3s var(--adm-ease);
 }
 
 /* ── Global ─────────────────────────────────────────────────── */
-html, body, .app-wrap {
-  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif !important;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+html,
+body,
+.app-wrap {
+  font-family: "Inter", system-ui, sans-serif !important;
+  background: var(--adm-bg) !important;
+  color: var(--adm-text) !important;
 }
 
 .app-wrap {
-  background-color: var(--adm-bg) !important;
   background-image:
-    radial-gradient(ellipse 60% 40% at 10% 0%,  rgba(0,212,170,0.05) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 30% at 90% 100%, rgba(0,212,170,0.03) 0%, transparent 60%);
-  color: var(--adm-text);
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(0, 212, 170, 0.06) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(0, 212, 170, 0.04) 0%,
+      transparent 50%
+    );
 }
 
-/* ── Header ─────────────────────────────────────────────────── */
+/* Header & Sidebar */
 .app-header {
-  background: rgba(117, 119, 122, 0.85) !important;
-  backdrop-filter: blur(16px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(20px) !important;
   border-bottom: 1px solid var(--adm-border) !important;
-  box-shadow: 0 1px 0 rgba(0,212,170,0.05) !important;
-  position: sticky !important;
-  top: 0 !important;
-  z-index: 100 !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
 }
 
-/* ── Sidebar / Navigation ───────────────────────────────────── */
 .nav {
-  background: rgba(131, 134, 139, 0.75) !important;
-  backdrop-filter: blur(16px) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(20px) !important;
   border-right: 1px solid var(--adm-border) !important;
 }
 
-.nav__label {
-  font-size: 0.62rem !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.1em !important;
-  text-transform: uppercase !important;
-  color: var(--adm-text-dim) !important;
-  padding: 1rem 1.25rem 0.4rem !important;
-}
-
-.nav__link {
-  border-radius: var(--adm-radius) !important;
-  font-weight: 500 !important;
-  font-size: 0.875rem !important;
-  padding: 0.6rem 0.9rem !important;
-  margin: 1px 0.65rem !important;
-  transition: all var(--adm-fast) !important;
-  color: var(--adm-text-muted) !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 0.5rem !important;
-}
-.nav__link:hover {
-  background: var(--adm-surface-2) !important;
-  color: var(--adm-text) !important;
-}
+.nav__link:hover,
 .nav__link--active {
   background: var(--adm-teal-dim) !important;
   color: var(--adm-teal) !important;
-  box-shadow: inset 3px 0 0 var(--adm-teal) !important;
-  font-weight: 600 !important;
-}
-.nav__link--active::before { display: none !important; }
-
-.nav__brand {
-  font-weight: 700;
-  font-size: 0.95rem;
-  color: var(--adm-text) !important;
-  text-decoration: none !important;
-}
-.nav__brand::before, .nav__brand::after { content: none !important; }
-
-/* Breadcrumb chevron in step-nav */
-.step-nav__link {
-  font-weight: 500;
-  font-size: 0.825rem;
-  border-radius: var(--adm-radius-sm);
-  padding: 3px 8px;
-  transition: all var(--adm-fast);
-  color: var(--adm-text-muted);
-}
-.step-nav__link:hover {
-  background: var(--adm-surface-2);
-  color: var(--adm-teal) !important;
 }
 
-/* ── Cards (dashboard + collection list) ───────────────────── */
-.dashboard__card, .card {
+/* Cards & Dashboard */
+.card,
+.dashboard__card {
   background: var(--adm-surface) !important;
   border: 1px solid var(--adm-border) !important;
   border-radius: var(--adm-radius-xl) !important;
-  box-shadow: none !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06) !important;
   transition: all var(--adm-smooth) !important;
-  overflow: hidden;
-}
-.dashboard__card:hover, .card:hover {
-  transform: translateY(-2px);
-  border-color: var(--adm-border-hover) !important;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.25) !important;
 }
 
-/* ── Layout max-width ───────────────────────────────────────── */
-.collection-edit, .collection-list, .dashboard, .document {
-  max-width: 1280px;
-  margin-left: auto;
-  margin-right: auto;
+.card:hover,
+.dashboard__card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1) !important;
+  border-color: var(--adm-teal-border) !important;
 }
 
-/* ── Document sidebar (publish panel) ──────────────────────── */
-.doc-controls {
-  background: var(--adm-surface) !important;
-  border: 1px solid var(--adm-border) !important;
-  border-radius: var(--adm-radius-lg) !important;
-  overflow: hidden !important;
-}
-.doc-controls__header {
-  border-bottom: 1px solid var(--adm-border) !important;
-  padding: 0.85rem 1.1rem !important;
-  font-size: 0.75rem !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.07em !important;
-  text-transform: uppercase !important;
-  color: var(--adm-text-muted) !important;
-}
-
-/* ── Buttons ────────────────────────────────────────────────── */
-.btn {
-  border-radius: var(--adm-radius) !important;
-  font-weight: 600 !important;
-  font-size: 0.875rem !important;
-  letter-spacing: -0.01em;
-  padding: 0.55rem 1.1rem !important;
-  transition: all var(--adm-fast) !important;
-  text-transform: none !important;
-  box-shadow: none !important;
-}
-.btn:active { transform: scale(0.97) !important; }
-
+/* Buttons */
 .btn--style-primary {
   background: var(--adm-teal) !important;
-  color: hsl(222 47% 6%) !important;
-  border: none !important;
-  font-weight: 700 !important;
-  box-shadow: 0 2px 8px rgba(0,212,170,0.25) !important;
+  color: #0f172a !important;
+  box-shadow: var(--adm-teal-glow) !important;
 }
+
 .btn--style-primary:hover {
   background: #00b892 !important;
-  box-shadow: 0 4px 16px rgba(0,212,170,0.35) !important;
   transform: translateY(-1px);
 }
 
-.btn--style-secondary {
-  background: var(--adm-surface-2) !important;
-  border: 1px solid var(--adm-border) !important;
-  color: var(--adm-text) !important;
-}
-.btn--style-secondary:hover {
-  background: var(--adm-surface-3) !important;
-  border-color: var(--adm-border-hover) !important;
-}
-
-.btn--style-error {
-  background: rgba(239,68,68,0.1) !important;
-  border: 1px solid rgba(239,68,68,0.2) !important;
-  color: #f87171 !important;
-}
-.btn--style-error:hover {
-  background: rgba(239,68,68,0.18) !important;
-}
-
-.btn--size-icon {
-  border-radius: var(--adm-radius) !important;
-  padding: 0.5rem !important;
-}
-
-/* ── Form fields ────────────────────────────────────────────── */
-.field-type { margin-bottom: 1.5rem; }
-
-.field-type label, .field-type .label {
-  font-weight: 600;
-  font-size: 0.8rem;
-  margin-bottom: 0.4rem;
-  display: inline-block;
-  color: var(--adm-text-muted);
-  letter-spacing: 0.01em;
-}
-
-.field-type .field-type__description {
-  font-size: 0.75rem;
-  color: var(--adm-text-dim);
-  margin-top: 0.25rem;
-  line-height: 1.5;
-}
-
+/* Form Fields */
 .field-type input,
 .field-type textarea,
 .field-type select,
@@ -279,479 +117,41 @@ html, body, .app-wrap {
   background: var(--adm-surface-2) !important;
   border: 1px solid var(--adm-border) !important;
   border-radius: var(--adm-radius) !important;
-  padding: 0.6rem 0.9rem !important;
-  font-size: 0.9rem !important;
   color: var(--adm-text) !important;
-  transition: all var(--adm-fast) !important;
-  width: 100%;
 }
 
 .field-type input:focus,
 .field-type textarea:focus,
 .react-select__control--is-focused {
   border-color: var(--adm-teal) !important;
-  box-shadow: 0 0 0 3px rgba(0,212,170,0.12) !important;
-  background: var(--adm-surface-2) !important;
-  outline: none !important;
+  box-shadow: 0 0 0 4px var(--adm-teal-dim) !important;
 }
 
-.field-type input::placeholder,
-.field-type textarea::placeholder {
-  color: var(--adm-text-dim) !important;
-}
-
-.render-fields {
-  border-radius: var(--adm-radius-lg);
-}
-
-/* Tabs (e.g. Overview / Case Study) */
-.tabs-field__tabs-container {
-  border-bottom: 1px solid var(--adm-border) !important;
-  gap: 0 !important;
-}
-.tabs-field__tab-button {
-  font-size: 0.85rem !important;
-  font-weight: 500 !important;
-  color: var(--adm-text-muted) !important;
-  padding: 0.6rem 1.1rem !important;
-  border-bottom: 2px solid transparent !important;
-  transition: all var(--adm-fast) !important;
-}
-.tabs-field__tab-button:hover {
-  color: var(--adm-text) !important;
-}
-.tabs-field__tab-button--active {
-  color: var(--adm-teal) !important;
-  border-bottom-color: var(--adm-teal) !important;
-  font-weight: 600 !important;
-}
-
-/* ── Tables ─────────────────────────────────────────────────── */
-.table {
-  border-collapse: separate !important;
-  border-spacing: 0 4px !important;
-  width: 100%;
-}
-.table thead tr {
-  background: transparent !important;
-  box-shadow: none !important;
-}
-.table th {
-  text-transform: uppercase;
-  font-size: 0.65rem;
-  letter-spacing: 0.08em;
-  font-weight: 700;
-  color: var(--adm-text-dim);
-  border: none !important;
-  padding: 0.5rem 1rem;
-}
-.table tbody tr {
-  background: var(--adm-surface) !important;
-  border-radius: var(--adm-radius) !important;
-  transition: all var(--adm-fast);
-}
-.table tbody tr td {
-  border: none !important;
-  padding: 0.9rem 1rem;
-  border-top: 1px solid var(--adm-border);
-  border-bottom: 1px solid var(--adm-border);
-  color: var(--adm-text);
-  font-size: 0.875rem;
-}
-.table tbody tr td:first-child {
-  border-top-left-radius: var(--adm-radius);
-  border-bottom-left-radius: var(--adm-radius);
-  border-left: 1px solid var(--adm-border);
-}
-.table tbody tr td:last-child {
-  border-top-right-radius: var(--adm-radius);
-  border-bottom-right-radius: var(--adm-radius);
-  border-right: 1px solid var(--adm-border);
-}
+/* Tables */
 .table tbody tr:hover {
+  background: #f8fafc !important;
   transform: translateY(-1px);
-  background: var(--adm-surface-2) !important;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-.table tbody tr:hover td {
-  border-color: var(--adm-border-hover) !important;
 }
 
-/* ── Login / Create first user ──────────────────────────────── */
-.template-default:has(.login__form),
-.template-default:has(.create-first-user) {
-  background: var(--adm-bg) !important;
-  background-image:
-    radial-gradient(ellipse 50% 50% at 20% 20%, rgba(0,212,170,0.08), transparent 60%),
-    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(0,212,170,0.05), transparent 60%);
-  min-height: 100vh;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-.template-default__wrap {
-  width: 100%;
-  max-width: 420px;
-  background: var(--adm-surface) !important;
-  backdrop-filter: blur(24px) !important;
-  border: 1px solid var(--adm-border) !important;
-  border-radius: var(--adm-radius-xl) !important;
-  padding: 2.5rem 2.5rem 2.25rem !important;
-  box-shadow: 0 24px 64px rgba(0,0,0,0.45), 0 0 0 1px rgba(0,212,170,0.06) !important;
-}
-.template-default__wrap h1 {
-  text-align: center;
-  font-weight: 800;
-  font-size: 1.6rem;
-  letter-spacing: -0.025em;
-  margin-bottom: 1.5rem;
-  color: var(--adm-text);
-}
-
-/* ── Status pills / badges ──────────────────────────────────── */
-.pill {
-  border-radius: var(--adm-radius-pill) !important;
-  padding: 3px 10px !important;
-  font-weight: 600 !important;
-  text-transform: uppercase !important;
-  font-size: 0.6rem !important;
-  letter-spacing: 0.06em;
-  background: var(--adm-surface-2) !important;
-  border: 1px solid var(--adm-border);
-  color: var(--adm-text-muted) !important;
-}
-.pill--style-success, .pill--style-active {
-  background: var(--adm-teal-dim) !important;
-  color: var(--adm-teal) !important;
-  border-color: var(--adm-teal-border) !important;
-}
-.pill--style-warning {
-  background: rgba(251,191,36,0.1) !important;
-  color: #fbbf24 !important;
-  border-color: rgba(251,191,36,0.2) !important;
-}
-.pill--style-error {
-  background: rgba(239,68,68,0.1) !important;
-  color: #f87171 !important;
-  border-color: rgba(239,68,68,0.2) !important;
-}
-
-/* ── Tooltip / popup ────────────────────────────────────────── */
-.tooltip, .popup-button {
-  background: var(--adm-surface-2) !important;
-  backdrop-filter: blur(12px);
-  border-radius: var(--adm-radius) !important;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.3) !important;
-  border: 1px solid var(--adm-border);
-  font-size: 0.8rem;
-}
-
-/* ── Scrollbar ──────────────────────────────────────────────── */
-::-webkit-scrollbar       { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb {
-  background: var(--adm-surface-3);
-  border-radius: var(--adm-radius-pill);
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(0,212,170,0.4);
-}
-
-/* ── Typography ─────────────────────────────────────────────── */
-.collection-list__title,
-.document-header__title,
-.dashboard__header h1,
-h1, h2, h3 {
-  font-weight: 700 !important;
-  letter-spacing: -0.02em !important;
-  color: var(--adm-text);
-}
-
-/* ── Pagination ─────────────────────────────────────────────── */
-.pagination .btn {
-  border-radius: var(--adm-radius-sm) !important;
-  font-size: 0.8rem !important;
-  padding: 0.35rem 0.65rem !important;
-}
-
-/* ── Checkbox / radio ───────────────────────────────────────── */
-.checkbox-input__input:checked,
-input[type='checkbox']:checked {
-  accent-color: var(--adm-teal);
-}
-
-/* ── Lexical editor toolbar ─────────────────────────────────── */
-.toolbar {
-  background: var(--adm-surface-2) !important;
-  border: 1px solid var(--adm-border) !important;
-  border-radius: var(--adm-radius) var(--adm-radius) 0 0 !important;
-}
-.toolbar__button {
-  color: var(--adm-text-muted) !important;
-  border-radius: var(--adm-radius-sm) !important;
-  transition: all var(--adm-fast) !important;
-}
-.toolbar__button:hover {
-  background: var(--adm-surface-3) !important;
-  color: var(--adm-text) !important;
-}
-.toolbar__button--active {
-  background: var(--adm-teal-dim) !important;
-  color: var(--adm-teal) !important;
-}
-
-/* Rich text editor area */
-.rich-text__editor {
-  background: var(--adm-surface-2) !important;
-  border: 1px solid var(--adm-border) !important;
-  border-top: none !important;
-  border-radius: 0 0 var(--adm-radius) var(--adm-radius) !important;
-  color: var(--adm-text) !important;
-  padding: 1rem !important;
-  min-height: 240px;
-  line-height: 1.7;
-}
-
-/* ── Drag handles ───────────────────────────────────────────── */
-.drag-handle {
-  color: var(--adm-text-dim) !important;
-  opacity: 0.5;
-  transition: opacity var(--adm-fast);
-}
-.drag-handle:hover { opacity: 1; color: var(--adm-teal) !important; }
-
-/* ── Search bar (collection list) ───────────────────────────── */
-.list-header__search input {
-  background: var(--adm-surface-2) !important;
-  border: 1px solid var(--adm-border) !important;
-  border-radius: var(--adm-radius-pill) !important;
-  color: var(--adm-text) !important;
-  font-size: 0.875rem !important;
-  padding: 0.45rem 1rem !important;
-}
-.list-header__search input:focus {
-  border-color: var(--adm-teal) !important;
-  box-shadow: 0 0 0 3px rgba(0,212,170,0.1) !important;
-  outline: none !important;
-}
-
-/* ── Upload / media grid ────────────────────────────────────── */
-.file-details {
-  background: var(--adm-surface-2) !important;
-  border: 1px solid var(--adm-border) !important;
-  border-radius: var(--adm-radius-lg) !important;
-  overflow: hidden;
-}
-
-/* ── Notices / alerts ───────────────────────────────────────── */
-.notice--success {
-  background: var(--adm-teal-dim) !important;
-  border-color: var(--adm-teal-border) !important;
-  color: var(--adm-teal) !important;
-}
-
-/* ── Entry / fade animations ────────────────────────────────── */
-@keyframes admFadeUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.dashboard,
-.collection-list,
-.document,
-.template-default__wrap {
-  animation: admFadeUp 0.35s var(--adm-ease);
-}
-
-/* ══════════════════════════════════════════════════════════════
-   RESPONSIVE ADMIN — Payload 3.x
-   Breakpoints: 1024px (tablet) · 768px (tablet-sm) · 480px (mobile)
-══════════════════════════════════════════════════════════════ */
-
-/* ── Radio groups (Category / Language / Status selects) ────── */
-.radio-group-field,
-.field-type--radio-group,
-.field-type--select {
-  width: 100%;
-}
-
-.radio-group__wrap {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  gap: 0.5rem !important;
-}
-
-.radio-input {
-  display: flex !important;
-  align-items: center !important;
-  gap: 0.45rem !important;
-  padding: 0.45rem 0.85rem !important;
-  border: 1px solid var(--adm-border) !important;
-  border-radius: var(--adm-radius-pill) !important;
-  background: var(--adm-surface-2) !important;
-  cursor: pointer !important;
-  font-size: 0.82rem !important;
-  font-weight: 500 !important;
-  color: var(--adm-text-muted) !important;
-  transition: all var(--adm-fast) !important;
-  min-height: 36px !important;
-  user-select: none !important;
-}
-
-.radio-input:hover {
-  border-color: var(--adm-teal) !important;
-  color: var(--adm-teal) !important;
-}
-
-.radio-input__input {
-  accent-color: var(--adm-teal) !important;
-  width: 14px !important;
-  height: 14px !important;
-  flex-shrink: 0 !important;
-}
-
-.radio-input--selected,
-.radio-input[data-selected='true'] {
-  border-color: var(--adm-teal-border) !important;
-  background: var(--adm-teal-dim) !important;
-  color: var(--adm-teal) !important;
-}
-
-/* ── Upload / Cover field ───────────────────────────────────── */
-.upload-field,
-.file-field,
-.field-type--upload {
-  width: 100% !important;
-}
-
-.upload-field__select,
-.file-field__upload,
-.upload__buttons {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  gap: 0.5rem !important;
-  width: 100% !important;
-}
-
-.upload-field__select .btn,
-.file-field__upload .btn,
-.upload__buttons .btn {
-  flex: 1 1 auto !important;
-  min-width: 120px !important;
-  justify-content: center !important;
-}
-
-.file-details__filename {
-  word-break: break-all !important;
-}
-
-/* ── Number field (Rating) ──────────────────────────────────── */
-.field-type--number input {
-  max-width: 100% !important;
-  width: 100% !important;
-}
-
-/* ── Checkbox field (Featured) — styled as toggle pill ──────── */
-.checkbox-field,
-.field-type--checkbox {
-  display: flex !important;
-  align-items: center !important;
-  gap: 0.6rem !important;
-}
-
-.checkbox-input {
-  min-height: 36px !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 0.5rem !important;
-  cursor: pointer !important;
-}
-
-.checkbox-input__input {
-  width: 18px !important;
-  height: 18px !important;
-  accent-color: var(--adm-teal) !important;
-  flex-shrink: 0 !important;
-}
-
-/* ── Date field ─────────────────────────────────────────────── */
-.field-type--date input {
-  width: 100% !important;
-}
-
-/* ── Textarea (Notes) ───────────────────────────────────────── */
-.field-type--textarea textarea {
-  min-height: 120px !important;
-  resize: vertical !important;
-}
-
-/* ── Relationship field ─────────────────────────────────────── */
-.relationship-field,
-.field-type--relationship {
-  width: 100% !important;
-}
-
-/* ── Responsive — Tablet ≤ 1024px ───────────────────────────── */
+/* ── RESPONSIVE (Mobile-First + migliorata) ─────────────────── */
 @media (max-width: 1024px) {
-  /* ── Document edit: stack main + sidebar ── */
-  /* Try all known Payload 3.x wrapper class names */
-  .document-fields__wrap,
-  .doc-fields,
-  .collection-edit > .gutter--left.gutter--right,
   .document__content,
-  .document-content {
-    display: flex !important;
+  .document-fields__wrap,
+  .collection-edit > div {
     flex-direction: column !important;
-    gap: 1rem !important;
+    gap: 1.5rem !important;
   }
-
-  /* Sidebar: full width, not absolute/fixed */
   .document__sidebar,
-  .document-sidebar,
-  .doc-controls-wrap,
-  .collection-edit .document__sidebar {
-    position: static !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    flex-shrink: 0 !important;
-  }
-
-  /* Main fields area: full width */
-  .document__fields,
-  .document-main,
-  .document__main,
-  .collection-edit .document__fields {
-    width: 100% !important;
-    max-width: 100% !important;
-    flex: none !important;
-  }
-
-  /* Doc controls (publish panel + sidebar fields): full width strip */
   .doc-controls {
-    width: 100% !important;
-    max-width: 100% !important;
     position: static !important;
+    width: 100% !important;
   }
 }
 
-/* ── Responsive — Tablet ≤ 768px ────────────────────────────── */
 @media (max-width: 768px) {
-  /* Reduce header height */
   .app-header {
     padding: 0 1rem !important;
   }
-
-  /* Ensure nav z-index above content */
-  .nav {
-    z-index: 200 !important;
-  }
-
-  /* Reduce gutter padding */
-  .gutter--left  { padding-left:  1rem !important; }
-  .gutter--right { padding-right: 1rem !important; }
-  .gutter--bottom { padding-bottom: 1.5rem !important; }
-
-  /* Layout containers: reduced horizontal padding */
   .collection-edit,
   .collection-list,
   .dashboard,
@@ -759,281 +159,31 @@ input[type='checkbox']:checked {
     padding-left: 1rem !important;
     padding-right: 1rem !important;
   }
-
-  /* ── Breadcrumb / step-nav ── */
-  .step-nav {
-    flex-wrap: wrap !important;
-    gap: 0.25rem !important;
-  }
-
-  /* ── Document header: stack title + save button ── */
-  .document-header,
-  .doc-header,
-  .collection-edit__header {
+  .document-header {
     flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 0.75rem !important;
-    padding-bottom: 1rem !important;
+    gap: 1rem !important;
   }
-
-  .document-header__title,
-  .doc-header__title {
-    font-size: 1.3rem !important;
-    word-break: break-word !important;
-  }
-
-  /* Save / publish buttons: full width on mobile */
-  .document-header .btn,
-  .doc-header .btn {
-    width: 100% !important;
-    justify-content: center !important;
-  }
-
-  /* ── Sidebar: collapse before main content ── */
-  .document__sidebar,
-  .document-sidebar,
-  .doc-controls-wrap {
-    order: -1 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    position: static !important;
-  }
-
-  /* Doc-controls: horizontal strip layout on tablet */
-  .doc-controls {
-    width: 100% !important;
-    max-width: 100% !important;
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 0.75rem !important;
-    border-radius: var(--adm-radius-lg) !important;
-  }
-
-  .doc-controls__header {
-    width: 100% !important;
-  }
-
-  /* Sidebar fields (e.g. Featured) appear inline, full-width */
-  .field-type--checkbox {
-    padding: 0.75rem !important;
-    background: var(--adm-surface-2) !important;
-    border: 1px solid var(--adm-border) !important;
-    border-radius: var(--adm-radius) !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-  }
-
-  /* ── Tables: horizontal scroll ── */
-  .table-wrap,
-  .collection-list__table {
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-    width: 100% !important;
-  }
-
-  .table {
-    min-width: 520px !important;
-  }
-
-  .table th {
-    padding: 0.5rem 0.75rem !important;
-    font-size: 0.6rem !important;
-  }
-
-  .table tbody tr td {
-    padding: 0.65rem 0.75rem !important;
-    font-size: 0.8rem !important;
-  }
-
-  /* ── List page header: stack search + action ── */
-  .list-header {
-    flex-direction: column !important;
-    align-items: stretch !important;
-    gap: 0.75rem !important;
-    padding: 0.75rem 0 !important;
-  }
-
-  .list-header__search,
-  .list-header__search input {
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-
-  .list-header .btn {
-    width: 100% !important;
-    justify-content: center !important;
-  }
-
-  /* ── Column/Filter buttons ── */
-  .list-header__actions {
-    display: flex !important;
-    gap: 0.5rem !important;
-    flex-wrap: wrap !important;
-  }
-
-  /* ── Buttons: touch targets ── */
   .btn {
-    min-height: 44px !important;
-    padding: 0.65rem 1.1rem !important;
+    min-height: 48px !important;
   }
-
-  .btn--size-icon {
-    min-height: 40px !important;
-    min-width: 40px !important;
-    padding: 0.5rem !important;
-  }
-
-  /* ── Radio groups: wrap pills ── */
-  .radio-group__wrap {
-    gap: 0.4rem !important;
-  }
-
-  .radio-input {
-    min-height: 40px !important;
-    padding: 0.4rem 0.75rem !important;
-  }
-
-  /* ── Upload buttons: row, full-width ── */
-  .upload-field__select,
-  .file-field__upload,
-  .upload__buttons {
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-  }
-
-  /* ── Login card ── */
-  .template-default__wrap {
-    max-width: 100% !important;
-    margin: 1rem !important;
-    padding: 2rem 1.5rem !important;
-  }
-
-  /* ── Tabs: horizontal scroll ── */
-  .tabs-field__tabs-container {
+  .table-wrap {
     overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-    flex-wrap: nowrap !important;
-  }
-
-  .tabs-field__tab-button {
-    flex-shrink: 0 !important;
-    white-space: nowrap !important;
-  }
-
-  /* ── Rich text editor ── */
-  .rich-text__editor {
-    min-height: 160px !important;
-  }
-
-  /* ── Pagination ── */
-  .pagination {
-    justify-content: center !important;
-    flex-wrap: wrap !important;
-    gap: 0.25rem !important;
   }
 }
 
-/* ── Responsive — Mobile ≤ 480px ────────────────────────────── */
 @media (max-width: 480px) {
-  /* Tighten gutters further */
-  .gutter--left  { padding-left:  0.75rem !important; }
-  .gutter--right { padding-right: 0.75rem !important; }
-
-  .collection-edit,
-  .collection-list,
-  .dashboard,
-  .document {
-    padding-left: 0.75rem !important;
-    padding-right: 0.75rem !important;
-  }
-
-  /* Document header: tighter */
-  .document-header,
-  .doc-header {
-    padding-top: 0.75rem !important;
-  }
-
-  .document-header__title,
-  .doc-header__title {
-    font-size: 1.15rem !important;
-  }
-
-  /* Form fields: reduce spacing */
   .field-type {
-    margin-bottom: 1.1rem !important;
+    margin-bottom: 1.25rem !important;
   }
-
-  /* Inputs: font-size 16px prevents iOS auto-zoom */
-  .field-type input,
-  .field-type textarea,
-  .field-type select,
-  .react-select__control {
-    font-size: 1rem !important;
+  .radio-input,
+  .checkbox-input {
+    min-height: 48px !important;
   }
-
-  /* Radio pills: smaller on very narrow screens */
-  .radio-input {
-    font-size: 0.78rem !important;
-    padding: 0.35rem 0.65rem !important;
-    min-height: 36px !important;
-  }
-
-  /* Upload buttons: stack vertically */
-  .upload-field__select .btn,
-  .file-field__upload .btn,
-  .upload__buttons .btn {
+  .upload-field__select .btn {
     width: 100% !important;
-    flex: 1 1 100% !important;
   }
-
-  /* Featured/checkbox: full-width card */
-  .field-type--checkbox {
-    padding: 0.65rem 0.85rem !important;
-  }
-
-  /* Textarea: shorter on mobile */
-  .field-type--textarea textarea {
-    min-height: 100px !important;
-  }
-
-  /* Doc-controls: compact */
-  .doc-controls {
-    flex-direction: column !important;
-  }
-
-  /* Table: tightest cells */
-  .table th,
-  .table tbody tr td {
-    padding: 0.45rem 0.55rem !important;
-    font-size: 0.72rem !important;
-  }
-
-  /* Toolbar: horizontal scroll */
-  .toolbar {
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-    flex-wrap: nowrap !important;
-  }
-
-  .toolbar__button {
-    flex-shrink: 0 !important;
-  }
-
-  /* Login card */
   .template-default__wrap {
-    padding: 1.5rem 1.1rem !important;
-    border-radius: var(--adm-radius-lg) !important;
-    margin: 0.75rem !important;
-  }
-
-  .template-default__wrap h1 {
-    font-size: 1.25rem !important;
-  }
-
-  /* No hover lift on touch devices (prevents stuck state) */
-  .dashboard__card:hover,
-  .card:hover,
-  .table tbody tr:hover {
-    transform: none !important;
+    margin: 1rem !important;
+    padding: 2rem 1.5rem !important;
   }
 }
