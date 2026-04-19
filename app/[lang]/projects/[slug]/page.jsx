@@ -13,15 +13,25 @@ export const revalidate = 3600;
 // Helper per rendering rich text: string (legacy) o Lexical JSON
 function renderRichText(field) {
   if (!field) return null;
+
+  // Se è una stringa semplice
   if (typeof field === "string") {
-    return <p>{field}</p>;
+    return <p className="prose">{field}</p>;
   }
+
+  // Se è oggetto Lexical (ha root.children)
   if (field?.root?.children) {
     return <LexicalRenderer data={field} />;
   }
+
+  // Protezione extra: se arriva un oggetto strano
+  if (typeof field === "object") {
+    console.warn("renderRichText received object:", field);
+    return <p>{JSON.stringify(field)}</p>;
+  }
+
   return null;
 }
-
 export async function generateMetadata({ params }) {
   const { lang, slug } = await params;
   const dict = await getDictionary(lang);
@@ -323,18 +333,25 @@ export default async function ProjectDetailPage({ params }) {
             )}
 
             {/* Tech Stack */}
+
             {project.stack && project.stack.length > 0 && (
               <div className="mb-8">
                 <h3 className="font-bold mb-4">{dict.projects.technologies}</h3>
                 <div className="flex flex-wrap gap-2">
-                  {project.stack.map((item, idx) => (
-                    <span
-                      key={idx}
-                      className="text-xs bg-accent/10 text-accent px-3 py-1 rounded-full"
-                    >
-                      {item.tech}
-                    </span>
-                  ))}
+                  {project.stack.map((item, idx) => {
+                    const techName =
+                      typeof item === "string"
+                        ? item
+                        : item?.tech || item?.name || "Tech";
+                    return (
+                      <span
+                        key={idx}
+                        className="text-xs bg-accent/10 text-accent px-3 py-1 rounded-full"
+                      >
+                        {techName}
+                      </span>
+                    );
+                  })}
                 </div>
               </div>
             )}
