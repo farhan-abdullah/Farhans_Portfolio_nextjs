@@ -56,7 +56,7 @@ export default buildConfig({
         Dashboard: "@/components/admin/Dashboard",
       },
     },
-    theme: "dark",
+    theme: "light",
     css: path.resolve(dirname, "admin-custom.css"),
   },
   localization: {

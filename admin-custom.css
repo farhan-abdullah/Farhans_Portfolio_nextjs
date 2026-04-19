@@ -8,7 +8,7 @@
 /* Sidebar + Header più eleganti */
 .payload-admin .sidebar,
 .payload-admin .nav {
-  background: hsl(240 10% 8%) !important;
+  background: hsl(240, 7%, 45%) !important;
 }
 
 .payload-admin .btn,
@@ -25,7 +25,7 @@
 /* Card e tabelle più pulite */
 .payload-admin .card {
   border-radius: 16px;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  box-shadow: 0 4px 6px -1px rgba(114, 104, 104, 0.1);
 }
 
 /* Miglior focus e accessibilità */

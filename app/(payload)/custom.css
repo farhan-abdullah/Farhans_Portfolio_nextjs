@@ -14,11 +14,11 @@
   --adm-teal-border:   rgba(0,212,170,0.22);
   --adm-teal-glow:     0 0 20px rgba(0,212,170,0.18);
 
-  --adm-bg:            hsl(222 47% 5%);
-  --adm-surface:       hsl(222 47% 8%);
-  --adm-surface-2:     hsl(217 33% 12%);
-  --adm-surface-3:     hsl(217 33% 16%);
-  --adm-border:        hsl(217 33% 16%);
+  --adm-bg:            hsl(225, 79%, 65%);
+  --adm-surface:       hsl(221, 34%, 67%);
+  --adm-surface-2:     hsl(219, 21%, 66%);
+  --adm-surface-3:     hsl(218, 7%, 52%);
+  --adm-border:        hsl(216, 92%, 45%);
   --adm-border-hover:  hsl(217 33% 22%);
 
   --adm-text:          hsl(210 40% 98%);
@@ -92,7 +92,7 @@ html, body, .app-wrap {
 
 /* ── Header ─────────────────────────────────────────────────── */
 .app-header {
-  background: rgba(8, 15, 24, 0.85) !important;
+  background: rgba(117, 119, 122, 0.85) !important;
   backdrop-filter: blur(16px) saturate(180%) !important;
   -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
   border-bottom: 1px solid var(--adm-border) !important;
@@ -104,7 +104,7 @@ html, body, .app-wrap {
 
 /* ── Sidebar / Navigation ───────────────────────────────────── */
 .nav {
-  background: rgba(8, 15, 24, 0.75) !important;
+  background: rgba(131, 134, 139, 0.75) !important;
   backdrop-filter: blur(16px) !important;
   border-right: 1px solid var(--adm-border) !important;
 }
