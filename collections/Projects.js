@@ -22,7 +22,7 @@ export const Projects = {
         const isDev = process.env.NODE_ENV === "development";
         const baseUrl = isDev
           ? "http://localhost:3000"
-          : process.env.NEXT_PUBLIC_SITE_URL ||
+          : process.env.NEXT_PUBLIC_SERVER_URL ||
             "https://www.farhanabdullah.com";
 
         const lang = data?.locale || "it"; // lingua automatica del progetto
