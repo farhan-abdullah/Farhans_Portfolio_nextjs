@@ -17,7 +17,7 @@ import { Categories } from "./collections/Categories.js";
 import { Media } from "./collections/Media.js";
 import { Projects } from "./collections/Projects.js";
 import { Users } from "./collections/Users.js";
-
+import ContactMessages from './collections/ContactMessages';
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
@@ -64,7 +64,7 @@ export default buildConfig({
     fallback: true,
   },
 
-  collections: [Users, Media, Categories, Projects, Books, BlogPosts],
+  collections: [Users, Media, Categories, Projects, Books, BlogPosts,ContactMessages],
 
   editor: lexicalEditor({}),
 

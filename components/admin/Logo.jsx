@@ -1,12 +1,16 @@
 export default function Logo() {
   return (
-    <div style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'1.25rem 1rem', borderBottom:'1px solid hsl(217 33% 16%)', background:'hsl(222 47% 6%)' }}>
-      <div style={{ width:'2.25rem', height:'2.25rem', background:'linear-gradient(135deg,#00d4aa,#0d9488)', borderRadius:'.65rem', display:'flex', alignItems:'center', justifyContent:'center', color:'hsl(222 47% 6%)', fontWeight:800, fontSize:'1.1rem', flexShrink:0, boxShadow:'0 0 0 1px rgba(0,212,170,.3),0 4px 12px rgba(0,212,170,.2)' }}>
+    <div className="flex items-center gap-3">
+      <div className="w-9 h-9 bg-linear-to-br  from-blue-600 to-cyan-400 rounded-2xl flex items-center justify-center text-white font-bold text-2xl shadow-inner">
         F
       </div>
-      <div style={{ lineHeight:1.1 }}>
-        <div style={{ fontSize:'1rem', fontWeight:700, letterSpacing:'-.02em', color:'hsl(210 40% 98%)' }}>Farhan</div>
-        <div style={{ fontSize:'.7rem', fontWeight:600, color:'#00d4aa', letterSpacing:'.04em' }}>Admin Panel</div>
+      <div>
+        <span className="text-2xl font-semibold tracking-tight text-white">
+          Farhan
+        </span>
+        <span className="block text-[10px] text-gray-400 -mt-1 tracking-[1px]">
+          ADMIN PANEL
+        </span>
       </div>
     </div>
   );

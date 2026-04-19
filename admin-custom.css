@@ -1,4 +1,42 @@
 /* admin-custom.css — loaded by Payload directly, no PostCSS processing */
+
 .payload-admin {
   --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+}
+
+/* Sidebar + Header più eleganti */
+.payload-admin .sidebar,
+.payload-admin .nav {
+  background: hsl(240 10% 8%) !important;
+}
+
+.payload-admin .btn,
+.payload-admin button {
+  border-radius: 9999px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.payload-admin .btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.2);
+}
+
+/* Card e tabelle più pulite */
+.payload-admin .card {
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+/* Miglior focus e accessibilità */
+.payload-admin input:focus,
+.payload-admin textarea:focus,
+.payload-admin select:focus {
+  border-color: hsl(217 91% 60%) !important;
+  box-shadow: 0 0 0 3px hsl(217 91% 60% / 0.3);
+}
+
+/* Dark mode ancora più bella */
+.payload-admin .table tr:hover {
+  background: hsl(240 10% 12%) !important;
 }
