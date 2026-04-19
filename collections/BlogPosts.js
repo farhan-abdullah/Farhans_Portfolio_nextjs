@@ -22,10 +22,15 @@ export const BlogPosts = {
     listSearchableFields: ["title"],
     livePreview: {
       url: ({ data }) => {
-        const baseUrl =
-          process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+        const isDev = process.env.NODE_ENV === "development";
+        const baseUrl = isDev
+          ? "http://localhost:3000"
+          : process.env.NEXT_PUBLIC_SITE_URL ||
+            "https://www.farhanabdullah.com";
+
         const lang = data?.locale || "it";
         const slug = data?.slug || "untitled";
+
         return `${baseUrl}/${lang}/blog/${slug}`;
       },
     },

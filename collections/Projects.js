@@ -18,10 +18,16 @@ export const Projects = {
     // ← LIVE PREVIEW CON LINGUA AUTOMATICA
     livePreview: {
       url: ({ data }) => {
-        const baseUrl =
-          process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
-        const lang = data?.locale || "it"; // prende automaticamente la lingua del progetto
+        // Sceglie automaticamente localhost o produzione
+        const isDev = process.env.NODE_ENV === "development";
+        const baseUrl = isDev
+          ? "http://localhost:3000"
+          : process.env.NEXT_PUBLIC_SITE_URL ||
+            "https://www.farhanabdullah.com";
+
+        const lang = data?.locale || "it"; // lingua automatica del progetto
         const slug = data?.slug || "untitled";
+
         return `${baseUrl}/${lang}/projects/${slug}`;
       },
     },
