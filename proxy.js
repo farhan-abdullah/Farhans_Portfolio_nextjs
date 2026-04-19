@@ -72,10 +72,19 @@ export function proxy(request) {
   ) {
     return NextResponse.next();
   }
+  // ==================== HEADERS PER LIVE PREVIEW ====================
+  const response = NextResponse.next();
 
+  // Permette il caricamento in iframe dall'admin di Payload
+  response.headers.set("X-Frame-Options", "SAMEORIGIN");
+
+  response.headers.set(
+    "Content-Security-Policy",
+    "frame-ancestors 'self' https://*.payloadcms.com http://localhost:3000 https://*.vercel.app https://www.farhanabdullah.com",
+  );
   // ── LOGICA i18n (solo per pagine pubbliche) ──
   const localeFromPath = i18n.locales.find(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
   );
 
   if (localeFromPath) {
@@ -93,7 +102,10 @@ export function proxy(request) {
 
   // Redirect automatico al locale corretto
   const locale = getLocale(request);
-  const newUrl = new URL(`/${locale}${pathname === "/" ? "" : pathname}`, request.url);
+  const newUrl = new URL(
+    `/${locale}${pathname === "/" ? "" : pathname}`,
+    request.url,
+  );
 
   const res = NextResponse.redirect(newUrl);
   res.cookies.set("NEXT_LOCALE", locale, {

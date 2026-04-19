@@ -1,23 +1,29 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { BookCard } from '@/components/cards/book-card';
+import { BookCard } from "@/components/cards/book-card";
+import { useState } from "react";
 
 export function BooksTabs({ initialBooks, dict }) {
-  const [activeCategory, setActiveCategory] = useState('all');
+  const [activeCategory, setActiveCategory] = useState("all");
 
   const categories = [
-    { id: 'all', label: dict.books.filter_all },
-    { id: 'bengali_classics', label: dict.books.categories.bengali_classics },
-    { id: 'sirah', label: dict.books.categories.sirah },
-    { id: 'islamic_history', label: dict.books.categories.islamic_history },
-    { id: 'islamic_sciences', label: dict.books.categories.islamic_sciences },
-    { id: 'spirituality', label: dict.books.categories.spirituality },
-    { id: 'productivity', label: dict.books.categories.productivity },
+    { id: "all", label: dict.books.filter_all },
+    { id: "bengali_classics", label: dict.books.categories.bengali_classics },
+    { id: "sirah", label: dict.books.categories.sirah },
+    {
+      id: "history_civilization",
+      label: dict.books.categories.history_civilization,
+    },
+    {
+      id: "sciences_technology",
+      label: dict.books.categories.sciences_technology,
+    },
+    { id: "spirituality", label: dict.books.categories.spirituality },
+    { id: "productivity", label: dict.books.categories.productivity },
   ];
 
   const filteredBooks =
-    activeCategory === 'all'
+    activeCategory === "all"
       ? initialBooks
       : initialBooks.filter((book) => book.category === activeCategory);
 
@@ -33,15 +39,25 @@ export function BooksTabs({ initialBooks, dict }) {
       <div className="mb-12 grid grid-cols-3 gap-6">
         <div className="text-center">
           <div className="text-3xl font-bold text-accent">{stats.total}</div>
-          <p className="text-sm text-muted-foreground mt-1">{dict.books.books_count}</p>
+          <p className="text-sm text-muted-foreground mt-1">
+            {dict.books.books_count}
+          </p>
         </div>
         <div className="text-center">
-          <div className="text-3xl font-bold text-accent">{stats.categories}</div>
-          <p className="text-sm text-muted-foreground mt-1">{dict.books.categories_count}</p>
+          <div className="text-3xl font-bold text-accent">
+            {stats.categories}
+          </div>
+          <p className="text-sm text-muted-foreground mt-1">
+            {dict.books.categories_count}
+          </p>
         </div>
         <div className="text-center">
-          <div className="text-3xl font-bold text-accent">{stats.languages}</div>
-          <p className="text-sm text-muted-foreground mt-1">{dict.books.languages_count}</p>
+          <div className="text-3xl font-bold text-accent">
+            {stats.languages}
+          </div>
+          <p className="text-sm text-muted-foreground mt-1">
+            {dict.books.languages_count}
+          </p>
         </div>
       </div>
 
@@ -54,8 +70,8 @@ export function BooksTabs({ initialBooks, dict }) {
               onClick={() => setActiveCategory(category.id)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                 activeCategory === category.id
-                  ? 'bg-accent text-[hsl(var(--accent-foreground))]'
-                  : 'bg-[hsl(var(--muted))] text-[hsl(var(--muted-foreground))] hover:bg-[hsl(var(--muted))]/80'
+                  ? "bg-accent text-[hsl(var(--accent-foreground))]"
+                  : "bg-[hsl(var(--muted))] text-[hsl(var(--muted-foreground))] hover:bg-[hsl(var(--muted))]/80"
               }`}
             >
               {category.label}
@@ -74,7 +90,7 @@ export function BooksTabs({ initialBooks, dict }) {
       ) : (
         <div className="flex items-center justify-center min-h-96">
           <p className="text-muted-foreground text-center max-w-md">
-            {dict.common.no_books_found || 'Nessun libro in questa categoria.'}
+            {dict.common.no_books_found || "Nessun libro in questa categoria."}
           </p>
         </div>
       )}
