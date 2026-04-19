@@ -21,11 +21,12 @@ export const BlogPosts = {
     description: "Gestione articoli blog per www.farhanabdullah.com",
     listSearchableFields: ["title"],
     livePreview: {
-      url: ({ data, collectionConfig }) => {
+      url: ({ data }) => {
         const base =
           process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
-        const slug = data?.slug || "";
-        return `${base}/blog/${slug}`;
+        const lang = "it";
+        const slug = data?.slug || "untitled";
+        return `${base}/${lang}/blog/${slug}`;
       },
     },
   },

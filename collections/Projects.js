@@ -16,11 +16,12 @@ export const Projects = {
     description: "Gestione progetti portfolio per www.farhanabdullah.com",
     listSearchableFields: ["title", "client"],
     livePreview: {
-      url: ({ data, collectionConfig }) => {
+      url: ({ data }) => {
         const base =
           process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
-        const slug = data?.slug || "";
-        return `${base}/projects/${slug}`;
+        const lang = "it"; // lingua di default per il preview
+        const slug = data?.slug || "untitled";
+        return `${base}/${lang}/projects/${slug}`;
       },
     },
   },
