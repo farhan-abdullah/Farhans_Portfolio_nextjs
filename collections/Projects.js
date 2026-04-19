@@ -12,7 +12,17 @@ export const Projects = {
   admin: {
     useAsTitle: "title",
     group: "Content",
-    defaultColumns: ["title", "category", "status", "featured", "updatedAt"],
+    defaultColumns: ["title", "client", "status", "finishedAt", "updatedAt"],
+    description: "Gestione progetti portfolio per www.farhanabdullah.com",
+    listSearchableFields: ["title", "client"],
+    livePreview: {
+      url: ({ data, collectionConfig }) => {
+        const base =
+          process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+        const slug = data?.slug || "";
+        return `${base}/projects/${slug}`;
+      },
+    },
   },
   access: {
     read: () => true,
