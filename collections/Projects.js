@@ -1,18 +1,18 @@
 import {
-  lexicalEditor,
-  HeadingFeature,
   FixedToolbarFeature,
+  HeadingFeature,
   InlineToolbarFeature,
-} from '@payloadcms/richtext-lexical';
-const LOCALES = ['it', 'en', 'bn'];
+  lexicalEditor,
+} from "@payloadcms/richtext-lexical";
+const LOCALES = ["it", "en", "bn"];
 
 /** @type {import('payload').CollectionConfig} */
 export const Projects = {
-  slug: 'projects',
+  slug: "projects",
   admin: {
-    useAsTitle: 'title',
-    group: 'Content',
-    defaultColumns: ['title', 'category', 'status', 'featured', 'updatedAt'],
+    useAsTitle: "title",
+    group: "Content",
+    defaultColumns: ["title", "category", "status", "featured", "updatedAt"],
   },
   access: {
     read: () => true,
@@ -31,53 +31,54 @@ export const Projects = {
     // TABS
     // ──────────────────────────────────────────
     {
-      type: 'tabs',
+      type: "tabs",
       tabs: [
         {
-          label: 'Overview',
+          label: "Overview",
           fields: [
             {
-              name: 'title',
-              type: 'text',
+              name: "title",
+              type: "text",
               required: true,
               localized: true,
             },
             {
-              name: 'tagline',
-              type: 'text',
+              name: "tagline",
+              type: "text",
               localized: true,
               admin: {
-                description: 'One-liner shown on cards and hero (max ~90 chars)',
+                description:
+                  "One-liner shown on cards and hero (max ~90 chars)",
               },
             },
             {
-              name: 'summary',
-              type: 'textarea',
+              name: "summary",
+              type: "textarea",
               localized: true,
               admin: {
-                description: 'Short description for project card (2-3 lines)',
+                description: "Short description for project card (2-3 lines)",
               },
             },
             {
-              name: 'cover',
-              type: 'upload',
-              relationTo: 'media',
+              name: "cover",
+              type: "upload",
+              relationTo: "media",
               required: true,
             },
             {
-              name: 'gallery',
-              type: 'array',
-              labels: { singular: 'Image', plural: 'Gallery' },
+              name: "gallery",
+              type: "array",
+              labels: { singular: "Image", plural: "Gallery" },
               fields: [
                 {
-                  name: 'image',
-                  type: 'upload',
-                  relationTo: 'media',
+                  name: "image",
+                  type: "upload",
+                  relationTo: "media",
                   required: true,
                 },
                 {
-                  name: 'caption',
-                  type: 'text',
+                  name: "caption",
+                  type: "text",
                   localized: true,
                 },
               ],
@@ -86,55 +87,60 @@ export const Projects = {
         },
         // ── Case Study ──
         {
-          label: 'Case Study',
+          label: "Case Study",
           fields: [
             {
-              name: 'problem',
-              type: 'richText',
+              name: "problem",
+              type: "richText",
               localized: true,
               editor: lexicalEditor({
                 features: ({ defaultFeatures }) => [
                   ...defaultFeatures,
-                  HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
+                  HeadingFeature({ enabledHeadingSizes: ["h2", "h3", "h4"] }),
                   FixedToolbarFeature(),
                   InlineToolbarFeature(),
                 ],
               }),
-              admin: { description: 'What was the problem / challenge?' },
+              admin: { description: "What was the problem / challenge?" },
             },
             {
-              name: 'solution',
-              type: 'richText',
+              name: "solution",
+              type: "richText",
               localized: true,
               editor: lexicalEditor({}),
-              admin: { description: 'How did you solve it?' },
+              admin: { description: "How did you solve it?" },
             },
             {
-              name: 'outcome',
-              type: 'richText',
+              name: "outcome",
+              type: "richText",
               localized: true,
               editor: lexicalEditor({}),
-              admin: { description: 'Results, metrics, impact' },
+              admin: { description: "Results, metrics, impact" },
             },
             {
-              name: 'metrics',
-              type: 'array',
-              labels: { singular: 'Metric', plural: 'Metrics' },
+              name: "metrics",
+              type: "array",
+              labels: { singular: "Metric", plural: "Metrics" },
               fields: [
-                { name: 'label', type: 'text', required: true, localized: true },
-                { name: 'value', type: 'text', required: true },
-                { name: 'description', type: 'text', localized: true },
+                {
+                  name: "label",
+                  type: "text",
+                  required: true,
+                  localized: true,
+                },
+                { name: "value", type: "text", required: true },
+                { name: "description", type: "text", localized: true },
               ],
             },
             {
-              name: 'myRole',
-              type: 'textarea',
+              name: "myRole",
+              type: "textarea",
               localized: true,
-              admin: { description: 'Your specific contribution / role' },
+              admin: { description: "Your specific contribution / role" },
             },
             {
-              name: 'duration',
-              type: 'text',
+              name: "duration",
+              type: "text",
               admin: { description: 'e.g. "3 months", "Q2 2024 — Q4 2024"' },
             },
           ],
@@ -146,147 +152,160 @@ export const Projects = {
     // SIDEBAR
     // ──────────────────────────────────────────
     {
-      name: 'slug',
-      type: 'text',
+      name: "slug",
+      type: "text",
       required: true,
       unique: true,
       admin: {
-        position: 'sidebar',
+        position: "sidebar",
         description: 'URL slug (e.g. "tiger-tech-redesign")',
       },
     },
     {
-      name: 'category',
-      type: 'select',
+      name: "category",
+      type: "select",
       required: true,
       options: [
-        { label: 'Full-Stack', value: 'fullstack' },
-        { label: 'Frontend', value: 'frontend' },
-        { label: 'Backend', value: 'backend' },
-        { label: 'Multilingual', value: 'multilingual' },
+        { label: "Full-Stack", value: "fullstack" },
+        { label: "Frontend", value: "frontend" },
+        { label: "Backend", value: "backend" },
+        { label: "Multilingual", value: "multilingual" },
       ],
-      admin: { position: 'sidebar' },
+      admin: { position: "sidebar" },
     },
     {
-      name: 'stack',
-      type: 'array',
+      name: "stack",
+      type: "array",
       admin: {
-        position: 'sidebar',
-        description: 'Tech stack (React, Node.js, MongoDB, etc.)',
+        position: "sidebar",
+        description: "Tech stack (React, Node.js, MongoDB, etc.)",
       },
-      fields: [{ name: 'tech', type: 'text', required: true }],
+      fields: [{ name: "tech", type: "text", required: true }],
     },
     {
-      name: 'links',
-      type: 'group',
-      admin: { position: 'sidebar' },
+      name: "links",
+      type: "group",
+      admin: { position: "sidebar" },
       fields: [
-        { name: 'live', type: 'text', admin: { description: 'Live URL' } },
-        { name: 'github', type: 'text', admin: { description: 'GitHub URL' } },
-        { name: 'figma', type: 'text' },
+        { name: "live", type: "text", admin: { description: "Live URL" } },
+        { name: "github", type: "text", admin: { description: "GitHub URL" } },
+        { name: "figma", type: "text" },
       ],
     },
     {
-      name: 'featured',
-      type: 'checkbox',
+      name: "featured",
+      type: "checkbox",
       defaultValue: false,
-      admin: { position: 'sidebar' },
+      admin: { position: "sidebar" },
     },
     {
-      name: 'status',
-      type: 'select',
+      name: "status",
+      type: "select",
       required: true,
-      defaultValue: 'live',
+      defaultValue: "live",
       options: [
-        { label: 'Live', value: 'live' },
-        { label: 'In Progress', value: 'wip' },
-        { label: 'Archived', value: 'archived' },
+        { label: "Live", value: "live" },
+        { label: "In Progress", value: "wip" },
+        { label: "Archived", value: "archived" },
       ],
-      admin: { position: 'sidebar' },
+      admin: { position: "sidebar" },
     },
     {
-      name: 'completedAt',
-      type: 'date',
-      admin: { position: 'sidebar', date: { pickerAppearance: 'monthOnly' } },
+      name: "completedAt",
+      type: "date",
+      admin: { position: "sidebar", date: { pickerAppearance: "monthOnly" } },
     },
     // SEO
     {
-      name: 'seo',
-      type: 'group',
+      name: "seo",
+      type: "group",
       fields: [
-        { name: 'metaTitle', type: 'text', localized: true },
-        { name: 'metaDescription', type: 'textarea', localized: true },
-        { name: 'ogImage', type: 'upload', relationTo: 'media' },
+        { name: "metaTitle", type: "text", localized: true },
+        { name: "metaDescription", type: "textarea", localized: true },
+        { name: "ogImage", type: "upload", relationTo: "media" },
       ],
     },
-  {
-  name: 'techStack',
-  type: 'array',
-  label: 'Tech Stack',
-  fields: [
     {
-      name: 'technology',
-      type: 'text',
-      required: true,
-    },
-  ],
-  admin: {
-    components: {
-      Field: () => import('@/components/admin/TechStackField'),
-    },
-  },
-},
-{
-  name: 'results',
-  type: 'array',
-  label: 'Risultati ottenuti',
-  fields: [
-    { name: 'metric', type: 'text' },
-    { name: 'value',  type: 'text' },
-  ],
-  admin: {
-    components: {
-      Field: () => import('@/components/admin/ResultsField'),
-    },
-  },
-},
-{
-  name: 'hero',
-  type: 'group',
-  label: 'Hero Images',
-  fields: [
-    {
-      name: 'desktop',
-      type: 'upload',
-      relationTo: 'media',
-      label: 'Immagine Desktop',
+      name: "techStack",
+      type: "array",
+      label: "Tech Stack",
+      fields: [
+        {
+          name: "technology",
+          type: "text",
+          required: true,
+        },
+      ],
+      admin: {
+        components: {
+          Field: () => import("@/components/admin/TechStackField"),
+        },
+      },
     },
     {
-      name: 'mobile',
-      type: 'upload',
-      relationTo: 'media',
-      label: 'Immagine Mobile',
+      name: "results",
+      type: "array",
+      label: "Risultati ottenuti",
+      fields: [
+        { name: "metric", type: "text" },
+        { name: "value", type: "text" },
+      ],
+      admin: {
+        components: {
+          Field: () => import("@/components/admin/ResultsField"),
+        },
+      },
+    },
+    {
+      name: "hero",
+      type: "group",
+      label: "Hero Images",
+      fields: [
+        {
+          name: "desktop",
+          type: "upload",
+          relationTo: "media",
+          label: "Immagine Desktop",
+        },
+        {
+          name: "mobile",
+          type: "upload",
+          relationTo: "media",
+          label: "Immagine Mobile",
+        },
+      ],
+      admin: {
+        components: {
+          Field: () => import("@/components/admin/ImagePreviewField"),
+        },
+      },
+    },
+    {
+      name: "client",
+      type: "text",
+      label: "Client",
+    },
+    {
+      name: "testimonial",
+      type: "textarea",
+      label: "Testimonial of client",
+      admin: { rows: 3 },
     },
   ],
-  admin: {
-    components: {
-      Field: () => import('@/components/admin/ImagePreviewField'),
-    },
-  },
-},
 
-  ],
   hooks: {
     afterChange: [
       ({ doc }) => {
         const slug = doc?.slug;
-        import('next/cache').then(({ revalidatePath }) => {
-          for (const locale of LOCALES) {
-            revalidatePath(`/${locale}/projects`);
-            if (slug) revalidatePath(`/${locale}/projects/${slug}`);
-            revalidatePath(`/${locale}`);
-          }
-        }).catch(() => {});
+        import("next/cache")
+          .then(({ revalidatePath }) => {
+            for (const locale of LOCALES) {
+              revalidatePath(`/${locale}/projects`);
+              if (slug) revalidatePath(`/${locale}/projects/${slug}`);
+              revalidatePath(`/${locale}`);
+            }
+          })
+          .catch(() => {});
       },
     ],
   },

@@ -17,7 +17,6 @@ import { Categories } from "./collections/Categories.js";
 import { Media } from "./collections/Media.js";
 import { Projects } from "./collections/Projects.js";
 import { Users } from "./collections/Users.js";
-import ContactMessages from './collections/ContactMessages';
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
@@ -27,12 +26,18 @@ const dirname = path.dirname(filename);
 const useResend = !!process.env.RESEND_API_KEY;
 
 console.log("[R2 config]", {
-  S3_BUCKET:            process.env.S3_BUCKET            ? `"${process.env.S3_BUCKET}"` : "MISSING",
-  S3_ENDPOINT:          process.env.S3_ENDPOINT          ? `"${process.env.S3_ENDPOINT}"` : "MISSING",
-  S3_PUBLIC_URL:        process.env.S3_PUBLIC_URL        ? `"${process.env.S3_PUBLIC_URL}"` : "MISSING",
-  S3_REGION:            process.env.S3_REGION            || "auto (default)",
-  S3_ACCESS_KEY_ID:     process.env.S3_ACCESS_KEY_ID     ? "***SET***" : "MISSING",
-  S3_SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY ? "***SET***" : "MISSING",
+  S3_BUCKET: process.env.S3_BUCKET ? `"${process.env.S3_BUCKET}"` : "MISSING",
+  S3_ENDPOINT: process.env.S3_ENDPOINT
+    ? `"${process.env.S3_ENDPOINT}"`
+    : "MISSING",
+  S3_PUBLIC_URL: process.env.S3_PUBLIC_URL
+    ? `"${process.env.S3_PUBLIC_URL}"`
+    : "MISSING",
+  S3_REGION: process.env.S3_REGION || "auto (default)",
+  S3_ACCESS_KEY_ID: process.env.S3_ACCESS_KEY_ID ? "***SET***" : "MISSING",
+  S3_SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY
+    ? "***SET***"
+    : "MISSING",
 });
 
 export default buildConfig({
@@ -64,7 +69,7 @@ export default buildConfig({
     fallback: true,
   },
 
-  collections: [Users, Media, Categories, Projects, Books, BlogPosts,ContactMessages],
+  collections: [Users, Media, Categories, Projects, Books, BlogPosts],
 
   editor: lexicalEditor({}),
 
