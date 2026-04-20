@@ -57,7 +57,7 @@ export default buildConfig({
       },
     },
     theme: "light",
-    css: path.resolve(dirname, "admin-custom.css"),
+    css: path.resolve(dirname, "custom.css"),
   },
   localization: {
     locales: [
