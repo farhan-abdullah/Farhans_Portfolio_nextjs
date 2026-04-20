@@ -1,200 +1,441 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
-const TEAL = "#00d4aa";
-
-const COLLECTIONS = [
-  {
-    label: "Progetti",
-    href: "/admin/collections/projects",
-    desc: "Case study e portfolio",
-    color: TEAL,
-  },
-  {
-    label: "Blog Post",
-    href: "/admin/collections/blog-posts",
-    desc: "Articoli e guide tecniche",
-    color: "#60a5fa",
-  },
-  {
-    label: "Libri",
-    href: "/admin/collections/books",
-    desc: "Letture consigliate",
-    color: "#a78bfa",
-  },
-  {
-    label: "Media",
-    href: "/admin/collections/media",
-    desc: "Immagini e file",
-    color: "#fb923c",
-  },
-  {
-    label: "Categorie",
-    href: "/admin/collections/categories",
-    desc: "Tag e classificazioni",
-    color: "#f472b6",
-  },
-];
+import React from "react";
+import Link from "next/link";
+import {
+  Globe,
+  ArrowUpRight,
+  TrendingUp,
+  Cloud,
+  ArrowRight,
+  Briefcase,
+  FileText,
+  BookOpen,
+  Image as ImageIcon,
+  Tags,
+  Pencil,
+  Upload,
+  Check,
+  Plus,
+  GitBranch,
+} from "lucide-react";
 
 export default function Dashboard() {
-  const [stats, setStats] = useState({
-    projects: 0,
-    blogPosts: 0,
-    books: 0,
-    unreadMessages: 0,
-  });
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchStats = async () => {
-      try {
-        const [projRes, blogRes, bookRes, msgRes] = await Promise.all([
-          fetch("/api/projects?limit=1"),
-          fetch("/api/blog-posts?limit=1"),
-          fetch("/api/books?limit=1"),
-          fetch("/api/contact-messages?where[status][equals]=new&limit=1"),
-        ]);
-
-        const [proj, blog, book, msg] = await Promise.all([
-          projRes.json(),
-          blogRes.json(),
-          bookRes.json(),
-          msgRes.json(),
-        ]);
-
-        setStats({
-          projects: proj.totalDocs || 0,
-          blogPosts: blog.totalDocs || 0,
-          books: book.totalDocs || 0,
-          unreadMessages: msg.totalDocs || 0,
-        });
-      } catch (err) {
-        console.error("Errore caricamento stats dashboard", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchStats();
-  }, []);
-
   return (
-    <>
-      <style>{`
-        .adm-dash { min-height: 100vh; background: #f8fafc; color: #0f172a; font-family: Inter, system-ui, sans-serif; }
-        .adm-banner { background: linear-gradient(135deg, #ffffff, #f1f5f9); border-bottom: 1px solid #e2e8f0; padding: 2rem 2rem 1.75rem; }
-        .adm-badge { font-size: .62rem; font-weight: 700; letter-spacing: .1em; color: #00d4aa; background: rgba(0,212,170,.12); border: 1px solid rgba(0,212,170,.22); padding: 2px 10px; border-radius: 9999px; }
-        .adm-h1 { font-size: clamp(1.5rem, 4vw, 2.5rem); font-weight: 800; letter-spacing: -.03em; background: linear-gradient(120deg, #0f172a 20%, #00d4aa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .adm-sub { color: #64748b; margin-top: .4rem; font-size: .875rem; }
-        .adm-site-btn { display: inline-flex; align-items: center; gap: .45rem; padding: .6rem 1rem; background: rgba(0,212,170,.12); border: 1px solid rgba(0,212,170,.22); border-radius: .75rem; color: #00d4aa; font-weight: 600; text-decoration: none; transition: all .15s; }
-        .adm-site-btn:hover { background: rgba(0,212,170,.2); transform: translateY(-1px); }
-        .adm-body { max-width: 1280px; margin: 0 auto; padding: 2rem; }
-        .adm-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: .875rem; margin-bottom: 2.5rem; }
-        .adm-stat { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 1.1rem; padding: 1.25rem 1.5rem; text-decoration: none; color: inherit; transition: all .2s; }
-        .adm-stat:hover { transform: translateY(-2px); border-color: #00d4aa; }
-        .adm-stat-label { font-size: .62rem; font-weight: 700; letter-spacing: .08em; color: #64748b; text-transform: uppercase; }
-        .adm-stat-value { font-size: 2.25rem; font-weight: 800; color: #0f172a; margin: .35rem 0; }
-        .adm-section-header { display: flex; align-items: center; gap: .75rem; margin-bottom: 1rem; }
-        .adm-section-label { font-size: .62rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #64748b; }
-        .adm-section-line { flex: 1; height: 1px; background: #e2e8f0; }
-        .adm-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: .875rem; }
-        .adm-col { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 1.1rem; padding: 1.25rem; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: .65rem; transition: all .2s; }
-        .adm-col:hover { transform: translateY(-2px); border-color: #00d4aa; }
-        .adm-col-name { font-weight: 700; font-size: .95rem; }
-        .adm-col-desc { font-size: .8rem; color: #64748b; line-height: 1.4; }
-      `}</style>
-
-      <div className="adm-dash">
-        <div className="adm-banner">
-          <div
-            style={{
-              maxWidth: "1280px",
-              margin: "0 auto",
-              display: "flex",
-              alignItems: "flex-end",
-              justifyContent: "space-between",
-              flexWrap: "wrap",
-              gap: "1.25rem",
-            }}
+    <div className="dashboard-custom-wrapper pb-10">
+      {/* ── BANNER ── */}
+      <div className="dash-banner">
+        <div className="dash-banner-inner">
+          <div>
+            <span className="dash-badge">Panel</span>
+            <h1 className="dash-h1">Ciao, Farhan</h1>
+            <p className="dash-sub">Gestisci i contenuti del tuo portfolio</p>
+          </div>
+          <a
+            href="https://www.farhanabdullah.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="site-btn"
           >
-            <div>
-              <span className="adm-badge">Panel</span>
-              <h1 className="adm-h1">Ciao, Farhan 👋</h1>
-              <p className="adm-sub">Gestisci i contenuti del tuo portfolio</p>
-            </div>
-            <a
-              href="https://www.farhanabdullah.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="adm-site-btn"
-            >
-              Vai al sito
-            </a>
-          </div>
-        </div>
-
-        <div className="adm-body">
-          {/* Stats Live */}
-          <div className="adm-stats">
-            <a href="/admin/collections/projects" className="adm-stat">
-              <div className="adm-stat-label">Progetti</div>
-              <div className="adm-stat-value" style={{ color: TEAL }}>
-                {loading ? "—" : stats.projects}
-              </div>
-            </a>
-            <a href="/admin/collections/blog-posts" className="adm-stat">
-              <div className="adm-stat-label">Blog Post</div>
-              <div className="adm-stat-value" style={{ color: "#60a5fa" }}>
-                {loading ? "—" : stats.blogPosts}
-              </div>
-            </a>
-            <a href="/admin/collections/books" className="adm-stat">
-              <div className="adm-stat-label">Libri</div>
-              <div className="adm-stat-value" style={{ color: "#a78bfa" }}>
-                {loading ? "—" : stats.books}
-              </div>
-            </a>
-            <a href="/admin/collections/contact-messages" className="adm-stat">
-              <div className="adm-stat-label">Messaggi nuovi</div>
-              <div className="adm-stat-value" style={{ color: "#f43f5e" }}>
-                {loading ? "—" : stats.unreadMessages}
-              </div>
-            </a>
-          </div>
-
-          {/* Collections */}
-          <div className="adm-section-header">
-            <h2 className="adm-section-label">Collezioni</h2>
-            <div className="adm-section-line" />
-          </div>
-          <div className="adm-cols">
-            {COLLECTIONS.map((col) => (
-              <a key={col.label} href={col.href} className="adm-col">
-                <div
-                  style={{
-                    width: "2.25rem",
-                    height: "2.25rem",
-                    background: "#f1f5f9",
-                    borderRadius: "0.65rem",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <span style={{ color: col.color, fontSize: "1.4rem" }}>
-                    📌
-                  </span>
-                </div>
-                <div>
-                  <p className="adm-col-name">{col.label}</p>
-                  <p className="adm-col-desc">{col.desc}</p>
-                </div>
-              </a>
-            ))}
-          </div>
+            <Globe style={{ width: 14, height: 14 }} />
+            View live site
+            <ArrowUpRight style={{ width: 12, height: 12 }} />
+          </a>
         </div>
       </div>
-    </>
+
+      <div className="dash-body">
+        {/* ── STATISTICHE ── */}
+        <div className="dash-stats">
+          <div className="stat">
+            <div className="stat-bar" style={{ background: "var(--adm-accent)" }}></div>
+            <p className="stat-label">Projects</p>
+            <p className="stat-value" style={{ color: "var(--adm-accent)" }}>12</p>
+            <p className="stat-note">8 live · 3 WIP · 1 archived</p>
+            <p className="stat-trend">
+              <TrendingUp style={{ width: 11, height: 11 }} />+2 this month
+            </p>
+          </div>
+          <div className="stat">
+            <div className="stat-bar" style={{ background: "var(--adm-blue)" }}></div>
+            <p className="stat-label">Blog Posts</p>
+            <p className="stat-value" style={{ color: "var(--adm-blue)" }}>24</p>
+            <p className="stat-note">19 published · 5 drafts</p>
+            <p className="stat-trend">
+              <TrendingUp style={{ width: 11, height: 11 }} />+4 this month
+            </p>
+          </div>
+          <div className="stat">
+            <div className="stat-bar" style={{ background: "var(--adm-violet)" }}></div>
+            <p className="stat-label">Books</p>
+            <p className="stat-value" style={{ color: "var(--adm-violet)" }}>47</p>
+            <p className="stat-note">22 read · 6 reading · 19 wishlist</p>
+            <p className="stat-trend">
+              <TrendingUp style={{ width: 11, height: 11 }} />+3 this month
+            </p>
+          </div>
+          <div className="stat">
+            <div className="stat-bar" style={{ background: "var(--adm-orange)" }}></div>
+            <p className="stat-label">Media</p>
+            <p className="stat-value" style={{ color: "var(--adm-orange)" }}>163</p>
+            <p className="stat-note">287 MB of 10 GB</p>
+            <p className="stat-trend" style={{ color: "var(--adm-muted)" }}>
+              <Cloud style={{ width: 11, height: 11 }} /> Cloudflare R2
+            </p>
+          </div>
+        </div>
+
+        {/* ── COLLEZIONI ── */}
+        <div className="section-head">
+          <h2 className="section-label">Collections</h2>
+          <div className="section-line"></div>
+        </div>
+        <div className="dash-cols">
+          <Link href="/admin/collections/projects" className="coll-card">
+            <div className="coll-icon">
+              <Briefcase style={{ width: 18, height: 18, color: "var(--adm-accent)" }} />
+            </div>
+            <div>
+              <div className="coll-name">Projects</div>
+              <div className="coll-desc">Case studies &amp; portfolio work</div>
+            </div>
+            <span className="coll-link">Open <ArrowRight style={{ width: 11, height: 11 }} /></span>
+          </Link>
+
+          <Link href="/admin/collections/blog-posts" className="coll-card">
+            <div className="coll-icon">
+              <FileText style={{ width: 18, height: 18, color: "var(--adm-blue)" }} />
+            </div>
+            <div>
+              <div className="coll-name">Blog Posts</div>
+              <div className="coll-desc">Articles &amp; technical guides</div>
+            </div>
+            <span className="coll-link">Open <ArrowRight style={{ width: 11, height: 11 }} /></span>
+          </Link>
+
+          <Link href="/admin/collections/books" className="coll-card">
+            <div className="coll-icon">
+              <BookOpen style={{ width: 18, height: 18, color: "var(--adm-violet)" }} />
+            </div>
+            <div>
+              <div className="coll-name">Books</div>
+              <div className="coll-desc">My library &amp; reading list</div>
+            </div>
+            <span className="coll-link">Open <ArrowRight style={{ width: 11, height: 11 }} /></span>
+          </Link>
+
+          <Link href="/admin/collections/media" className="coll-card">
+            <div className="coll-icon">
+              <ImageIcon style={{ width: 18, height: 18, color: "var(--adm-orange)" }} />
+            </div>
+            <div>
+              <div className="coll-name">Media</div>
+              <div className="coll-desc">Images &amp; uploads</div>
+            </div>
+            <span className="coll-link">Open <ArrowRight style={{ width: 11, height: 11 }} /></span>
+          </Link>
+
+          <Link href="/admin/collections/categories" className="coll-card">
+            <div className="coll-icon">
+              <Tags style={{ width: 18, height: 18, color: "var(--adm-pink)" }} />
+            </div>
+            <div>
+              <div className="coll-name">Categories</div>
+              <div className="coll-desc">Tags &amp; taxonomies</div>
+            </div>
+            <span className="coll-link">Open <ArrowRight style={{ width: 11, height: 11 }} /></span>
+          </Link>
+        </div>
+
+        {/* ── PANNELLI INFERIORI ── */}
+        <div className="dash-row">
+          <div className="panel">
+            <div className="panel-head">
+              <div className="panel-title">Recent activity</div>
+            </div>
+            <div className="panel-body">
+              <div className="activity-item">
+                <div className="activity-dot">
+                  <Pencil style={{ width: 13, height: 13, color: "var(--adm-accent)" }} />
+                </div>
+                <div className="activity-main">
+                  <div className="activity-line">
+                    <span className="em">Bistro Boss</span>{" "}
+                    <span className="mu">was updated</span>
+                  </div>
+                  <div className="activity-time">2 min ago · autosave</div>
+                </div>
+                <span className="activity-badge" style={{ color: "var(--adm-accent)", background: "var(--adm-accent-soft)" }}>Projects</span>
+              </div>
+              <div className="activity-item">
+                <div className="activity-dot">
+                  <Upload style={{ width: 13, height: 13, color: "var(--adm-orange)" }} />
+                </div>
+                <div className="activity-main">
+                  <div className="activity-line">
+                    <span className="mu">Uploaded</span>{" "}
+                    <span className="em">cover.jpg</span>
+                  </div>
+                  <div className="activity-time">14 min ago</div>
+                </div>
+                <span className="activity-badge" style={{ color: "var(--adm-orange)", background: "rgba(251,146,60,.1)" }}>Media</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="panel">
+            <div className="panel-head">
+              <div className="panel-title">Quick actions</div>
+            </div>
+            <div className="quick-list">
+              <Link href="/admin/collections/projects/create" className="quick-item">
+                <div className="i" style={{ color: "var(--adm-accent)" }}>
+                  <Plus style={{ width: 14, height: 14 }} />
+                </div>
+                <div>
+                  <div className="t">New Project</div>
+                  <div className="s">Case study with tabs</div>
+                </div>
+              </Link>
+              <Link href="/admin/collections/blog-posts/create" className="quick-item">
+                <div className="i" style={{ color: "var(--adm-blue)" }}>
+                  <Pencil style={{ width: 14, height: 14 }} />
+                </div>
+                <div>
+                  <div className="t">Write a blog post</div>
+                  <div className="s">Rich text · Lexical</div>
+                </div>
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* ── FOOTER ── */}
+        <div className="dash-footer">
+          <div className="l">Farhan Abdullah · Portfolio CMS</div>
+          <div className="r">Payload 3.0 · Next.js 15 · MongoDB · Cloudflare R2</div>
+        </div>
+      </div>
+    </div>
+  );
+}"use client";
+
+import React from "react";
+import Link from "next/link";
+import {
+  Globe,
+  ArrowUpRight,
+  TrendingUp,
+  Cloud,
+  ArrowRight,
+  Briefcase,
+  FileText,
+  BookOpen,
+  Image as ImageIcon,
+  Tags,
+  Pencil,
+  Upload,
+  Check,
+  Plus,
+  GitBranch,
+} from "lucide-react";
+
+export default function Dashboard() {
+  return (
+    <div className="dashboard-custom-wrapper pb-10">
+      {/* ── BANNER ── */}
+      <div className="dash-banner">
+        <div className="dash-banner-inner">
+          <div>
+            <span className="dash-badge">Panel</span>
+            <h1 className="dash-h1">Ciao, Farhan</h1>
+            <p className="dash-sub">Gestisci i contenuti del tuo portfolio</p>
+          </div>
+          <a
+            href="https://www.farhanabdullah.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="site-btn"
+          >
+            <Globe style={{ width: 14, height: 14 }} />
+            View live site
+            <ArrowUpRight style={{ width: 12, height: 12 }} />
+          </a>
+        </div>
+      </div>
+
+      <div className="dash-body">
+        {/* ── STATISTICHE ── */}
+        <div className="dash-stats">
+          <div className="stat">
+            <div className="stat-bar" style={{ background: "var(--adm-accent)" }}></div>
+            <p className="stat-label">Projects</p>
+            <p className="stat-value" style={{ color: "var(--adm-accent)" }}>12</p>
+            <p className="stat-note">8 live · 3 WIP · 1 archived</p>
+            <p className="stat-trend">
+              <TrendingUp style={{ width: 11, height: 11 }} />+2 this month
+            </p>
+          </div>
+          <div className="stat">
+            <div className="stat-bar" style={{ background: "var(--adm-blue)" }}></div>
+            <p className="stat-label">Blog Posts</p>
+            <p className="stat-value" style={{ color: "var(--adm-blue)" }}>24</p>
+            <p className="stat-note">19 published · 5 drafts</p>
+            <p className="stat-trend">
+              <TrendingUp style={{ width: 11, height: 11 }} />+4 this month
+            </p>
+          </div>
+          <div className="stat">
+            <div className="stat-bar" style={{ background: "var(--adm-violet)" }}></div>
+            <p className="stat-label">Books</p>
+            <p className="stat-value" style={{ color: "var(--adm-violet)" }}>47</p>
+            <p className="stat-note">22 read · 6 reading · 19 wishlist</p>
+            <p className="stat-trend">
+              <TrendingUp style={{ width: 11, height: 11 }} />+3 this month
+            </p>
+          </div>
+          <div className="stat">
+            <div className="stat-bar" style={{ background: "var(--adm-orange)" }}></div>
+            <p className="stat-label">Media</p>
+            <p className="stat-value" style={{ color: "var(--adm-orange)" }}>163</p>
+            <p className="stat-note">287 MB of 10 GB</p>
+            <p className="stat-trend" style={{ color: "var(--adm-muted)" }}>
+              <Cloud style={{ width: 11, height: 11 }} /> Cloudflare R2
+            </p>
+          </div>
+        </div>
+
+        {/* ── COLLEZIONI ── */}
+        <div className="section-head">
+          <h2 className="section-label">Collections</h2>
+          <div className="section-line"></div>
+        </div>
+        <div className="dash-cols">
+          <Link href="/admin/collections/projects" className="coll-card">
+            <div className="coll-icon">
+              <Briefcase style={{ width: 18, height: 18, color: "var(--adm-accent)" }} />
+            </div>
+            <div>
+              <div className="coll-name">Projects</div>
+              <div className="coll-desc">Case studies &amp; portfolio work</div>
+            </div>
+            <span className="coll-link">Open <ArrowRight style={{ width: 11, height: 11 }} /></span>
+          </Link>
+
+          <Link href="/admin/collections/blog-posts" className="coll-card">
+            <div className="coll-icon">
+              <FileText style={{ width: 18, height: 18, color: "var(--adm-blue)" }} />
+            </div>
+            <div>
+              <div className="coll-name">Blog Posts</div>
+              <div className="coll-desc">Articles &amp; technical guides</div>
+            </div>
+            <span className="coll-link">Open <ArrowRight style={{ width: 11, height: 11 }} /></span>
+          </Link>
+
+          <Link href="/admin/collections/books" className="coll-card">
+            <div className="coll-icon">
+              <BookOpen style={{ width: 18, height: 18, color: "var(--adm-violet)" }} />
+            </div>
+            <div>
+              <div className="coll-name">Books</div>
+              <div className="coll-desc">My library &amp; reading list</div>
+            </div>
+            <span className="coll-link">Open <ArrowRight style={{ width: 11, height: 11 }} /></span>
+          </Link>
+
+          <Link href="/admin/collections/media" className="coll-card">
+            <div className="coll-icon">
+              <ImageIcon style={{ width: 18, height: 18, color: "var(--adm-orange)" }} />
+            </div>
+            <div>
+              <div className="coll-name">Media</div>
+              <div className="coll-desc">Images &amp; uploads</div>
+            </div>
+            <span className="coll-link">Open <ArrowRight style={{ width: 11, height: 11 }} /></span>
+          </Link>
+
+          <Link href="/admin/collections/categories" className="coll-card">
+            <div className="coll-icon">
+              <Tags style={{ width: 18, height: 18, color: "var(--adm-pink)" }} />
+            </div>
+            <div>
+              <div className="coll-name">Categories</div>
+              <div className="coll-desc">Tags &amp; taxonomies</div>
+            </div>
+            <span className="coll-link">Open <ArrowRight style={{ width: 11, height: 11 }} /></span>
+          </Link>
+        </div>
+
+        {/* ── PANNELLI INFERIORI ── */}
+        <div className="dash-row">
+          <div className="panel">
+            <div className="panel-head">
+              <div className="panel-title">Recent activity</div>
+            </div>
+            <div className="panel-body">
+              <div className="activity-item">
+                <div className="activity-dot">
+                  <Pencil style={{ width: 13, height: 13, color: "var(--adm-accent)" }} />
+                </div>
+                <div className="activity-main">
+                  <div className="activity-line">
+                    <span className="em">Bistro Boss</span>{" "}
+                    <span className="mu">was updated</span>
+                  </div>
+                  <div className="activity-time">2 min ago · autosave</div>
+                </div>
+                <span className="activity-badge" style={{ color: "var(--adm-accent)", background: "var(--adm-accent-soft)" }}>Projects</span>
+              </div>
+              <div className="activity-item">
+                <div className="activity-dot">
+                  <Upload style={{ width: 13, height: 13, color: "var(--adm-orange)" }} />
+                </div>
+                <div className="activity-main">
+                  <div className="activity-line">
+                    <span className="mu">Uploaded</span>{" "}
+                    <span className="em">cover.jpg</span>
+                  </div>
+                  <div className="activity-time">14 min ago</div>
+                </div>
+                <span className="activity-badge" style={{ color: "var(--adm-orange)", background: "rgba(251,146,60,.1)" }}>Media</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="panel">
+            <div className="panel-head">
+              <div className="panel-title">Quick actions</div>
+            </div>
+            <div className="quick-list">
+              <Link href="/admin/collections/projects/create" className="quick-item">
+                <div className="i" style={{ color: "var(--adm-accent)" }}>
+                  <Plus style={{ width: 14, height: 14 }} />
+                </div>
+                <div>
+                  <div className="t">New Project</div>
+                  <div className="s">Case study with tabs</div>
+                </div>
+              </Link>
+              <Link href="/admin/collections/blog-posts/create" className="quick-item">
+                <div className="i" style={{ color: "var(--adm-blue)" }}>
+                  <Pencil style={{ width: 14, height: 14 }} />
+                </div>
+                <div>
+                  <div className="t">Write a blog post</div>
+                  <div className="s">Rich text · Lexical</div>
+                </div>
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* ── FOOTER ── */}
+        <div className="dash-footer">
+          <div className="l">Farhan Abdullah · Portfolio CMS</div>
+          <div className="r">Payload 3.0 · Next.js 15 · MongoDB · Cloudflare R2</div>
+        </div>
+      </div>
+    </div>
   );
 }
