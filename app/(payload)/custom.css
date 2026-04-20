@@ -135,7 +135,7 @@ h1, h2, h3, .dashboard__title, .list-title, .document-title {
 
 .table thead th {
   background: var(--adm-surface-2) !important;
-  color: var(--adm-muted) !important;
+  color: var(--adm-text) !important;
   border-bottom: 1px solid var(--adm-border) !important;
   font-weight: 700 !important;
   text-transform: uppercase !important;
