@@ -59,7 +59,7 @@ html, body, .app-wrap, .template-default__wrap, .payload-default-template {
 
 /* ── TYPOGRAPHY FIX ────────────────────────────────────────── */
 h1, h2, h3, h4, h5, h6, p, span, label, td, th {
-  color: inherit;
+  color: #0f172a;;
 }
 
 h1, h2, h3, .dashboard__title, .list-title, .document-title {
@@ -67,7 +67,7 @@ h1, h2, h3, .dashboard__title, .list-title, .document-title {
 }
 
 .text-muted, .field-description {
-  color: var(--adm-muted) !important;
+  color: #0f172a !important;
 }
 
 /* ── HEADER / TOPBAR ───────────────────────────────────────── */
