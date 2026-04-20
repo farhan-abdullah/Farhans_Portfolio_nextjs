@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import "../../app/(payload)/custom.css";
 import {
   Globe,
   ArrowUpRight,
