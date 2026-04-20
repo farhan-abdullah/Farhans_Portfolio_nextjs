@@ -41,22 +41,26 @@ console.log("[R2 config]", {
 });
 
 export default buildConfig({
-  admin: {
+ admin: {
     user: Users.slug,
     meta: {
       titleSuffix: " | Farhan Admin",
     },
-    // Admin custom con Tailwind (versione stabile)
+    // Admin custom con Tailwind
     components: {
       graphics: {
-        Logo: "@/components/admin/Logo",
-        Icon: "@/components/admin/Logo",
+        Logo: path.resolve(dirname, "components/admin/Logo.jsx"),
+        Icon: path.resolve(dirname, "components/admin/Logo.jsx"),
       },
       views: {
-        Dashboard: "@/components/admin/Dashboard",
+        dashboard: { // DEVE essere minuscolo
+          Component: path.resolve(dirname, "components/admin/Dashboard.jsx"),
+        },
       },
     },
     theme: "light",
+    // ⚠️ IMPORTANTE: Se non hai ancora programmato in React il file "Dashboard.jsx", 
+    // devi commentare la riga qui sotto, altrimenti l'interfaccia rimarrà invisibile.
     css: path.resolve(dirname, "custom.css"),
   },
   localization: {
