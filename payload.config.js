@@ -61,7 +61,7 @@ export default buildConfig({
     theme: "light",
     // ⚠️ IMPORTANTE: Se non hai ancora programmato in React il file "Dashboard.jsx", 
     // devi commentare la riga qui sotto, altrimenti l'interfaccia rimarrà invisibile.
-    css: path.resolve(dirname, "custom.css"),
+    css: path.resolve(dirname, "./custom.css"),
   },
   localization: {
     locales: [

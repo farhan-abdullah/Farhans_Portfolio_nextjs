@@ -1,0 +1,227 @@
+/* ============================================================
+   Payload CMS Admin — Farhan Abdullah LIGHT Theme
+   Risolto: Conflitto testo invisibile e Dark Mode nativa
+   Accent: Teal #00d4aa
+============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap");
+
+/* ── FORZA OVERRIDE TEMA SCURO NATIVO DI PAYLOAD ───────────── */
+/* Blocca le variabili native di Payload per impedire il testo bianco */
+:root,
+html[data-theme="dark"],
+html[data-theme="light"],
+body {
+  --theme-text: #0f172a !important;
+  --theme-bg: #f8fafc !important;
+  --theme-elevation-0: #ffffff !important;
+  --theme-elevation-50: #f1f5f9 !important;
+  --theme-elevation-100: #e2e8f0 !important;
+  --theme-elevation-150: #cbd5e1 !important;
+  --theme-elevation-200: #94a3b8 !important;
+  --theme-elevation-800: #0f172a !important;
+  --theme-error-500: #ef4444 !important;
+  --theme-success-500: #10b981 !important;
+  color: #0f172a !important;
+}
+
+/* ── LIGHT COLOR PALETTE ───────────── */
+:root {
+  --adm-bg: #f8fafc;
+  --adm-surface: #ffffff;
+  --adm-surface-2: #f1f5f9;
+  --adm-border: #e2e8f0;
+  --adm-border-strong: #cbd5e1;
+  
+  --adm-fg: #0f172a;
+  --adm-text: #0f172a;
+  --adm-muted: #64748b;
+  
+  --adm-accent: #00d4aa;
+  --adm-accent-soft: rgba(0, 212, 170, 0.12);
+  --adm-accent-softer: rgba(0, 212, 170, 0.22);
+  --adm-accent-glow: 0 0 0 3px rgba(0, 212, 170, 0.15);
+
+  --adm-font: "Inter", system-ui, sans-serif;
+  --adm-mono: "JetBrains Mono", monospace;
+  --adm-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── GLOBAL RESET ──────────────────────────────────────────── */
+html, body, .app-wrap, .template-default__wrap, .payload-default-template {
+  font-family: var(--adm-font) !important;
+  background: var(--adm-bg) !important;
+  color: var(--adm-text) !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-wrap { background-image: none !important; }
+
+/* ── TYPOGRAPHY FIX ────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6, p, span, label, td, th {
+  color: #0f172a;;
+}
+
+h1, h2, h3, .dashboard__title, .list-title, .document-title {
+  color: #0f172a !important;
+}
+
+.text-muted, .field-description {
+  color: #0f172a !important;
+}
+
+/* ── HEADER / TOPBAR ───────────────────────────────────────── */
+.app-header, .header {
+  height: 56px !important;
+  background: var(--adm-surface) !important;
+  border-bottom: 1px solid var(--adm-border) !important;
+  padding: 0 1.25rem !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 1rem !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02) !important;
+}
+
+/* ── SIDEBAR ───────────────────────────────────────────────── */
+.nav, .sidebar {
+  width: 260px !important;
+  background: var(--adm-surface) !important;
+  border-right: 1px solid var(--adm-border) !important;
+}
+
+.nav__link, .nav-item {
+  padding: 0.55rem 0.75rem !important;
+  border-radius: 6px !important;
+  font-size: 0.82rem !important;
+  color: var(--adm-text) !important;
+  transition: background var(--adm-fast) !important;
+}
+
+.nav__link:hover { background: var(--adm-surface-2) !important; }
+.nav__link--active, .nav-item.active {
+  background: var(--adm-accent-soft) !important;
+  color: #0d9488 !important;
+  font-weight: 600 !important;
+}
+
+/* ── DASHBOARD & CARDS ─────────────────────────────────────── */
+.dashboard__header {
+  background: linear-gradient(135deg, #f1f5f9, #e2e8f0) !important;
+  border-bottom: 1px solid var(--adm-border) !important;
+  padding: 2rem 2rem 1.75rem !important;
+}
+
+.dashboard__card, .card, .stat {
+  background: var(--adm-surface) !important;
+  border: 1px solid var(--adm-border) !important;
+  border-radius: 18px !important;
+  padding: 1.25rem 1.5rem !important;
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.03) !important;
+  color: var(--adm-text) !important;
+}
+
+/* ── LIST VIEW & TABLES ────────────────────────────────────── */
+.list-header {
+  padding: 1.25rem 1.5rem !important;
+  border-bottom: 1px solid var(--adm-border) !important;
+}
+
+.table, .tbl {
+  background: var(--adm-surface) !important;
+  border: 1px solid var(--adm-border) !important;
+  border-radius: 14px !important;
+  overflow: hidden !important;
+}
+
+.table thead th {
+  background: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+  border-bottom: 1px solid var(--adm-border) !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  font-size: 0.68rem !important;
+}
+
+.table tbody td {
+  border-bottom: 1px solid var(--adm-border) !important;
+  color: var(--adm-fg) !important;
+}
+
+.table tbody tr:hover { background: #f8fafc !important; }
+
+/* ── FORMS & INPUTS (Fix testo invisibile nei campi) ───────── */
+.field-type { margin-bottom: 1.25rem !important; }
+.field-label {
+  font-size: 0.76rem !important;
+  font-weight: 600 !important;
+  color: var(--adm-fg) !important;
+  margin-bottom: 0.4rem !important;
+}
+
+.input, .textarea, .select, 
+.field-type input, .field-type textarea, .field-type select,
+.react-select__control, .react-select__single-value {
+  background: var(--adm-surface-2) !important;
+  border: 1px solid var(--adm-border) !important;
+  border-radius: 6px !important;
+  padding: 0.65rem 0.8rem !important;
+  font-size: 0.85rem !important;
+  color: #0f172a !important; /* Forza il colore scuro sui campi */
+}
+
+/* Colore del placeholder */
+.input::placeholder, .textarea::placeholder, .field-type input::placeholder {
+  color: #94a3b8 !important;
+}
+
+.input:focus, .textarea:focus, .react-select__control--is-focused {
+  background: var(--adm-surface) !important;
+  border-color: var(--adm-accent) !important;
+  box-shadow: var(--adm-accent-glow) !important;
+  outline: none !important;
+}
+
+/* ── RICH TEXT (LEXICAL) ───────────────────────────────────── */
+.lexical-editor {
+  background: var(--adm-surface) !important;
+  border: 1px solid var(--adm-border) !important;
+  border-radius: 6px !important;
+}
+.lexical-toolbar {
+  background: var(--adm-surface-2) !important;
+  border-bottom: 1px solid var(--adm-border) !important;
+}
+.lexical-content { color: var(--adm-fg) !important; }
+
+/* ── BUTTONS ───────────────────────────────────────────────── */
+.btn, .topbar-btn {
+  font-family: var(--adm-font) !important;
+  font-size: 0.78rem !important;
+  padding: 0.45rem 0.75rem !important;
+  border-radius: 6px !important;
+  border: 1px solid var(--adm-border) !important;
+  color: #0f172a !important;
+  background: var(--adm-surface) !important;
+}
+
+.btn--style-primary, .topbar-btn.primary {
+  background: var(--adm-accent) !important;
+  color: #0f172a !important;
+  border-color: var(--adm-accent) !important;
+  font-weight: 600 !important;
+}
+.btn--style-primary:hover { background: #00b892 !important; }
+
+/* ── RESPONSIVE DESIGN ─────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .document__content { flex-direction: column !important; gap: 1.5rem !important; }
+  .document__sidebar { width: 100% !important; border-left: none !important; border-top: 1px solid var(--adm-border) !important; }
+  .dashboard-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+@media (max-width: 768px) {
+  .app-header { padding: 0 1rem !important; }
+  .collection-list, .document, .dashboard { padding-left: 1rem !important; padding-right: 1rem !important; }
+  .table-wrap { overflow-x: auto !important; }
+  .dashboard-grid { grid-template-columns: 1fr !important; }
+}
