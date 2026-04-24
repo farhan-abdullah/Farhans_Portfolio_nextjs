@@ -1,8 +1,5 @@
 "use client";
 
-import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
 import {
   BookOpen,
   Calendar,
@@ -12,6 +9,9 @@ import {
   Tag,
   X,
 } from "lucide-react";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 /**
  * Full-details modal for a single book.
@@ -76,8 +76,7 @@ export function BookDetailsModal({ book, dict, lang, onClose }) {
     // Lock body scroll and compensate for scrollbar to avoid layout shift.
     const originalOverflow = document.body.style.overflow;
     const originalPaddingRight = document.body.style.paddingRight;
-    const scrollbarW =
-      window.innerWidth - document.documentElement.clientWidth;
+    const scrollbarW = window.innerWidth - document.documentElement.clientWidth;
     document.body.style.overflow = "hidden";
     if (scrollbarW > 0) {
       document.body.style.paddingRight = `${scrollbarW}px`;
@@ -188,7 +187,7 @@ export function BookDetailsModal({ book, dict, lang, onClose }) {
                 alt={book.title}
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 672px, 768px"
-                className="object-cover"
+                className="object-contain"
                 priority
               />
             ) : (
