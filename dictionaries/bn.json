@@ -138,6 +138,11 @@
     "status_reading": "পড়ছি",
     "status_wishlist": "পড়ার তালিকা",
     "recommended": "সুপারিশকৃত",
+    "category_label": "বিভাগ",
+    "language_label": "ভাষা",
+    "finished_label": "শেষ করেছি",
+    "notes_label": "আমার নোট",
+    "external_link": "আরও তথ্য",
     "categories": {
       "bengali_classics": "বাংলা ক্লাসিক",
       "sirah": "সীরাহ (নবীর জীবনী ﷺ)",
@@ -145,6 +150,12 @@
       "sciences_technology": "প্রযুক্তি ও বিজ্ঞান",
       "spirituality": "আধ্যাত্মিকতা ও হৃদয়",
       "productivity": "উৎপাদনশীলতা ও বৃদ্ধি"
+    },
+    "languages": {
+      "bn": "বাংলা",
+      "en": "ইংরেজি",
+      "it": "ইতালিয়ান",
+      "ar": "আরবি"
     }
   },
   "blog": {
@@ -228,6 +239,7 @@
     "not_found": "পৃষ্ঠা পাওয়া যায়নি",
     "back_home": "হোমে ফিরুন",
     "no_posts_found": "এখনো কোনো পোস্ট প্রকাশিত হয়নি। শীঘ্রই ফিরে আসুন!",
-    "cta_project_idea": "আপনার পরবর্তী প্রজেক্টের জন্য কোনো আইডিয়া আছে?"
+    "cta_project_idea": "আপনার পরবর্তী প্রজেক্টের জন্য কোনো আইডিয়া আছে?",
+    "close": "বন্ধ করুন"
   }
 }

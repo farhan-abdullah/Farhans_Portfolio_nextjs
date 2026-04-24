@@ -1,10 +1,12 @@
 "use client";
 
 import { BookCard } from "@/components/cards/book-card";
+import { BookDetailsModal } from "@/components/book-details-modal";
 import { useState } from "react";
 
-export function BooksTabs({ initialBooks, dict }) {
+export function BooksTabs({ initialBooks, dict, lang }) {
   const [activeCategory, setActiveCategory] = useState("all");
+  const [selectedBook, setSelectedBook] = useState(null);
 
   const categories = [
     { id: "all", label: dict.books.filter_all },
@@ -84,7 +86,12 @@ export function BooksTabs({ initialBooks, dict }) {
       {filteredBooks.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {filteredBooks.map((book) => (
-            <BookCard key={book.id} book={book} dict={dict} />
+            <BookCard
+              key={book.id}
+              book={book}
+              dict={dict}
+              onClick={() => setSelectedBook(book)}
+            />
           ))}
         </div>
       ) : (
@@ -93,6 +100,16 @@ export function BooksTabs({ initialBooks, dict }) {
             {dict.common.no_books_found || "Nessun libro in questa categoria."}
           </p>
         </div>
+      )}
+
+      {/* Book details modal — mounted only when a book is selected */}
+      {selectedBook && (
+        <BookDetailsModal
+          book={selectedBook}
+          dict={dict}
+          lang={lang}
+          onClose={() => setSelectedBook(null)}
+        />
       )}
     </>
   );

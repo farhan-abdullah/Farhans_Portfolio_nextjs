@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { Star } from 'lucide-react';
 
-export function BookCard({ book, dict }) {
+export function BookCard({ book, dict, onClick }) {
   const categoryEmoji = {
     bengali_classics: '📖',
     sirah: '📿',
@@ -24,7 +24,12 @@ export function BookCard({ book, dict }) {
   };
 
   return (
-    <div className="group flex flex-col rounded-lg border border-[hsl(var(--border))] bg-[hsl(var(--card))] overflow-hidden transition-all hover:shadow-lg hover:border-accent">
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={`${book.title} — ${book.author}`}
+      className="group flex flex-col text-left items-stretch rounded-lg border border-[hsl(var(--border))] bg-[hsl(var(--card))] overflow-hidden transition-all hover:shadow-lg hover:border-accent hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[hsl(var(--background))] cursor-pointer"
+    >
       {/* Cover */}
       <div className="relative h-56 overflow-hidden bg-[hsl(var(--muted))]">
         {book.cover?.url ? (
@@ -82,6 +87,6 @@ export function BookCard({ book, dict }) {
           </p>
         )}
       </div>
-    </div>
+    </button>
   );
 }

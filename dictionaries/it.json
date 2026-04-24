@@ -139,6 +139,11 @@
     "status_reading": "In lettura",
     "status_wishlist": "Da leggere",
     "recommended": "Consigliato",
+    "category_label": "Categoria",
+    "language_label": "Lingua",
+    "finished_label": "Completato il",
+    "notes_label": "Le mie note",
+    "external_link": "Ulteriori info",
     "categories": {
       "bengali_classics": "Classici Bengali",
       "sirah": "Sīrah (Biografia del Profeta ﷺ)",
@@ -146,6 +151,12 @@
       "sciences_technology": "Tecnologia & Scienze",
       "spirituality": "Spiritualità & Cuore",
       "productivity": "Produttività & Crescita"
+    },
+    "languages": {
+      "bn": "Bengalese",
+      "en": "Inglese",
+      "it": "Italiano",
+      "ar": "Arabo"
     }
   },
   "blog": {
@@ -229,6 +240,7 @@
     "not_found": "Pagina non trovata",
     "back_home": "Torna alla home",
     "no_posts_found": "Ancora nessun articolo pubblicato. Torna più tardi!",
-    "cta_project_idea": "Hai un’idea per il prossimo progetto?"
+    "cta_project_idea": "Hai un’idea per il prossimo progetto?",
+    "close": "Chiudi"
   }
 }

@@ -71,7 +71,7 @@ export default async function BooksPage({ params }) {
       <PageHeader label={dict.books.label} title={dict.books.title} sub={dict.books.sub} />
 
       <section className="container-custom py-16">
-        <BooksTabs initialBooks={books} dict={dict} />
+        <BooksTabs initialBooks={books} dict={dict} lang={lang} />
       </section>
     </>
   );

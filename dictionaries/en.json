@@ -139,6 +139,11 @@
     "status_reading": "Reading",
     "status_wishlist": "To read",
     "recommended": "Recommended",
+    "category_label": "Category",
+    "language_label": "Language",
+    "finished_label": "Finished on",
+    "notes_label": "My notes",
+    "external_link": "More info",
     "categories": {
       "bengali_classics": "Bengali Classics",
       "sirah": "Sīrah (Life of the Prophet ﷺ)",
@@ -146,6 +151,12 @@
       "sciences_technology": "Technology & Sciences",
       "spirituality": "Spirituality & the Heart",
       "productivity": "Productivity & Growth"
+    },
+    "languages": {
+      "bn": "Bengali",
+      "en": "English",
+      "it": "Italian",
+      "ar": "Arabic"
     }
   },
   "blog": {
@@ -229,6 +240,7 @@
     "not_found": "Page not found",
     "back_home": "Back to home",
     "no_posts_found": "No articles published yet. Check back soon!",
-    "cta_project_idea": "Got an idea for your next project?"
+    "cta_project_idea": "Got an idea for your next project?",
+    "close": "Close"
   }
 }

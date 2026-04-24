@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 // ==================== i18n CONFIG ====================
 const i18n = {
-  defaultLocale: "it",
+  defaultLocale: "en",
   locales: ["it", "en", "bn"],
 };
 
